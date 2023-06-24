@@ -151,15 +151,12 @@ contract AxiomV1Test is Test {
         vm.pauseGasMetering();
         // We first load a correct proof
         string memory correctProofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v0.1.calldata");
-        bytes memory correctProof = vm.parseBytes(correctProofStr);
+        bytes memory proofData = vm.parseBytes(correctProofStr);
         // The first 32 bytes of the proof represent a field element that should be at most 88 bits (11 bytes).
         // The first 21 bytes are 0s.
         // We prank the 22nd byte to 0x53
-        correctProof[21] = bytes1(0x53);
-        // Invalid proof modified from valid proof of the chain of block headers between blocks in range `[0xf99000, 0x993ff]`.
-        string memory proofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v0.1.fail.calldata");
-        bytes memory proofData = vm.parseBytes(proofStr);
-        assert(keccak256(correctProof) == keccak256(proofData));
+        proofData[21] = bytes1(0x53);
+        // This is now an invalid proof modified from a valid proof of the chain of block headers between blocks in range `[0xf99000, 0x993ff]`.
         axiom.setHistoricalRoot(
             16356352,
             keccak256(
@@ -179,14 +176,11 @@ contract AxiomV1Test is Test {
         vm.pauseGasMetering();
         // We first load a correct proof
         string memory correctProofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v0.1.calldata");
-        bytes memory correctProof = vm.parseBytes(correctProofStr);
+        bytes memory proofData = vm.parseBytes(correctProofStr);
         // The startBlockNumber is in bytes 536:540 (see getBoundaryBlockData in AxiomV1Configuration.sol)
         // The startBlockNumber should be 0x00f99000; we prank it to 0x00f99001
-        correctProof[539] = bytes1(0x01);
-        // Invalid proof with modified `startBlockNumber` from valid proof of the chain of block headers between blocks in range `[0xf99000, 0x993ff]`.
-        string memory proofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v0.1.fail.startBlockNumber.calldata");
-        bytes memory proofData = vm.parseBytes(proofStr);
-        assert(keccak256(correctProof) == keccak256(proofData));
+        proofData[539] = bytes1(0x01);
+        // This is now an invalid proof with modified `startBlockNumber` from a valid proof of the chain of block headers between blocks in range `[0xf99000, 0x993ff]`.
         axiom.setHistoricalRoot(
             16356352,
             keccak256(
@@ -206,15 +200,12 @@ contract AxiomV1Test is Test {
         vm.pauseGasMetering();
         // We first load a correct proof
         string memory correctProofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v0.1.calldata");
-        bytes memory correctProof = vm.parseBytes(correctProofStr);
+        bytes memory proofData = vm.parseBytes(correctProofStr);
         // The endBlockNumber is in bytes 540:544 (see getBoundaryBlockData in AxiomV1Configuration.sol)
         // The endBlockNumber should be 0x00f993ff; we prank it to 0x00f99400
-        correctProof[542] = bytes1(0x94);
-        correctProof[543] = bytes1(0x00);
-        // Invalid proof with modified `numFinal` from valid proof of the chain of block headers between blocks in range `[0xf99000, 0x993ff]`.
-        string memory proofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v0.1.fail.numFinal.calldata");
-        bytes memory proofData = vm.parseBytes(proofStr);
-        assert(keccak256(correctProof) == keccak256(proofData));
+        proofData[542] = bytes1(0x94);
+        proofData[543] = bytes1(0x00);
+        // This is now an invalid proof with modified `numFinal` from a valid proof of the chain of block headers between blocks in range `[0xf99000, 0x993ff]`.
         axiom.setHistoricalRoot(
             16356352,
             keccak256(
@@ -329,12 +320,10 @@ contract AxiomV1Test is Test {
             abi.decode(vm.parseBytes(data), (bytes32[128], bytes32[11][127]));
         // We first load a correct proof
         string memory correctProofStr = vm.readFile("test/data/mainnet_17_7_000000_01ffff.v0.calldata");
-        bytes memory correctProof = vm.parseBytes(correctProofStr);
+        bytes memory proofData = vm.parseBytes(correctProofStr);
         // We prank the 3064th byte to equal 0xec
-        correctProof[3063] = bytes1(0xec);
-        // Invalid proof modified from valid SNARK proof of the chain of block headers between blocks in range `[0x000000, 0x01ffff]`.
-        bytes memory proofData = vm.parseBytes(vm.readFile("test/data/mainnet_17_7_000000_01ffff.v0.fail.calldata"));
-        assert(keccak256(correctProof) == keccak256(proofData));
+        proofData[3063] = bytes1(0xec);
+        // This is now an invalid proof modified from a valid SNARK proof of the chain of block headers between blocks in range `[0x000000, 0x01ffff]`.
         vm.resumeGasMetering();
         vm.expectRevert();
         axiom.updateHistorical(bytes32(hex"00"), uint32(0), roots, endHashProofs, proofData);
@@ -357,20 +346,17 @@ contract AxiomV1Test is Test {
             abi.decode(vm.parseBytes(data), (bytes32[128], bytes32[11][127]));
         // We first load a correct proof
         string memory correctProofStr = vm.readFile("test/data/mainnet_17_7_000000_01ffff.v0.calldata");
-        bytes memory correctProof = vm.parseBytes(correctProofStr);
+        bytes memory proofData = vm.parseBytes(correctProofStr);
         // The startBlockNumber is in bytes 536:540 (see getBoundaryBlockData in AxiomV1Configuration.sol)
         // The startBlockNumber should be 0x00000000; we prank it to 0x00000001
-        correctProof[539] = bytes1(0x01);
-        // Invalid proof with `startBlockNumber` modified from valid SNARK proof of the chain of block headers between blocks in range `[0x000000, 0x01ffff]`.
-        bytes memory proofData =
-            vm.parseBytes(vm.readFile("test/data/mainnet_17_7_000000_01ffff.v0.fail.startBlockNumber.calldata"));
-        assert(keccak256(correctProof) == keccak256(proofData));
+        proofData[539] = bytes1(0x01);
+        // This is now an invalid proof with `startBlockNumber` modified from a valid SNARK proof of the chain of block headers between blocks in range `[0x000000, 0x01ffff]`.
         vm.resumeGasMetering();
         vm.expectRevert();
         axiom.updateHistorical(bytes32(hex"00"), uint32(0), roots, endHashProofs, proofData);
     }
 
-    function testUpdateHistorical_numUpdate_fail() public {
+    function testUpdateHistorical_numFinal_fail() public {
         vm.pauseGasMetering();
         axiom.setHistoricalRoot(
             0x20000,
@@ -387,14 +373,11 @@ contract AxiomV1Test is Test {
             abi.decode(vm.parseBytes(data), (bytes32[128], bytes32[11][127]));
         // We first load a correct proof
         string memory correctProofStr = vm.readFile("test/data/mainnet_17_7_000000_01ffff.v0.calldata");
-        bytes memory correctProof = vm.parseBytes(correctProofStr);
+        bytes memory proofData = vm.parseBytes(correctProofStr);
         // The endBlockNumber is in bytes 540:544 (see getBoundaryBlockData in AxiomV1Configuration.sol)
         // The endBlockNumber should be 0x0001ffff; we prank it to 0x0001efff
-        correctProof[542] = bytes1(0xef);
-        // Invalid proof with `numUpdate` modified from valid SNARK proof of the chain of block headers between blocks in range `[0x000000, 0x01ffff]`.
-        bytes memory proofData =
-            vm.parseBytes(vm.readFile("test/data/mainnet_17_7_000000_01ffff.v0.fail.numUpdate.calldata"));
-        assert(keccak256(correctProof) == keccak256(proofData));
+        proofData[542] = bytes1(0xef);
+        // This is now an invalid proof with `numFinal` modified from a valid SNARK proof of the chain of block headers between blocks in range `[0x000000, 0x01ffff]`.
         vm.resumeGasMetering();
         vm.expectRevert();
         axiom.updateHistorical(bytes32(hex"00"), uint32(0), roots, endHashProofs, proofData);
