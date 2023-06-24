@@ -22,9 +22,9 @@ contract AxiomV1UpdateRecent is Test {
 
     function setUp() public {
         yulDeployer = new YulDeployer();
-        // `mainnet_10_7.v0.1` is a Yul verifier for a SNARK constraining a chain of up to 1024 block headers
+        // `mainnet_10_7.v1` is a Yul verifier for a SNARK constraining a chain of up to 1024 block headers
         // and Merkle-ization of their block hashes as specified in `updateRecent`.
-        address verifierAddress = address(yulDeployer.deployContract("mainnet_10_7.v0.1"));
+        address verifierAddress = address(yulDeployer.deployContract("mainnet_10_7.v1"));
 
         AxiomV1Cheat implementation = new AxiomV1Cheat();
         bytes memory data = abi.encodeWithSignature(
@@ -49,7 +49,7 @@ contract AxiomV1UpdateRecent is Test {
         vm.selectFork(mainnetForkId1);
         require(block.number - 256 <= 0xf993ff && 0xf993ff < block.number, "try a different block number");
         // Valid SNARK for blocks in `[0xf99000, 0xf993ff]`
-        string memory proofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v0.1.calldata");
+        string memory proofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v1.calldata");
         bytes memory proofData = vm.parseBytes(proofStr);
         vm.resumeGasMetering();
 
@@ -69,7 +69,7 @@ contract AxiomV1UpdateRecent is Test {
         axiom.setHistoricalMMRLen(15972);
         require(block.number - 256 <= 0xf993ff && 0xf993ff < block.number, "try a different block number");
         // Valid SNARK for blocks in `[0xf99000, 0xf993ff]`
-        string memory proofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v0.1.calldata");
+        string memory proofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v1.calldata");
         bytes memory proofData = vm.parseBytes(proofStr);
         vm.resumeGasMetering();
         vm.expectEmit(false, false, false, true);
@@ -87,7 +87,7 @@ contract AxiomV1UpdateRecent is Test {
         vm.selectFork(mainnetForkId2);
         require(block.number - 256 <= 0xf9907f && 0xf9907f < block.number, "try a different block number");
         // Valid SNARK for blocks in `[0xf99000, 0xf993ff]`
-        string memory proofStr = vm.readFile("test/data/mainnet_10_7_f99000_f9907f.v0.1.calldata");
+        string memory proofStr = vm.readFile("test/data/mainnet_10_7_f99000_f9907f.v1.calldata");
         bytes memory proofData = vm.parseBytes(proofStr);
         vm.resumeGasMetering();
 
@@ -99,7 +99,7 @@ contract AxiomV1UpdateRecent is Test {
         vm.selectFork(mainnetForkId1);
         require(block.number - 256 <= 0xf993ff && 0xf993ff < block.number, "try a different block number");
         // We first load a correct proof
-        string memory correctProofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v0.1.calldata");
+        string memory correctProofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v1.calldata");
         bytes memory proofData = vm.parseBytes(correctProofStr);
         // The first 32 bytes of the proof represent a field element that should be at most 88 bits (11 bytes).
         // The first 21 bytes are 0s.
@@ -117,7 +117,7 @@ contract AxiomV1UpdateRecent is Test {
         vm.selectFork(mainnetForkId1);
         require(block.number - 256 <= 0xf993ff && 0xf993ff < block.number, "try a different block number");
         // We first load a correct proof
-        string memory correctProofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v0.1.calldata");
+        string memory correctProofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v1.calldata");
         bytes memory proofData = vm.parseBytes(correctProofStr);
         // The first 32 bytes of the proof represent a field element that should be at most 88 bits (11 bytes).
         // The first 21 bytes are 0s.
@@ -134,7 +134,7 @@ contract AxiomV1UpdateRecent is Test {
         vm.selectFork(mainnetForkId1);
         require(block.number - 256 <= 0xf993ff && 0xf993ff < block.number, "try a different block number");
         // We first load a correct proof
-        string memory correctProofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v0.1.calldata");
+        string memory correctProofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v1.calldata");
         bytes memory proofData = vm.parseBytes(correctProofStr);
         // The endBlockNumber is in bytes 540:544 (see getBoundaryBlockData in AxiomV1Configuration.sol)
         // The endBlockNumber should be 0x00f993ff; we prank it to 0x00f99400
@@ -151,7 +151,7 @@ contract AxiomV1UpdateRecent is Test {
         vm.selectFork(mainnetForkId1);
         require(block.number - 256 <= 0xf993ff && 0xf993ff < block.number, "try a different block number");
         // We first load a correct proof
-        string memory correctProofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v0.1.calldata");
+        string memory correctProofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v1.calldata");
         bytes memory proofData = vm.parseBytes(correctProofStr);
         // The startBlockNumber is in bytes 536:540 (see getBoundaryBlockData in AxiomV1Configuration.sol)
         // The startBlockNumber should be 0x00f99000; we prank it to 0x00f99001
@@ -166,7 +166,7 @@ contract AxiomV1UpdateRecent is Test {
         vm.pauseGasMetering();
         vm.selectFork(mainnetForkId3);
         // Valid SNARK for blocks in `[0xf99000, 0xf993ff]`
-        string memory proofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v0.1.calldata");
+        string memory proofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v1.calldata");
         bytes memory proofData = vm.parseBytes(proofStr);
         vm.resumeGasMetering();
         vm.expectRevert();
@@ -177,7 +177,7 @@ contract AxiomV1UpdateRecent is Test {
         vm.pauseGasMetering();
         vm.selectFork(mainnetForkId4);
         // Valid SNARK for blocks in `[0xf99000, 0xf993ff]`
-        string memory proofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v0.1.calldata");
+        string memory proofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v1.calldata");
         bytes memory proofData = vm.parseBytes(proofStr);
         vm.resumeGasMetering();
         vm.expectRevert();
@@ -189,7 +189,7 @@ contract AxiomV1UpdateRecent is Test {
         vm.selectFork(mainnetForkId1);
         require(block.number - 256 <= 0xf993ff && 0xf993ff < block.number, "try a different block number");
         // We first load a correct proof
-        string memory correctProofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v0.1.calldata");
+        string memory correctProofStr = vm.readFile("test/data/mainnet_10_7_f99000_f993ff.v1.calldata");
         bytes memory proofData = vm.parseBytes(correctProofStr);
         // The endHash (bytes32) is split as two uint128 words in bytes 448+16:480 and 480+16:512 (see getBoundaryBlockData in AxiomV1Configuration.sol)
         // We prank the 512th byte to 0x0e (from 0x0d)
@@ -205,7 +205,7 @@ contract AxiomV1UpdateRecent is Test {
         vm.selectFork(mainnetForkId2);
         require(block.number - 256 <= 0xf9907f && 0xf9907f < block.number, "try a different block number");
         // Valid SNARK for blocks in `[0xf99000, 0xf9907f]`
-        string memory proofStr = vm.readFile("test/data/mainnet_10_7_f99000_f9907f.v0.1.calldata");
+        string memory proofStr = vm.readFile("test/data/mainnet_10_7_f99000_f9907f.v1.calldata");
         bytes memory proofData = vm.parseBytes(proofStr);
         vm.resumeGasMetering();
 
@@ -219,7 +219,7 @@ contract AxiomV1UpdateRecent is Test {
         vm.selectFork(mainnetForkId2);
         require(block.number - 256 <= 0xf9907f && 0xf9907f < block.number, "try a different block number");
         // Valid SNARK for blocks in `[0xf99000, 0xf9907f]`
-        string memory proofStr = vm.readFile("test/data/mainnet_10_7_f99000_f9907f.v0.1.calldata");
+        string memory proofStr = vm.readFile("test/data/mainnet_10_7_f99000_f9907f.v1.calldata");
         bytes memory proofData = vm.parseBytes(proofStr);
         vm.resumeGasMetering();
 
