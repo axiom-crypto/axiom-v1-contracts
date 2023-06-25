@@ -39,9 +39,9 @@ contract AxiomV1Test is Test {
         // `mainnet_10_7.v1` is a Yul verifier for a SNARK constraining a chain of up to 1024 block headers
         // and Merkle-ization of their block hashes as specified in `updateRecent`.
         verifierAddress = address(yulDeployer.deployContract("mainnet_10_7.v1"));
-        // `mainnet_17_7.v0` is a Yul verifier for a SNARK constraining a historic chain of 128 * 1024 block headers
+        // `mainnet_17_7.v1` is a Yul verifier for a SNARK constraining a historic chain of 128 * 1024 block headers
         // and Merkle-ization of their block hashes as specified in `updateHistorical`.
-        historicalVerifierAddress = address(yulDeployer.deployContract("mainnet_17_7.v0"));
+        historicalVerifierAddress = address(yulDeployer.deployContract("mainnet_17_7.v1"));
 
         AxiomV1Cheat implementation = new AxiomV1Cheat();
         bytes memory data = abi.encodeWithSignature(
@@ -297,7 +297,7 @@ contract AxiomV1Test is Test {
         (bytes32[128] memory roots, bytes32[11][127] memory endHashProofs) =
             abi.decode(vm.parseBytes(data), (bytes32[128], bytes32[11][127]));
         // Valid SNARK proof of the chain of block headers between blocks in range `[0x000000, 0x01ffff]`.
-        bytes memory proofData = vm.parseBytes(vm.readFile("test/data/mainnet_17_7_000000_01ffff.v0.calldata"));
+        bytes memory proofData = vm.parseBytes(vm.readFile("test/data/mainnet_17_7_000000_01ffff.v1.calldata"));
         vm.resumeGasMetering();
 
         axiom.updateHistorical(bytes32(hex"00"), uint32(0), roots, endHashProofs, proofData);
@@ -319,7 +319,7 @@ contract AxiomV1Test is Test {
         (bytes32[128] memory roots, bytes32[11][127] memory endHashProofs) =
             abi.decode(vm.parseBytes(data), (bytes32[128], bytes32[11][127]));
         // We first load a correct proof
-        string memory correctProofStr = vm.readFile("test/data/mainnet_17_7_000000_01ffff.v0.calldata");
+        string memory correctProofStr = vm.readFile("test/data/mainnet_17_7_000000_01ffff.v1.calldata");
         bytes memory proofData = vm.parseBytes(correctProofStr);
         // We prank the 3064th byte to equal 0xec
         proofData[3063] = bytes1(0xec);
@@ -345,7 +345,7 @@ contract AxiomV1Test is Test {
         (bytes32[128] memory roots, bytes32[11][127] memory endHashProofs) =
             abi.decode(vm.parseBytes(data), (bytes32[128], bytes32[11][127]));
         // We first load a correct proof
-        string memory correctProofStr = vm.readFile("test/data/mainnet_17_7_000000_01ffff.v0.calldata");
+        string memory correctProofStr = vm.readFile("test/data/mainnet_17_7_000000_01ffff.v1.calldata");
         bytes memory proofData = vm.parseBytes(correctProofStr);
         // The startBlockNumber is in bytes 536:540 (see getBoundaryBlockData in AxiomV1Configuration.sol)
         // The startBlockNumber should be 0x00000000; we prank it to 0x00000001
@@ -372,7 +372,7 @@ contract AxiomV1Test is Test {
         (bytes32[128] memory roots, bytes32[11][127] memory endHashProofs) =
             abi.decode(vm.parseBytes(data), (bytes32[128], bytes32[11][127]));
         // We first load a correct proof
-        string memory correctProofStr = vm.readFile("test/data/mainnet_17_7_000000_01ffff.v0.calldata");
+        string memory correctProofStr = vm.readFile("test/data/mainnet_17_7_000000_01ffff.v1.calldata");
         bytes memory proofData = vm.parseBytes(correctProofStr);
         // The endBlockNumber is in bytes 540:544 (see getBoundaryBlockData in AxiomV1Configuration.sol)
         // The endBlockNumber should be 0x0001ffff; we prank it to 0x0001efff
@@ -399,7 +399,7 @@ contract AxiomV1Test is Test {
         (bytes32[128] memory roots, bytes32[11][127] memory endHashProofs) =
             abi.decode(vm.parseBytes(data), (bytes32[128], bytes32[11][127]));
         // Valid SNARK proof of the chain of block headers between blocks in range `[0x000000, 0x01ffff]`.
-        bytes memory proofData = vm.parseBytes(vm.readFile("test/data/mainnet_17_7_000000_01ffff.v0.calldata"));
+        bytes memory proofData = vm.parseBytes(vm.readFile("test/data/mainnet_17_7_000000_01ffff.v1.calldata"));
         vm.resumeGasMetering();
         vm.expectRevert();
         axiom.updateHistorical(bytes32(hex"00"), uint32(0), roots, endHashProofs, proofData);
@@ -411,7 +411,7 @@ contract AxiomV1Test is Test {
         (bytes32[128] memory roots, bytes32[11][127] memory endHashProofs) =
             abi.decode(vm.parseBytes(data), (bytes32[128], bytes32[11][127]));
         // Valid SNARK proof of the chain of block headers between blocks in range `[0x000000, 0x01ffff]`.
-        bytes memory proofData = vm.parseBytes(vm.readFile("test/data/mainnet_17_7_000000_01ffff.v0.calldata"));
+        bytes memory proofData = vm.parseBytes(vm.readFile("test/data/mainnet_17_7_000000_01ffff.v1.calldata"));
         vm.resumeGasMetering();
         vm.expectRevert();
         axiom.updateHistorical(bytes32(hex"00"), uint32(0), roots, endHashProofs, proofData);
@@ -434,7 +434,7 @@ contract AxiomV1Test is Test {
             abi.decode(vm.parseBytes(data), (bytes32[128], bytes32[11][127]));
         roots[0] = bytes32(0x0);
         // Valid SNARK proof of the chain of block headers between blocks in range `[0x000000, 0x01ffff]`.
-        bytes memory proofData = vm.parseBytes(vm.readFile("test/data/mainnet_17_7_000000_01ffff.v0.calldata"));
+        bytes memory proofData = vm.parseBytes(vm.readFile("test/data/mainnet_17_7_000000_01ffff.v1.calldata"));
         vm.resumeGasMetering();
         vm.expectRevert();
         axiom.updateHistorical(bytes32(hex"00"), uint32(0), roots, endHashProofs, proofData);
