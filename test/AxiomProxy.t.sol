@@ -21,10 +21,10 @@ contract Proxy_Test is Test {
         yulDeployer = new YulDeployer();
         // `mainnet_10_7.v0.2` is a Yul verifier for a SNARK constraining a chain of up to 1024 block headers
         // and Merkle-ization of their block hashes as specified in `updateRecent`.
-        address verifierAddress = address(yulDeployer.deployContract("mainnet_10_7.v0.2"));
+        address verifierAddress = address(yulDeployer.deployContract("v0/mainnet_10_7.v0.2"));
         // `mainnet_17_7.v0` is a Yul verifier for a SNARK constraining a historic chain of 128 * 1024 block headers
         // and Merkle-ization of their block hashes as specified in `updateHistorical`.
-        address historicalVerifierAddress = address(yulDeployer.deployContract("mainnet_17_7.v0"));
+        address historicalVerifierAddress = address(yulDeployer.deployContract("v0/mainnet_17_7.v0"));
         _multisig = address(888888888);
         timelock = new AxiomTimelock(24 * 7 * 60 * 60, _multisig);
 

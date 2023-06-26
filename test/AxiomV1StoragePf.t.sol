@@ -30,17 +30,17 @@ contract AxiomStoragePfTest is Test {
     function setUp() public {
         yulDeployer = new YulDeployer();
         // `mainnet_10_7.v0.1` is a Yul verifier for a SNARK constraining a chain of up to 1024 block headers
-        // and Merkle-ization of their block hashes as specified in `updateRecent`.        
-        axiomVerifierAddress = address(yulDeployer.deployContract("mainnet_10_7.v0.1"));
+        // and Merkle-ization of their block hashes as specified in `updateRecent`.
+        axiomVerifierAddress = address(yulDeployer.deployContract("v0/mainnet_10_7.v0.1"));
         // `storage_ts.v0.1` is a Yul verifier for a SNARK constraining 10 storage proofs into a single account
-        // as specified in `attestSlots`.        
-        storageVerifierAddress = address(yulDeployer.deployContract("storage_ts.v0.1"));
+        // as specified in `attestSlots`.
+        storageVerifierAddress = address(yulDeployer.deployContract("v0/storage_ts.v0.1"));
         vm.makePersistent(axiomVerifierAddress);
         vm.makePersistent(storageVerifierAddress);
         vm.makePersistent(address(implementationSt));
 
         // valid SNARK for `attestSlots`
-        proof = vm.parseBytes(vm.readFile("test/data/storage.calldata"));
+        proof = vm.parseBytes(vm.readFile("test/data/v0/storage.calldata"));
         blockMerkleProof = [
             bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),
             bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),
@@ -97,16 +97,12 @@ contract AxiomStoragePfTest is Test {
         axiom = AxiomV1Cheat(payable(address(proxy)));
 
         data = abi.encodeWithSignature(
-            "initialize(address,address,address,address)",
-            address(0),
-            storageVerifierAddress,
-            address(1),
-            address(3)
+            "initialize(address,address,address,address)", address(0), storageVerifierAddress, address(1), address(3)
         );
         vm.expectRevert();
         AxiomProxy proxySt = new AxiomProxy(address(implementationSt), data);
         axiomStorage = AxiomV1StoragePf(payable(address(proxySt)));
-    }    
+    }
 
     function testInit_zeroVerifierAddress() public {
         AxiomV1Cheat implementation = new AxiomV1Cheat();
@@ -119,15 +115,11 @@ contract AxiomStoragePfTest is Test {
         axiom = AxiomV1Cheat(payable(address(proxy)));
 
         data = abi.encodeWithSignature(
-            "initialize(address,address,address,address)",
-            address(axiom),
-            address(0),
-            address(1),
-            address(3)
+            "initialize(address,address,address,address)", address(axiom), address(0), address(1), address(3)
         );
         vm.expectRevert();
         new AxiomProxy(address(implementationSt), data);
-    }        
+    }
 
     function testInit_zeroTimelockAddress() public {
         AxiomV1Cheat implementation = new AxiomV1Cheat();
@@ -169,7 +161,7 @@ contract AxiomStoragePfTest is Test {
         );
         vm.expectRevert();
         new AxiomProxy(address(implementationSt), data);
-    }               
+    }
 
     function testAttestSlots() public {
         deploy();
@@ -204,42 +196,42 @@ contract AxiomStoragePfTest is Test {
         blockData.blockNumber = 1232;
         vm.expectRevert();
         axiomStorage.attestSlots(blockData, proof);
-    }            
+    }
 
     function testAttestSlots_proof_fail() public {
         deploy();
-        bytes memory proofFail = vm.parseBytes(vm.readFile("test/data/storage.fail.calldata"));
+        bytes memory proofFail = vm.parseBytes(vm.readFile("test/data/v0/storage.fail.calldata"));
         vm.expectRevert();
         axiomStorage.attestSlots(blockData, proofFail);
     }
-    
+
     function testAttestSlots_blockHash_fail() public {
         deploy();
-        bytes memory proofFail = vm.parseBytes(vm.readFile("test/data/storage.fail.blockHash.calldata"));
+        bytes memory proofFail = vm.parseBytes(vm.readFile("test/data/v0/storage.fail.blockHash.calldata"));
         vm.expectRevert();
         axiomStorage.attestSlots(blockData, proofFail);
     }
 
     function testAttestSlots_blockNumber_fail() public {
         deploy();
-        bytes memory proofFail = vm.parseBytes(vm.readFile("test/data/storage.fail.blockNumber.calldata"));
+        bytes memory proofFail = vm.parseBytes(vm.readFile("test/data/v0/storage.fail.blockNumber.calldata"));
         vm.expectRevert();
         axiomStorage.attestSlots(blockData, proofFail);
-    }        
+    }
 
     function testAttestSlots_recentInvalid() public {
         deploy();
         blockData.blockNumber = 16428704 - 10;
         vm.expectRevert();
         axiomStorage.attestSlots(blockData, proof);
-    }    
+    }
 
     function testAttestSlots_oldInvalid() public {
         deploy();
         blockData.merkleProof[0] = bytes32(0x0000000000000000000000000000000000000000000000000000000000000001);
         vm.expectRevert();
         axiomStorage.attestSlots(blockData, proof);
-    }        
+    }
 
     function testAttestSlots_frozen() public {
         deploy();
@@ -262,7 +254,7 @@ contract AxiomStoragePfTest is Test {
         axiomStorage.freezeAll();
         vm.expectRevert();
         axiomStorage.isSlotAttestationValid(testBlockNumber, testAddress, uint256(0), uint256(129));
-    }    
+    }
 
     function testAttestSlotsForkRecent() public {
         string memory MAINNET_RPC_URL = string.concat("https://mainnet.infura.io/v3/", vm.envString("INFURA_ID"));
@@ -283,7 +275,7 @@ contract AxiomStoragePfTest is Test {
         address AXIOM_ADDRESS = 0x01d5b501C1fc0121e1411970fb79c322737025c2;
 
         // Valid SNARK verified against a recent block hash
-        string memory mainnetPath = "test/data/storage_mainnet_recent.calldata";
+        string memory mainnetPath = "test/data/v0/storage_mainnet_recent.calldata";
         string memory bashCmd = string.concat('cast abi-encode "f(bytes)" $(cat ', string.concat(mainnetPath, ")"));
         string[] memory inp = new string[](3);
         inp[0] = "bash";
@@ -352,7 +344,7 @@ contract AxiomStoragePfTest is Test {
         address AXIOM_ADDRESS = 0x01d5b501C1fc0121e1411970fb79c322737025c2;
 
         // Valid SNARK verified against a previous block hash
-        string memory mainnetPath = "test/data/storage_mainnet.calldata";
+        string memory mainnetPath = "test/data/v0/storage_mainnet.calldata";
         string memory bashCmd = string.concat('cast abi-encode "f(bytes)" $(cat ', string.concat(mainnetPath, ")"));
         string[] memory inp = new string[](3);
         inp[0] = "bash";
@@ -477,7 +469,7 @@ contract AxiomStoragePfTest is Test {
         vm.prank(address(10));
         vm.expectRevert();
         axiomStorage.updateAxiomAddress(address(100));
-    }    
+    }
 
     event UpdateSnarkVerifierAddress(address addr);
 
@@ -495,5 +487,5 @@ contract AxiomStoragePfTest is Test {
         vm.prank(address(10));
         vm.expectRevert();
         axiomStorage.updateSnarkVerifierAddress(address(100));
-    }     
+    }
 }
