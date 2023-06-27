@@ -257,8 +257,7 @@ contract AxiomStoragePfTest is Test {
     }
 
     function testAttestSlotsForkRecent() public {
-        string memory MAINNET_RPC_URL = string.concat("https://mainnet.infura.io/v3/", vm.envString("INFURA_ID"));
-        vm.createSelectFork(MAINNET_RPC_URL, 16_509_500);
+        vm.createSelectFork("mainnet", 16_509_500);
 
         bytes32[10] memory blockProof = [
             bytes32(0x33d28805ae6da649df58d72a8246644d8d846334e36402d945222374b574563f),
@@ -326,8 +325,7 @@ contract AxiomStoragePfTest is Test {
     }
 
     function testAttestSlotsForkProof() public {
-        string memory MAINNET_RPC_URL = string.concat("https://mainnet.infura.io/v3/", vm.envString("INFURA_ID"));
-        vm.createSelectFork(MAINNET_RPC_URL, 16_510_306);
+        vm.createSelectFork("mainnet", 16_510_306);
 
         bytes32[10] memory blockProof = [
             bytes32(0x751e47c2f3e4b6a78a96777b225ae2805e05258ee82cc2da0add2ee7c0417b8c),
