@@ -38,9 +38,9 @@ contract AxiomV1QueryDeployLocal is Script {
         vm.startBroadcast(deployerPrivateKey);
         address _multisig = vm.envAddress("ANVIL_MULTISIG");
 
-        address verifierAddress = address(deployContract("mainnet_10_7.v0.1"));
-        address historicalVerifierAddress = address(deployContract("mainnet_17_7.v0"));
-        address queryVerifierAddress = address(deployContract("batch_query_1"));
+        address verifierAddress = address(deployContract("mainnet_10_7.v1"));
+        address historicalVerifierAddress = address(deployContract("mainnet_17_7.v1"));
+        address queryVerifierAddress = address(deployContract("batch_query_2"));
 
         AxiomV1 implementation = new AxiomV1();
         AxiomV1Query queryImplementation = new AxiomV1Query();
@@ -59,7 +59,7 @@ contract AxiomV1QueryDeployLocal is Script {
             "initialize(address,address,uint256,uint256,uint32,address,address)",
             address(axiom),
             queryVerifierAddress,
-            10 * 1000 * 1000 gwei, 
+            10 * 1000 * 1000 gwei,
             2 ether,
             7200,
             address(timelock),

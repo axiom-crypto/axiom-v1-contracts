@@ -19,12 +19,12 @@ contract Proxy_Test is Test {
 
     function setUp() public {
         yulDeployer = new YulDeployer();
-        // `mainnet_10_7.v0.1` is a Yul verifier for a SNARK constraining a chain of up to 1024 block headers
-        // and Merkle-ization of their block hashes as specified in `updateRecent`.        
-        address verifierAddress = address(yulDeployer.deployContract("mainnet_10_7.v0.1"));
+        // `mainnet_10_7.v0.2` is a Yul verifier for a SNARK constraining a chain of up to 1024 block headers
+        // and Merkle-ization of their block hashes as specified in `updateRecent`.
+        address verifierAddress = address(yulDeployer.deployContract("v0/mainnet_10_7.v0.2"));
         // `mainnet_17_7.v0` is a Yul verifier for a SNARK constraining a historic chain of 128 * 1024 block headers
-        // and Merkle-ization of their block hashes as specified in `updateHistorical`.            
-        address historicalVerifierAddress = address(yulDeployer.deployContract("mainnet_17_7.v0"));
+        // and Merkle-ization of their block hashes as specified in `updateHistorical`.
+        address historicalVerifierAddress = address(yulDeployer.deployContract("v0/mainnet_17_7.v0"));
         _multisig = address(888888888);
         timelock = new AxiomTimelock(24 * 7 * 60 * 60, _multisig);
 
@@ -150,18 +150,18 @@ contract Proxy_Test is Test {
 
     // even updating as multisig should fail because upgrades must be done via timelock
     function test_upgradeSnarkVerifier_multisig_fails() external {
-        // `mainnet_10_7.v0.2` is an updated Yul verifier for a SNARK constraining a historic chain of 1024 block headers
-        // and Merkle-ization of their block hashes as specified in `updateRecent`.            
-        address newVerifier = address(yulDeployer.deployContract("mainnet_10_7.v0.2"));
+        // `mainnet_10_7.v1` is an updated Yul verifier for a SNARK constraining a historic chain of up to 1024 block headers
+        // and Merkle-ization of their block hashes as specified in `updateRecent`.
+        address newVerifier = address(yulDeployer.deployContract("mainnet_10_7.v1"));
         vm.prank(_multisig);
         vm.expectRevert();
         AxiomV1Core(address(proxy)).upgradeSnarkVerifier(newVerifier);
     }
 
     function test_upgradeSnarkVerifier_timelock_succeeds() external {
-        // `mainnet_10_7.v0.2` is an updated Yul verifier for a SNARK constraining a historic chain of 1024 block headers
-        // and Merkle-ization of their block hashes as specified in `updateRecent`.           
-        address newVerifier = address(yulDeployer.deployContract("mainnet_10_7.v0.2"));
+        // `mainnet_10_7.v1` is an updated Yul verifier for a SNARK constraining a historic chain of up to 1024 block headers
+        // and Merkle-ization of their block hashes as specified in `updateRecent`.
+        address newVerifier = address(yulDeployer.deployContract("mainnet_10_7.v1"));
 
         bytes memory data = abi.encodeWithSignature("upgradeSnarkVerifier(address)", address(newVerifier));
         bytes32 commitHash = bytes32(hex"3922fa892f4e19eabe6885ef168a0ad42ebfd8b3");
@@ -189,7 +189,7 @@ contract Proxy_Test is Test {
 
         // testUpdateOld
         // Valid proof for block header chain with numbers in `[0x103c800, 0x103cbff]`
-        string memory path = "test/data/mainnet_10_7_103c800_103cbff.v0.2.calldata";
+        string memory path = "test/data/mainnet_10_7_103c800_103cbff.v1.calldata";
         string memory bashCommand = string.concat('cast abi-encode "f(bytes)" $(cat ', string.concat(path, ")"));
 
         string[] memory inputs = new string[](3);
@@ -203,7 +203,10 @@ contract Proxy_Test is Test {
     }
 
     function test_upgradeHistoricalVerifier_timelock_succeeds() external {
-        bytes memory data = abi.encodeWithSignature("upgradeHistoricalSnarkVerifier(address)", address(0));
+        // `mainnet_17_7.v1` is an updated Yul verifier for a SNARK constraining a historic chain of 128 * 1024 block headers
+        // and Merkle-ization of their block hashes as specified in `updateHistorical`.
+        address newVerifier = address(yulDeployer.deployContract("mainnet_17_7.v1"));
+        bytes memory data = abi.encodeWithSignature("upgradeHistoricalSnarkVerifier(address)", address(newVerifier));
         vm.prank(_multisig);
         timelock.schedule(address(proxy), 0, data, bytes32(0), bytes32(uint256(0)), 24 * 7 * 60 * 60);
 

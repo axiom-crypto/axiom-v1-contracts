@@ -1,0 +1,38 @@
+on: [push]
+
+name: Foundry
+
+jobs:
+  check:
+    name: Foundry Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Check forge version
+        run: forge --version
+
+      - name: Check forge tree
+        run: forge tree
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install solc-select and solc
+        run: | 
+          pip3 install solc-select
+          solc-select use 0.8.19 --always-install
+
+      - name: Run tests
+        run: |
+          export MAINNET_RPC_URL=${{ vars.MAINNET_RPC_URL }}
+          RUST_BACKTRACE=1 forge test -vvv --gas-report
