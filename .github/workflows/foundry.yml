@@ -23,4 +23,6 @@ jobs:
         run: forge tree
 
       - name: Run tests
-        run: RUST_BACKTRACE=1 forge test -vvv --gas-report
+        run: |
+          export MAINNET_RPC_URL=${{ vars.MAINNET_RPC_URL }}
+          RUST_BACKTRACE=1 forge test -vvv --gas-report
