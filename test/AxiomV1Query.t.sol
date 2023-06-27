@@ -45,10 +45,31 @@ contract AxiomV1QueryTest is Test {
         maxQueryPrice = 2 ether;
         queryDeadlineInterval = 7200;
 
+        // this is a valid SNARK proof for AxiomV1Query, where some of the blocks in the query are within the last ~1024 blocks
         proof = vm.parseBytes(vm.readFile("test/data/mmr_recent.calldata"));
-        proofTrunc = vm.parseBytes(vm.readFile("test/data/mmr_recent_truncate.calldata"));
-        proofFail = vm.parseBytes(vm.readFile("test/data/mmr_recent_fail.calldata"));
+        // we create an invalid proof by truncating the last byte
+        proofTrunc = new bytes(proof.length - 1);
+        for (uint256 i = 0; i < proofTrunc.length; i++) {
+            proofTrunc[i] = proof[i];
+        }
+        require(
+            keccak256(proofTrunc) == keccak256(vm.parseBytes(vm.readFile("test/data/mmr_recent_truncate.calldata"))),
+            "proofTrunc does not match"
+        );
 
+        // we create an invalid proof of the same length by setting bytes -2 and -3 to 0xaa
+        proofFail = new bytes(proof.length);
+        for (uint256 i = 0; i < proofFail.length; i++) {
+            proofFail[i] = proof[i];
+        }
+        proofFail[proof.length - 2] = bytes1(0xaa);
+        proofFail[proof.length - 3] = bytes1(0xaa);
+        require(
+            keccak256(proofFail) == keccak256(vm.parseBytes(vm.readFile("test/data/mmr_recent_fail.calldata"))),
+            "proofFail does not match"
+        );
+
+        // this is another valid SNARK proof for AxiomV1Query, where all blocks in the query are more than 1024 blocks olds
         proofOld = vm.parseBytes(vm.readFile("test/data/mmr_old.calldata"));
     }
 
