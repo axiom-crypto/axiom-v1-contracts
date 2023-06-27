@@ -36,7 +36,7 @@ contract AxiomV1QueryTest is Test {
     function setUp() public {
         yulDeployer = new YulDeployer();
         axiomVerifierAddress = address(yulDeployer.deployContract("mainnet_10_7.v1"));
-        mmrVerifierAddress = address(yulDeployer.deployContract("batch_query_1"));
+        mmrVerifierAddress = address(yulDeployer.deployContract("batch_query_2"));
         vm.makePersistent(axiomVerifierAddress);
         vm.makePersistent(mmrVerifierAddress);
         vm.makePersistent(address(implementationQu));
