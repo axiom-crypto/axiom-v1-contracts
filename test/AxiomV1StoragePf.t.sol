@@ -29,9 +29,9 @@ contract AxiomStoragePfTest is Test {
 
     function setUp() public {
         yulDeployer = new YulDeployer();
-        // `mainnet_10_7.v0.1` is a Yul verifier for a SNARK constraining a chain of up to 1024 block headers
+        // `mainnet_10_7.v1` is a Yul verifier for a SNARK constraining a chain of up to 1024 block headers
         // and Merkle-ization of their block hashes as specified in `updateRecent`.
-        axiomVerifierAddress = address(yulDeployer.deployContract("v0/mainnet_10_7.v0.1"));
+        axiomVerifierAddress = address(yulDeployer.deployContract("mainnet_10_7.v1"));
         // `storage_ts.v0.1` is a Yul verifier for a SNARK constraining 10 storage proofs into a single account
         // as specified in `attestSlots`.
         storageVerifierAddress = address(yulDeployer.deployContract("v0/storage_ts.v0.1"));

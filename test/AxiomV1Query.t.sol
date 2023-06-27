@@ -61,7 +61,7 @@ contract AxiomV1QueryTest is Test {
         proofFail[proof.length - 2] = bytes1(0xaa);
         proofFail[proof.length - 3] = bytes1(0xaa);
 
-        // this is another valid SNARK proof for AxiomV1Query, where all blocks in the query are more than 1024 blocks olds
+        // this is another valid SNARK proof for AxiomV1Query, where all blocks in the query are more than 1024 blocks old
         proofOld = vm.parseBytes(vm.readFile("test/data/mmr_old.calldata"));
     }
 
