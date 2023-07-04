@@ -2,12 +2,12 @@
 pragma solidity 0.8.19;
 
 import "forge-std/Script.sol";
-import {AxiomV1} from "../contracts/AxiomV1.sol";
-import {AxiomProxy} from "../contracts/AxiomProxy.sol";
-import {AxiomTimelock} from "../contracts/AxiomTimelock.sol";
-import {AxiomV1StoragePf} from "../contracts/AxiomV1StoragePf.sol";
+import {AxiomV1} from "../../contracts/AxiomV1.sol";
+import {AxiomProxy} from "../../contracts/AxiomProxy.sol";
+import {AxiomTimelock} from "../../contracts/AxiomTimelock.sol";
+import {AxiomV1StoragePf} from "../../contracts/AxiomV1StoragePf.sol";
 
-contract AxiomStoragePfDeployLocal is Script {
+contract AxiomV1StoragePfDeployLocal is Script {
     function deployContract(string memory fileName) public returns (address) {
         string memory bashCommand = string.concat(
             'cast abi-encode "f(bytes)" $(solc --yul snark-verifiers/', string.concat(fileName, ".yul --bin | tail -1)")
@@ -34,33 +34,33 @@ contract AxiomStoragePfDeployLocal is Script {
     }
 
     function run() external {
-        uint256 deployerPrivateKey = vm.envUint("ANVIL_PRIVATE_KEY");
-        vm.startBroadcast(deployerPrivateKey);
-        address _multisig = vm.envAddress("ANVIL_MULTISIG");
+        vm.startBroadcast();
+        address timelockMultisig = vm.envAddress("ANVIL_MULTISIG");
+        address guardian = vm.envAddress("ANVIL_MULTISIG");
 
-        address verifierAddress = address(deployContract("mainnet_10_7.v0.1"));
-        address historicalVerifierAddress = address(deployContract("mainnet_17_7.v0"));
-        address storageVerifierAddress = address(deployContract("storage_ts.v0.1"));
+        address verifierAddress = address(deployContract("mainnet_10_7.v1"));
+        address historicalVerifierAddress = address(deployContract("mainnet_17_7.v1"));
+        address storageVerifierAddress = address(deployContract("v0/storage_ts.v0.2"));
+
+        AxiomTimelock timelock = new AxiomTimelock(60 * 60 * 24 * 7 /* 1 week delay */, timelockMultisig);
 
         AxiomV1 implementation = new AxiomV1();
-        AxiomV1StoragePf storageImplementation = new AxiomV1StoragePf();
-        AxiomTimelock timelock = new AxiomTimelock(60 * 60 * 24 * 7 /* 1 week delay */, _multisig);
-
         bytes memory axiomInit = abi.encodeWithSignature(
             "initialize(address,address,address,address)",
             verifierAddress,
             historicalVerifierAddress,
             address(timelock),
-            msg.sender
+            guardian
         );
         AxiomProxy axiom = new AxiomProxy(address(implementation), axiomInit);
 
+        AxiomV1StoragePf storageImplementation = new AxiomV1StoragePf();
         bytes memory storageInit = abi.encodeWithSignature(
             "initialize(address,address,address,address)",
             address(axiom),
             storageVerifierAddress,
             address(timelock),
-            msg.sender
+            guardian
         );
         new AxiomProxy(address(storageImplementation), storageInit);
 
