@@ -19,7 +19,7 @@ Fill in `.env` with your `MAINNET_RPC_URL` and/or `GOERLI_RPC_URL`.
 
 ## Contracts: High-level overview
 
-The two main contracts in this repository are `AxiomV1` and `AxiomV1StoragePf`. They are both designed to be deployed using OpenZeppelin UUPS [proxies](https://docs.openzeppelin.com/contracts/4.x/api/proxy) and the contracts themselves are [UUPS Upgradeable](https://docs.openzeppelin.com/contracts/4.x/api/proxy#UUPSUpgradeable). The UUPS proxy is [`AxiomProxy`](contracts/AxiomProxy.sol).
+The three main contracts in this repository are `AxiomV1`, `AxiomV1StoragePf`, and `AxiomV1Query`. They are all designed to be deployed using OpenZeppelin UUPS [proxies](https://docs.openzeppelin.com/contracts/4.x/api/proxy) and the contracts themselves are [UUPS Upgradeable](https://docs.openzeppelin.com/contracts/4.x/api/proxy#UUPSUpgradeable). The UUPS proxy is [`AxiomProxy`](contracts/AxiomProxy.sol).
 
 ### `AxiomV1`
 
