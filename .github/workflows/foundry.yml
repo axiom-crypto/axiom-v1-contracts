@@ -25,14 +25,101 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
       - name: Install solc-select and solc
-        run: | 
+        run: |
           pip3 install solc-select
           solc-select use 0.8.19 --always-install
 
-      - name: Run tests
+      - name: Check snark verifier Yul code SHA checksums are correct
+        working-directory: ./snark-verifiers
+        run: |
+          ACTUAL_SHA=$(sha256sum mainnet_10_7.v1.yul | cut -d ' ' -f 1)
+          if [[ $ACTUAL_SHA == "2f8c9420b1f79be6d7fe1a54b02dad2c2d492071e1082d22050a68cda4546a9b" ]]; then
+              echo "AxiomV1Core snark verifier Yul code matches";
+          else
+              echo "AxiomV1Core snark verifier Yul code does not match";
+              exit 1
+          fi
+          ACTUAL_SHA=$(sha256sum mainnet_17_7.v1.yul | cut -d ' ' -f 1)
+          if [[ $ACTUAL_SHA == "f6e0fd84055585bfce8662affe9982158d8523996881a79e5b5119723d5bbf62" ]]; then
+              echo "AxiomV1Core historical snark verifier Yul code matches";
+          else
+              echo "AxiomV1Core historical snark verifier Yul code does not match";
+              exit 1
+          fi
+          ACTUAL_SHA=$(sha256sum batch_query_2.yul | cut -d ' ' -f 1)
+          if [[ $ACTUAL_SHA == "30b83ac7101eec9e57d98c0663deb4908db910db254bd3f73e3bd789f6197ed3" ]]; then
+              echo "AxiomV1Query snark verifier Yul code matches";
+          else
+              echo "AxiomV1Query snark verifier Yul code does not match";
+              exit 1
+          fi
+
+      - name: Run Foundry tests
         run: |
           export MAINNET_RPC_URL=${{ vars.MAINNET_RPC_URL }}
           RUST_BACKTRACE=1 forge test -vvv --gas-report
+
+      - name: Check snark verifier bytecode is correct
+        working-directory: ./snark-verifiers
+        run: |
+          BYTE_CODE=$(solc --yul --bin mainnet_10_7.v1.yul | tail -1)
+          if [[ $BYTE_CODE == $(cat mainnet_10_7.v1.bin) ]]; then
+              echo "AxiomV1Core snark verifier bytecode matches";
+          else
+              echo "AxiomV1Core snark verifier bytecode does not match";
+              exit 1
+          fi
+          BYTE_CODE=$(solc --yul --bin mainnet_17_7.v1.yul | tail -1)
+          if [[ $BYTE_CODE == $(cat mainnet_17_7.v1.bin) ]]; then
+              echo "AxiomV1Core historical snark verifier bytecode matches";
+          else
+              echo "AxiomV1Core historical snark verifier bytecode does not match";
+              exit 1
+          fi
+          BYTE_CODE=$(solc --yul --bin batch_query_2.yul | tail -1)
+          if [[ $BYTE_CODE == $(cat batch_query_2.bin) ]]; then
+              echo "AxiomV1Query snark verifier bytecode matches";
+          else
+              echo "AxiomV1Query snark verifier bytecode does not match";
+              exit 1
+          fi
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.20.x
+
+      - name: Check bytecode does not have DELEGATECALL or SELFDESTRUCT
+        working-directory: ./snark-verifiers
+        run: |
+          go install github.com/Arachnid/evmdis/evmdis@latest
+          DIS_CODE=$(cat mainnet_10_7.v1.bin | evmdis -bin)
+          if [[ $DIS_CODE == *"DELEGATECALL"* ]]; then
+              echo "AxiomV1Core snark verifier bytecode contains DELEGATECALL";
+              exit 1
+          fi
+          if [[ $DIS_CODE == *"SELFDESTRUCT"* ]]; then
+              echo "AxiomV1Core snark verifier bytecode contains SELFDESTRUCT";
+              exit 1
+          fi
+          DIS_CODE=$(cat mainnet_17_7.v1.bin | evmdis -bin)
+          if [[ $DIS_CODE == *"DELEGATECALL"* ]]; then
+              echo "AxiomV1Core historical snark verifier bytecode contains DELEGATECALL";
+              exit 1
+          fi
+          if [[ $DIS_CODE == *"SELFDESTRUCT"* ]]; then
+              echo "AxiomV1Core historical snark verifier bytecode contains SELFDESTRUCT";
+              exit 1
+          fi
+          DIS_CODE=$(cat batch_query_2.bin | evmdis -bin)
+          if [[ $DIS_CODE == *"DELEGATECALL"* ]]; then
+              echo "AxiomV1Query snark verifier bytecode contains DELEGATECALL";
+              exit 1
+          fi
+          if [[ $DIS_CODE == *"SELFDESTRUCT"* ]]; then
+              echo "AxiomV1Query snark verifier bytecode contains SELFDESTRUCT";
+              exit 1
+          fi

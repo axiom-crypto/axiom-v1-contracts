@@ -2,12 +2,11 @@
 pragma solidity 0.8.19;
 
 import "forge-std/Script.sol";
-import {AxiomV1} from "../contracts/AxiomV1.sol";
-import {AxiomProxy} from "../contracts/AxiomProxy.sol";
-import {AxiomTimelock} from "../contracts/AxiomTimelock.sol";
-import {AxiomV1Query} from "../contracts/AxiomV1Query.sol";
+import {AxiomV1} from "../../contracts/AxiomV1.sol";
+import {AxiomProxy} from "../../contracts/AxiomProxy.sol";
+import {AxiomTimelock} from "../../contracts/AxiomTimelock.sol";
 
-contract AxiomV1QueryDeployLocal is Script {
+contract AxiomV1DeployLocal is Script {
     function deployContract(string memory fileName) public returns (address) {
         string memory bashCommand = string.concat(
             'cast abi-encode "f(bytes)" $(solc --yul snark-verifiers/', string.concat(fileName, ".yul --bin | tail -1)")
@@ -34,38 +33,25 @@ contract AxiomV1QueryDeployLocal is Script {
     }
 
     function run() external {
-        uint256 deployerPrivateKey = vm.envUint("ANVIL_PRIVATE_KEY");
-        vm.startBroadcast(deployerPrivateKey);
-        address _multisig = vm.envAddress("ANVIL_MULTISIG");
+        vm.startBroadcast();
+        // address guardian = vm.envAddress("ANVIL_MULTISIG");
+        address guardian = address(0xF88F9B8d445eEEBD83801d8da099695C791bc166);
+        // address timelock = address(0x57Dbf921727818fd2e8a3e97B4958Ab69F6b6815); // AxiomTimelock contract address
 
         address verifierAddress = address(deployContract("mainnet_10_7.v1"));
         address historicalVerifierAddress = address(deployContract("mainnet_17_7.v1"));
-        address queryVerifierAddress = address(deployContract("batch_query_2"));
 
         AxiomV1 implementation = new AxiomV1();
-        AxiomV1Query queryImplementation = new AxiomV1Query();
-        AxiomTimelock timelock = new AxiomTimelock(60 * 60 * 24 * 7 /* 1 week delay */, _multisig);
+        AxiomTimelock timelock = new AxiomTimelock(600, address(0xaDBbfC69F616aa16cc21003645A81C19F27Fa28f));
 
-        bytes memory axiomInit = abi.encodeWithSignature(
+        bytes memory data = abi.encodeWithSignature(
             "initialize(address,address,address,address)",
             verifierAddress,
             historicalVerifierAddress,
             address(timelock),
-            msg.sender
+            guardian
         );
-        AxiomProxy axiom = new AxiomProxy(address(implementation), axiomInit);
-
-        bytes memory queryInit = abi.encodeWithSignature(
-            "initialize(address,address,uint256,uint256,uint32,address,address)",
-            address(axiom),
-            queryVerifierAddress,
-            10 * 1000 * 1000 gwei,
-            2 ether,
-            7200,
-            address(timelock),
-            msg.sender
-        );
-        new AxiomProxy(address(queryImplementation), queryInit);
+        new AxiomProxy(address(implementation), data);
 
         vm.stopBroadcast();
     }
