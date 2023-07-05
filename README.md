@@ -198,3 +198,61 @@ bash script/local/deploy_query_local.sh
 ```
 
 This will print out verbose logs of the deployment, including the addresses of **multiple** deployed contracts (SNARK verifier, historical SNARK verifier, query MMR SNARK verifier, `AxiomV1`, `AxiomV1Query`, and `AxiomProxy`).
+
+### Code Analysis for contributors
+
+To generate documents to better understand and analyze the code we can run
+
+```bash
+bash script/local/code_analysis.sh
+```
+
+This generates the following files (links and samples below)
+
+#### [axiom-v1-inheritance-contracts-inheritance-graph.png](./docs/axiom-v1-contracts-inheritance-graph.png)
+
+Useful for undertanding the axiom-v1-contracts their functions and relationships
+
+![axiom-v1-inheritance-contracts-inheritance-graph.png](./docs/axiom-v1-contracts-inheritance-graph.png)
+
+#### [axiom-v1-contracts-coverage.log](./docs/axiom-v1-contracts-coverage.log)
+
+Useful for reviewing test coverage for axiom contracts
+
+```text
+Compiling 90 files with 0.8.19
+Solc 0.8.19 finished in 6.63s
+Compiler run [32msuccessful![0m
+Analysing contracts...
+Running tests...
+```
+
+| File                                           | % Lines           | % Statements      | % Branches       | % Funcs         |
+|------------------------------------------------|-------------------|-------------------|------------------|-----------------|
+| contracts/AxiomV1.sol                          | 100.00% (6/6)     | 100.00% (7/7)     | 100.00% (2/2)    | 100.00% (3/3)   |
+| contracts/AxiomV1Access.sol                    | 100.00% (8/8)     | 100.00% (7/7)     | 100.00% (2/2)    | 100.00% (5/5)   |
+| contracts/AxiomV1Core.sol                      | 100.00% (125/125) | 99.40% (167/168)  | 91.89% (68/74)   | 100.00% (14/14) |
+| contracts/AxiomV1Query.sol                     | 99.39% (163/164)  | 99.49% (196/197)  | 89.47% (68/76)   | 95.24% (20/21)  |
+| contracts/AxiomV1StoragePf.sol                 | 100.00% (40/40)   | 100.00% (51/51)   | 100.00% (20/20)  | 85.71% (6/7)    |
+| contracts/libraries/MerkleMountainRange.sol    | 0.00% (0/52)      | 0.00% (0/64)      | 0.00% (0/10)     | 0.00% (0/5)     |
+| contracts/libraries/MerkleTree.sol             | 0.00% (0/30)      | 0.00% (0/46)      | 0.00% (0/20)     | 0.00% (0/2)     |
+| contracts/mock/AxiomV1CoreMock.sol             | 0.00% (0/105)     | 0.00% (0/146)     | 0.00% (0/64)     | 0.00% (0/10)    |
+| contracts/mock/AxiomV1Mock.sol                 | 0.00% (0/6)       | 0.00% (0/7)       | 0.00% (0/2)      | 0.00% (0/3)     |
+| contracts/mock/AxiomV1QueryMock.sol            | 0.00% (0/157)     | 0.00% (0/188)     | 0.00% (0/72)     | 0.00% (0/20)    |
+| script/goerli/AxiomV1DeployMock.s.sol          | 0.00% (0/7)       | 0.00% (0/11)      | 100.00% (0/0)    | 0.00% (0/1)     |
+| script/goerli/AxiomV1QueryDeployMock.s.sol     | 0.00% (0/9)       | 0.00% (0/14)      | 100.00% (0/0)    | 0.00% (0/1)     |
+| script/local/AxiomV1Deploy.s.sol               | 0.00% (0/19)      | 0.00% (0/28)      | 0.00% (0/2)      | 0.00% (0/2)     |
+| script/local/AxiomV1DeployLocal.s.sol          | 0.00% (0/19)      | 0.00% (0/28)      | 0.00% (0/2)      | 0.00% (0/2)     |
+| script/local/AxiomV1QueryDeployLocal.s.sol     | 0.00% (0/24)      | 0.00% (0/38)      | 0.00% (0/2)      | 0.00% (0/2)     |
+| script/local/AxiomV1QueryDeployMock.s.sol      | 0.00% (0/10)      | 0.00% (0/15)      | 100.00% (0/0)    | 0.00% (0/1)     |
+| script/local/AxiomV1StoragePfDeployLocal.s.sol | 0.00% (0/24)      | 0.00% (0/38)      | 0.00% (0/2)      | 0.00% (0/2)     |
+| script/mainnet/AxiomV1DeployMainnet.s.sol      | 0.00% (0/9)       | 0.00% (0/15)      | 100.00% (0/0)    | 0.00% (0/1)     |
+| script/mainnet/AxiomV1QueryDeployMainnet.s.sol | 0.00% (0/9)       | 0.00% (0/15)      | 100.00% (0/0)    | 0.00% (0/1)     |
+| script/mock/AxiomV1DeployMock.s.sol            | 0.00% (0/7)       | 0.00% (0/9)       | 100.00% (0/0)    | 0.00% (0/1)     |
+| script/mock/AxiomV1QueryDeployMock.s.sol       | 0.00% (0/9)       | 0.00% (0/12)      | 100.00% (0/0)    | 0.00% (0/1)     |
+| test/AxiomV1.t.sol                             | 75.00% (3/4)      | 75.00% (3/4)      | 100.00% (0/0)    | 75.00% (3/4)    |
+| Total                                          | 40.93% (345/843)  | 38.90% (431/1108) | 45.71% (160/350) | 46.79% (51/109) |
+
+#### [axiom-v1-slither.log](./docs/axiom-v1-contracts-slither.log)
+
+Useful for seeing any potential attack vectors for axiom-v1-contracts
