@@ -1,7 +1,7 @@
 'forge clean' running (wd: /Users/johnwhitton/me/axiom/axiom-v1-contracts)
 'forge build --build-info --force' running
 Compiling 90 files with 0.8.19
-Solc 0.8.19 finished in 11.08s
+Solc 0.8.19 finished in 11.58s
 Compiler run [32msuccessful![0m
 
 INFO:Detectors:
@@ -291,25 +291,25 @@ Reentrancy in AxiomV1Core.updateOld(bytes32,uint32,bytes) (contracts/AxiomV1Core
 	- AxiomV1Core.updateRecent(bytes) (contracts/AxiomV1Core.sol#64-113)
 Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-1
 INFO:Detectors:
-AxiomV1Query._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).runningHash_scope_0 (contracts/AxiomV1Query.sol#376) is a local variable never initialized
-StdCheatsSafe.rawToConvertedEIP1559Detail(StdCheatsSafe.RawTx1559Detail).txDetail (lib/forge-std/src/StdCheats.sol#273) is a local variable never initialized
-MerkleMountainRangeTest.testAppendEmpty().mmr2 (test/MerkleMountainRange.t.sol#20) is a local variable never initialized
-MerkleMountainRangeTest.testAppendNonempty().mmr2 (test/MerkleMountainRange.t.sol#38) is a local variable never initialized
-StdCheatsSafe.readEIP1559ScriptArtifact(string).artifact (lib/forge-std/src/StdCheats.sol#237) is a local variable never initialized
-MerkleMountainRangeTest.testAppendNonempty().mmr1 (test/MerkleMountainRange.t.sol#40) is a local variable never initialized
-StdCheatsSafe.rawToConvertedEIPTx1559(StdCheatsSafe.RawTx1559).transaction (lib/forge-std/src/StdCheats.sol#257) is a local variable never initialized
-AxiomV1UpdateRecent.testIsBlockHashValid_notStored_fail().merkleProof (test/AxiomV1UpdateRecent.t.sol#304) is a local variable never initialized
-MerkleMountainRangeTest.testAppendEmpty().mmr1 (test/MerkleMountainRange.t.sol#24) is a local variable never initialized
-AxiomV1QueryMock._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).runningHash_scope_0 (contracts/mock/AxiomV1QueryMock.sol#398) is a local variable never initialized
 StdCheatsSafe.rawToConvertedEIPTx1559s(StdCheatsSafe.RawTx1559[]).i (lib/forge-std/src/StdCheats.sol#250) is a local variable never initialized
-StdCheatsSafe.rawToConvertedReceipt(StdCheatsSafe.RawReceipt).receipt (lib/forge-std/src/StdCheats.sol#325) is a local variable never initialized
-AxiomV1UpdateRecent.testIsBlockHashValid().merkleProof (test/AxiomV1UpdateRecent.t.sol#262) is a local variable never initialized
-AxiomV1UpdateRecent.testIsBlockHashValid_zeroBlockHash_fail().merkleProof (test/AxiomV1UpdateRecent.t.sol#339) is a local variable never initialized
-ERC1967UpgradeUpgradeable._upgradeToAndCallUUPS(address,bytes,bool).slot (lib/openzeppelin-contracts-upgradeable/contracts/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol#94) is a local variable never initialized
-StdCheatsSafe.rawToConvertedReceiptLogs(StdCheatsSafe.RawReceiptLog[]).i (lib/forge-std/src/StdCheats.sol#349) is a local variable never initialized
-StdCheatsSafe.rawToConvertedReceipts(StdCheatsSafe.RawReceipt[]).i (lib/forge-std/src/StdCheats.sol#318) is a local variable never initialized
-ERC1967Upgrade._upgradeToAndCallUUPS(address,bytes,bool).slot (lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Upgrade.sol#88) is a local variable never initialized
 MerkleTreeTest.testMerkleRootValue().leaves (test/MerkleTree.t.sol#26) is a local variable never initialized
+AxiomV1UpdateRecent.testIsBlockHashValid().merkleProof (test/AxiomV1UpdateRecent.t.sol#262) is a local variable never initialized
+AxiomV1QueryMock._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).runningHash_scope_0 (contracts/mock/AxiomV1QueryMock.sol#398) is a local variable never initialized
+AxiomV1UpdateRecent.testIsBlockHashValid_notStored_fail().merkleProof (test/AxiomV1UpdateRecent.t.sol#304) is a local variable never initialized
+StdCheatsSafe.rawToConvertedReceipt(StdCheatsSafe.RawReceipt).receipt (lib/forge-std/src/StdCheats.sol#325) is a local variable never initialized
+MerkleMountainRangeTest.testAppendEmpty().mmr2 (test/MerkleMountainRange.t.sol#20) is a local variable never initialized
+MerkleMountainRangeTest.testAppendEmpty().mmr1 (test/MerkleMountainRange.t.sol#24) is a local variable never initialized
+MerkleMountainRangeTest.testAppendNonempty().mmr2 (test/MerkleMountainRange.t.sol#38) is a local variable never initialized
+StdCheatsSafe.rawToConvertedReceipts(StdCheatsSafe.RawReceipt[]).i (lib/forge-std/src/StdCheats.sol#318) is a local variable never initialized
+StdCheatsSafe.rawToConvertedReceiptLogs(StdCheatsSafe.RawReceiptLog[]).i (lib/forge-std/src/StdCheats.sol#349) is a local variable never initialized
+MerkleMountainRangeTest.testAppendNonempty().mmr1 (test/MerkleMountainRange.t.sol#40) is a local variable never initialized
+AxiomV1UpdateRecent.testIsBlockHashValid_zeroBlockHash_fail().merkleProof (test/AxiomV1UpdateRecent.t.sol#339) is a local variable never initialized
+StdCheatsSafe.readEIP1559ScriptArtifact(string).artifact (lib/forge-std/src/StdCheats.sol#237) is a local variable never initialized
+StdCheatsSafe.rawToConvertedEIPTx1559(StdCheatsSafe.RawTx1559).transaction (lib/forge-std/src/StdCheats.sol#257) is a local variable never initialized
+ERC1967UpgradeUpgradeable._upgradeToAndCallUUPS(address,bytes,bool).slot (lib/openzeppelin-contracts-upgradeable/contracts/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol#94) is a local variable never initialized
+AxiomV1Query._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).runningHash_scope_0 (contracts/AxiomV1Query.sol#376) is a local variable never initialized
+ERC1967Upgrade._upgradeToAndCallUUPS(address,bytes,bool).slot (lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Upgrade.sol#88) is a local variable never initialized
+StdCheatsSafe.rawToConvertedEIP1559Detail(StdCheatsSafe.RawTx1559Detail).txDetail (lib/forge-std/src/StdCheats.sol#273) is a local variable never initialized
 Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#uninitialized-local-variables
 INFO:Detectors:
 StdChains.getChainWithUpdatedRpcUrl(string,StdChains.Chain) (lib/forge-std/src/StdChains.sol#155-178) ignores return value by vm.rpcUrl(chainAlias) (lib/forge-std/src/StdChains.sol#157-175)
@@ -929,36 +929,36 @@ Redundant expression "status (lib/forge-std/src/StdUtils.sol#187)" inStdUtils (l
 Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#redundant-statements
 INFO:Detectors:
 Variable AxiomV1Query.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_0 (contracts/AxiomV1Query.sol#251) is too similar to AxiomV1Query._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).idx_scope_1 (contracts/AxiomV1Query.sol#383)
-Variable AxiomV1Query.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_0 (contracts/AxiomV1Query.sol#251) is too similar to AxiomV1Query.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_2 (contracts/AxiomV1Query.sol#267)
 Variable AxiomV1Query.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_0 (contracts/AxiomV1Query.sol#251) is too similar to AxiomV1Query._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).idx_scope_2 (contracts/AxiomV1Query.sol#391)
+Variable AxiomV1Query.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_0 (contracts/AxiomV1Query.sol#251) is too similar to AxiomV1Query.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_2 (contracts/AxiomV1Query.sol#267)
 Variable AxiomV1Query._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).idx_scope_1 (contracts/AxiomV1Query.sol#383) is too similar to AxiomV1Query.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_2 (contracts/AxiomV1Query.sol#267)
 Variable AxiomV1Query._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).idx_scope_1 (contracts/AxiomV1Query.sol#383) is too similar to AxiomV1Query._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).idx_scope_2 (contracts/AxiomV1Query.sol#391)
 Variable AxiomV1Query.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).leaf_scope_1 (contracts/AxiomV1Query.sol#252-261) is too similar to AxiomV1Query.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).leaf_scope_3 (contracts/AxiomV1Query.sol#268-273)
 Variable AxiomV1QueryMock.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_0 (contracts/mock/AxiomV1QueryMock.sol#258) is too similar to AxiomV1QueryMock._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).idx_scope_1 (contracts/mock/AxiomV1QueryMock.sol#406)
 Variable AxiomV1QueryMock.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_0 (contracts/mock/AxiomV1QueryMock.sol#258) is too similar to AxiomV1QueryMock._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).idx_scope_2 (contracts/mock/AxiomV1QueryMock.sol#414)
 Variable AxiomV1QueryMock.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_0 (contracts/mock/AxiomV1QueryMock.sol#258) is too similar to AxiomV1QueryMock.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_2 (contracts/mock/AxiomV1QueryMock.sol#282)
-Variable AxiomV1QueryMock._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).idx_scope_1 (contracts/mock/AxiomV1QueryMock.sol#406) is too similar to AxiomV1QueryMock.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_2 (contracts/mock/AxiomV1QueryMock.sol#282)
 Variable AxiomV1QueryMock._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).idx_scope_1 (contracts/mock/AxiomV1QueryMock.sol#406) is too similar to AxiomV1QueryMock._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).idx_scope_2 (contracts/mock/AxiomV1QueryMock.sol#414)
+Variable AxiomV1QueryMock._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).idx_scope_1 (contracts/mock/AxiomV1QueryMock.sol#406) is too similar to AxiomV1QueryMock.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_2 (contracts/mock/AxiomV1QueryMock.sol#282)
 Variable AxiomV1QueryMock.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).leaf_scope_1 (contracts/mock/AxiomV1QueryMock.sol#259-272) is too similar to AxiomV1QueryMock.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).leaf_scope_3 (contracts/mock/AxiomV1QueryMock.sol#283-290)
 Variable StdAssertions.assertEqCall(address,bytes,address,bytes,bool).returnDataA (lib/forge-std/src/StdAssertions.sol#351) is too similar to StdAssertions.assertEqCall(address,bytes,address,bytes,bool).returnDataB (lib/forge-std/src/StdAssertions.sol#352)
+Variable StdInvariant._targetedArtifactSelectors (lib/forge-std/src/StdInvariant.sol#20) is too similar to StdInvariant.targetArtifactSelectors().targetedArtifactSelectors_ (lib/forge-std/src/StdInvariant.sol#77)
+Variable StdInvariant._targetedArtifacts (lib/forge-std/src/StdInvariant.sol#18) is too similar to StdInvariant.targetArtifacts().targetedArtifacts_ (lib/forge-std/src/StdInvariant.sol#73)
+Variable StdInvariant._targetedSelectors (lib/forge-std/src/StdInvariant.sol#21) is too similar to StdInvariant.targetSelectors().targetedSelectors_ (lib/forge-std/src/StdInvariant.sol#85)
 Variable StdInvariant._excludedArtifacts (lib/forge-std/src/StdInvariant.sol#17) is too similar to StdInvariant.excludeArtifacts().excludedArtifacts_ (lib/forge-std/src/StdInvariant.sol#61)
 Variable StdInvariant._excludedContracts (lib/forge-std/src/StdInvariant.sol#12) is too similar to StdInvariant.excludeContracts().excludedContracts_ (lib/forge-std/src/StdInvariant.sol#65)
 Variable StdInvariant._excludedSenders (lib/forge-std/src/StdInvariant.sol#13) is too similar to StdInvariant.excludeSenders().excludedSenders_ (lib/forge-std/src/StdInvariant.sol#69)
 Variable StdInvariant._targetedContracts (lib/forge-std/src/StdInvariant.sol#14) is too similar to StdInvariant.targetContracts().targetedContracts_ (lib/forge-std/src/StdInvariant.sol#81)
-Variable StdInvariant._targetedSelectors (lib/forge-std/src/StdInvariant.sol#21) is too similar to StdInvariant.targetSelectors().targetedSelectors_ (lib/forge-std/src/StdInvariant.sol#85)
 Variable StdInvariant._targetedSenders (lib/forge-std/src/StdInvariant.sol#15) is too similar to StdInvariant.targetSenders().targetedSenders_ (lib/forge-std/src/StdInvariant.sol#89)
-Variable StdInvariant._targetedArtifactSelectors (lib/forge-std/src/StdInvariant.sol#20) is too similar to StdInvariant.targetArtifactSelectors().targetedArtifactSelectors_ (lib/forge-std/src/StdInvariant.sol#77)
-Variable StdInvariant._targetedArtifacts (lib/forge-std/src/StdInvariant.sol#18) is too similar to StdInvariant.targetArtifacts().targetedArtifacts_ (lib/forge-std/src/StdInvariant.sol#73)
-Variable Vm.expectEmit(bool,bool,bool,bool).checkTopic1 (lib/forge-std/src/Vm.sol#343) is too similar to Vm.expectEmit(bool,bool,bool,bool,address).checkTopic2 (lib/forge-std/src/Vm.sol#344)
-Variable Vm.expectEmit(bool,bool,bool,bool,address).checkTopic1 (lib/forge-std/src/Vm.sol#344) is too similar to Vm.expectEmit(bool,bool,bool,bool,address).checkTopic2 (lib/forge-std/src/Vm.sol#344)
 Variable Vm.expectEmit(bool,bool,bool,bool).checkTopic1 (lib/forge-std/src/Vm.sol#343) is too similar to Vm.expectEmit(bool,bool,bool,bool).checkTopic2 (lib/forge-std/src/Vm.sol#343)
+Variable Vm.expectEmit(bool,bool,bool,bool,address).checkTopic1 (lib/forge-std/src/Vm.sol#344) is too similar to Vm.expectEmit(bool,bool,bool,bool,address).checkTopic2 (lib/forge-std/src/Vm.sol#344)
+Variable Vm.expectEmit(bool,bool,bool,bool).checkTopic1 (lib/forge-std/src/Vm.sol#343) is too similar to Vm.expectEmit(bool,bool,bool,bool,address).checkTopic2 (lib/forge-std/src/Vm.sol#344)
 Variable Vm.expectEmit(bool,bool,bool,bool).checkTopic1 (lib/forge-std/src/Vm.sol#343) is too similar to Vm.expectEmit(bool,bool,bool,bool).checkTopic3 (lib/forge-std/src/Vm.sol#343)
-Variable Vm.expectEmit(bool,bool,bool,bool).checkTopic1 (lib/forge-std/src/Vm.sol#343) is too similar to Vm.expectEmit(bool,bool,bool,bool,address).checkTopic3 (lib/forge-std/src/Vm.sol#344)
 Variable Vm.expectEmit(bool,bool,bool,bool,address).checkTopic1 (lib/forge-std/src/Vm.sol#344) is too similar to Vm.expectEmit(bool,bool,bool,bool,address).checkTopic3 (lib/forge-std/src/Vm.sol#344)
+Variable Vm.expectEmit(bool,bool,bool,bool).checkTopic1 (lib/forge-std/src/Vm.sol#343) is too similar to Vm.expectEmit(bool,bool,bool,bool,address).checkTopic3 (lib/forge-std/src/Vm.sol#344)
 Variable Vm.expectEmit(bool,bool,bool,bool,address).checkTopic1 (lib/forge-std/src/Vm.sol#344) is too similar to Vm.expectEmit(bool,bool,bool,bool).checkTopic2 (lib/forge-std/src/Vm.sol#343)
+Variable Vm.expectEmit(bool,bool,bool,bool,address).checkTopic2 (lib/forge-std/src/Vm.sol#344) is too similar to Vm.expectEmit(bool,bool,bool,bool,address).checkTopic3 (lib/forge-std/src/Vm.sol#344)
 Variable Vm.expectEmit(bool,bool,bool,bool).checkTopic2 (lib/forge-std/src/Vm.sol#343) is too similar to Vm.expectEmit(bool,bool,bool,bool).checkTopic3 (lib/forge-std/src/Vm.sol#343)
 Variable Vm.expectEmit(bool,bool,bool,bool).checkTopic2 (lib/forge-std/src/Vm.sol#343) is too similar to Vm.expectEmit(bool,bool,bool,bool,address).checkTopic3 (lib/forge-std/src/Vm.sol#344)
-Variable Vm.expectEmit(bool,bool,bool,bool,address).checkTopic2 (lib/forge-std/src/Vm.sol#344) is too similar to Vm.expectEmit(bool,bool,bool,bool,address).checkTopic3 (lib/forge-std/src/Vm.sol#344)
 Variable Vm.expectEmit(bool,bool,bool,bool,address).checkTopic1 (lib/forge-std/src/Vm.sol#344) is too similar to Vm.expectEmit(bool,bool,bool,bool).checkTopic3 (lib/forge-std/src/Vm.sol#343)
 Variable Vm.expectEmit(bool,bool,bool,bool,address).checkTopic2 (lib/forge-std/src/Vm.sol#344) is too similar to Vm.expectEmit(bool,bool,bool,bool).checkTopic3 (lib/forge-std/src/Vm.sol#343)
 Variable AxiomV1UpdateRecent.mainnetForkId1 (test/AxiomV1UpdateRecent.t.sol#18) is too similar to AxiomV1UpdateRecent.mainnetForkId2 (test/AxiomV1UpdateRecent.t.sol#19)

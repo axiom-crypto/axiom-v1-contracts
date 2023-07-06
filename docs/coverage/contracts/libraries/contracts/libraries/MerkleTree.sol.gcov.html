@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - lcov.info - contracts/libraries/contracts/libraries/MerkleTree.sol</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">contracts/libraries/contracts/libraries</a> - MerkleTree.sol<span style="font-size: 80%;"> (source / <a href="MerkleTree.sol.func-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">lcov.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
+            <td class="headerCovTableEntry">30</td>
+            <td class="headerCovTableEntry">0</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2023-07-05 20:29:04</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">0</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntryHi">-</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">0</td>
+          </tr>
+                  <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">             Branch data     Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>                 :             : // SPDX-License-Identifier: MIT</span>
+<span id="L2"><span class="lineNum">       2</span>                 :             : pragma solidity 0.8.19;</span>
+<span id="L3"><span class="lineNum">       3</span>                 :             : </span>
+<span id="L4"><span class="lineNum">       4</span>                 :             : import {HISTORICAL_NUM_ROOTS} from &quot;./configuration/AxiomV1Configuration.sol&quot;;</span>
+<span id="L5"><span class="lineNum">       5</span>                 :             : </span>
+<span id="L6"><span class="lineNum">       6</span>                 :             : /// @title Merkle Tree</span>
+<span id="L7"><span class="lineNum">       7</span>                 :             : /// @notice Helper functions for computing Merkle roots of Merkle trees</span>
+<span id="L8"><span class="lineNum">       8</span>                 :             : library MerkleTree {</span>
+<span id="L9"><span class="lineNum">       9</span>                 :             :     /// @notice Compute the Merkle root of a Merkle tree with HISTORICAL_NUM_ROOTS leaves</span>
+<span id="L10"><span class="lineNum">      10</span>                 :             :     /// @param  leaves The HISTORICAL_NUM_ROOTS leaves of the Merkle tree</span>
+<span id="L11"><span class="lineNum">      11</span>                 :<span class="tlaUNC tlaBgUNC">           0 :     function merkleRoot(bytes32[HISTORICAL_NUM_ROOTS] memory leaves) internal pure returns (bytes32) {</span></span>
+<span id="L12"><span class="lineNum">      12</span>                 :             :         // we create a new array to avoid mutating `leaves`, which is passed by reference</span>
+<span id="L13"><span class="lineNum">      13</span>                 :             :         // unnecessary if calldata `leaves` is passed in since it is automatically copied to memory</span>
+<span id="L14"><span class="lineNum">      14</span>                 :<span class="tlaUNC">           0 :         bytes32[] memory hashes = new bytes32[](HISTORICAL_NUM_ROOTS / 2);</span></span>
+<span id="L15"><span class="lineNum">      15</span>                 :<span class="tlaUNC">           0 :         for (uint256 i = 0; i &lt; HISTORICAL_NUM_ROOTS / 2; i++) {</span></span>
+<span id="L16"><span class="lineNum">      16</span>                 :<span class="tlaUNC">           0 :             hashes[i] = keccak256(abi.encodePacked(leaves[i &lt;&lt; 1], leaves[(i &lt;&lt; 1) | 1]));</span></span>
+<span id="L17"><span class="lineNum">      17</span>                 :             :         }</span>
+<span id="L18"><span class="lineNum">      18</span>                 :<span class="tlaUNC">           0 :         uint256 len = HISTORICAL_NUM_ROOTS / 4;</span></span>
+<span id="L19"><span class="lineNum">      19</span>                 :<span class="tlaUNC">           0 :         while (len != 0) {</span></span>
+<span id="L20"><span class="lineNum">      20</span>                 :<span class="tlaUNC">           0 :             for (uint256 i = 0; i &lt; len; i++) {</span></span>
+<span id="L21"><span class="lineNum">      21</span>                 :<span class="tlaUNC">           0 :                 hashes[i] = keccak256(abi.encodePacked(hashes[i &lt;&lt; 1], hashes[(i &lt;&lt; 1) | 1]));</span></span>
+<span id="L22"><span class="lineNum">      22</span>                 :             :             }</span>
+<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaUNC">           0 :             len &gt;&gt;= 1;</span></span>
+<span id="L24"><span class="lineNum">      24</span>                 :             :         }</span>
+<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaUNC">           0 :         return hashes[0];</span></span>
+<span id="L26"><span class="lineNum">      26</span>                 :             :     }</span>
+<span id="L27"><span class="lineNum">      27</span>                 :             : </span>
+<span id="L28"><span class="lineNum">      28</span>                 :             :     /// @notice Compute the Merkle root of a Merkle tree with 2^depth leaves all equal to bytes32(0x0)</span>
+<span id="L29"><span class="lineNum">      29</span>                 :             :     /// @param depth The depth of the Merkle tree, 0 &lt;= depth &lt; BLOCK_BATCH_DEPTH.</span>
+<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaUNC">           0 :     function getEmptyHash(uint256 depth) internal pure returns (bytes32) {</span></span>
+<span id="L31"><span class="lineNum">      31</span>                 :             :         // emptyHashes[idx] is the Merkle root of a tree of depth idx with 0's as leaves</span>
+<span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaUNC">           0 :         if (depth == 0) {</span></span>
+<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaUNC">           0 :             return bytes32(0x0000000000000000000000000000000000000000000000000000000000000000);</span></span>
+<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaUNC">           0 :         } else if (depth == 1) {</span></span>
+<span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaUNC">           0 :             return bytes32(0xad3228b676f7d3cd4284a5443f17f1962b36e491b30a40b2405849e597ba5fb5);</span></span>
+<span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaUNC">           0 :         } else if (depth == 2) {</span></span>
+<span id="L37"><span class="lineNum">      37</span>                 :<span class="tlaUNC">           0 :             return bytes32(0xb4c11951957c6f8f642c4af61cd6b24640fec6dc7fc607ee8206a99e92410d30);</span></span>
+<span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaUNC">           0 :         } else if (depth == 3) {</span></span>
+<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaUNC">           0 :             return bytes32(0x21ddb9a356815c3fac1026b6dec5df3124afbadb485c9ba5a3e3398a04b7ba85);</span></span>
+<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaUNC">           0 :         } else if (depth == 4) {</span></span>
+<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaUNC">           0 :             return bytes32(0xe58769b32a1beaf1ea27375a44095a0d1fb664ce2dd358e7fcbfb78c26a19344);</span></span>
+<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaUNC">           0 :         } else if (depth == 5) {</span></span>
+<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaUNC">           0 :             return bytes32(0x0eb01ebfc9ed27500cd4dfc979272d1f0913cc9f66540d7e8005811109e1cf2d);</span></span>
+<span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaUNC">           0 :         } else if (depth == 6) {</span></span>
+<span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaUNC">           0 :             return bytes32(0x887c22bd8750d34016ac3c66b5ff102dacdd73f6b014e710b51e8022af9a1968);</span></span>
+<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaUNC">           0 :         } else if (depth == 7) {</span></span>
+<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaUNC">           0 :             return bytes32(0xffd70157e48063fc33c97a050f7f640233bf646cc98d9524c6b92bcf3ab56f83);</span></span>
+<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaUNC">           0 :         } else if (depth == 8) {</span></span>
+<span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaUNC">           0 :             return bytes32(0x9867cc5f7f196b93bae1e27e6320742445d290f2263827498b54fec539f756af);</span></span>
+<span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaUNC">           0 :         } else if (depth == 9) {</span></span>
+<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaUNC">           0 :             return bytes32(0xcefad4e508c098b9a7e1d8feb19955fb02ba9675585078710969d3440f5054e0);</span></span>
+<span id="L52"><span class="lineNum">      52</span>                 :             :         } else {</span>
+<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaUNC">           0 :             revert(&quot;depth must be in range [0, 10)&quot;);</span></span>
+<span id="L54"><span class="lineNum">      54</span>                 :             :         }</span>
+<span id="L55"><span class="lineNum">      55</span>                 :             :     }</span>
+<span id="L56"><span class="lineNum">      56</span>                 :             : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>
