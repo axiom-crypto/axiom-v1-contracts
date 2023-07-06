@@ -1,0 +1,1152 @@
+'forge clean' running (wd: /Users/johnwhitton/me/axiom/axiom-v1-contracts)
+'forge build --build-info --force' running
+Compiling 90 files with 0.8.19
+Solc 0.8.19 finished in 11.58s
+Compiler run [32msuccessful![0m
+
+INFO:Detectors:
+TimelockController._execute(address,uint256,bytes) (lib/openzeppelin-contracts/contracts/governance/TimelockController.sol#348-355) sends eth to arbitrary user
+	Dangerous calls:
+	- (success) = target.call{value: value}(data) (lib/openzeppelin-contracts/contracts/governance/TimelockController.sol#353)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#functions-that-send-ether-to-arbitrary-destinations
+INFO:Detectors:
+MerkleMountainRangeTest.testAppendEmpty() (test/MerkleMountainRange.t.sol#19-35) passes array MerkleMountainRangeTest.leaves (test/MerkleMountainRange.t.sol#10)by reference to MerkleMountainRange.append(MerkleMountainRange.MMR,bytes32[]) (contracts/libraries/MerkleMountainRange.sol#94-133)which only takes arrays by value
+MerkleMountainRangeTest.testAppendNonempty() (test/MerkleMountainRange.t.sol#37-71) passes array MerkleMountainRangeTest.leaves (test/MerkleMountainRange.t.sol#10)by reference to MerkleMountainRange.append(MerkleMountainRange.MMR,bytes32[]) (contracts/libraries/MerkleMountainRange.sol#94-133)which only takes arrays by value
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#modifying-storage-array-by-value
+INFO:Detectors:
+ERC1967UpgradeUpgradeable._functionDelegateCall(address,bytes) (lib/openzeppelin-contracts-upgradeable/contracts/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol#184-190) uses delegatecall to a input-controlled function id
+	- (success,returndata) = target.delegatecall(data) (lib/openzeppelin-contracts-upgradeable/contracts/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol#188)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#controlled-delegatecall
+INFO:Detectors:
+AxiomV1DeployMock is re-used:
+	- AxiomV1DeployMock (script/goerli/AxiomV1DeployMock.s.sol#8-20)
+	- AxiomV1DeployMock (script/mock/AxiomV1DeployMock.s.sol#8-20)
+AxiomV1QueryDeployMock is re-used:
+	- AxiomV1QueryDeployMock (script/goerli/AxiomV1QueryDeployMock.s.sol#11-34)
+	- AxiomV1QueryDeployMock (script/local/AxiomV1QueryDeployMock.s.sol#9-35)
+	- AxiomV1QueryDeployMock (script/mock/AxiomV1QueryDeployMock.s.sol#11-33)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#name-reused
+INFO:Detectors:
+StdCheats.vm (lib/forge-std/src/StdCheats.sol#490) shadows:
+	- StdCheatsSafe.vm (lib/forge-std/src/StdCheats.sol#10)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variable-shadowing
+INFO:Detectors:
+MathUpgradeable.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#55-135) performs a multiplication on the result of a division:
+	- denominator = denominator / twos (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#102)
+	- inverse = (3 * denominator) ^ 2 (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#117)
+MathUpgradeable.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#55-135) performs a multiplication on the result of a division:
+	- denominator = denominator / twos (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#102)
+	- inverse *= 2 - denominator * inverse (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#121)
+MathUpgradeable.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#55-135) performs a multiplication on the result of a division:
+	- denominator = denominator / twos (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#102)
+	- inverse *= 2 - denominator * inverse (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#122)
+MathUpgradeable.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#55-135) performs a multiplication on the result of a division:
+	- denominator = denominator / twos (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#102)
+	- inverse *= 2 - denominator * inverse (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#123)
+MathUpgradeable.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#55-135) performs a multiplication on the result of a division:
+	- denominator = denominator / twos (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#102)
+	- inverse *= 2 - denominator * inverse (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#124)
+MathUpgradeable.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#55-135) performs a multiplication on the result of a division:
+	- denominator = denominator / twos (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#102)
+	- inverse *= 2 - denominator * inverse (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#125)
+MathUpgradeable.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#55-135) performs a multiplication on the result of a division:
+	- denominator = denominator / twos (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#102)
+	- inverse *= 2 - denominator * inverse (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#126)
+MathUpgradeable.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#55-135) performs a multiplication on the result of a division:
+	- prod0 = prod0 / twos (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#105)
+	- result = prod0 * inverse (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#132)
+Math.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#55-135) performs a multiplication on the result of a division:
+	- denominator = denominator / twos (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#102)
+	- inverse = (3 * denominator) ^ 2 (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#117)
+Math.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#55-135) performs a multiplication on the result of a division:
+	- denominator = denominator / twos (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#102)
+	- inverse *= 2 - denominator * inverse (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#121)
+Math.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#55-135) performs a multiplication on the result of a division:
+	- denominator = denominator / twos (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#102)
+	- inverse *= 2 - denominator * inverse (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#122)
+Math.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#55-135) performs a multiplication on the result of a division:
+	- denominator = denominator / twos (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#102)
+	- inverse *= 2 - denominator * inverse (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#123)
+Math.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#55-135) performs a multiplication on the result of a division:
+	- denominator = denominator / twos (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#102)
+	- inverse *= 2 - denominator * inverse (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#124)
+Math.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#55-135) performs a multiplication on the result of a division:
+	- denominator = denominator / twos (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#102)
+	- inverse *= 2 - denominator * inverse (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#125)
+Math.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#55-135) performs a multiplication on the result of a division:
+	- denominator = denominator / twos (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#102)
+	- inverse *= 2 - denominator * inverse (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#126)
+Math.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#55-135) performs a multiplication on the result of a division:
+	- prod0 = prod0 / twos (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#105)
+	- result = prod0 * inverse (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#132)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#divide-before-multiply
+INFO:Detectors:
+TimelockController.isOperationDone(bytes32) (lib/openzeppelin-contracts/contracts/governance/TimelockController.sol#162-164) uses a dangerous strict equality:
+	- getTimestamp(id) == _DONE_TIMESTAMP (lib/openzeppelin-contracts/contracts/governance/TimelockController.sol#163)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dangerous-strict-equalities
+INFO:Detectors:
+Reentrancy in AxiomStoragePfTest.deploy() (test/AxiomV1StoragePf.t.sol#65-87):
+	External calls:
+	- vm.roll(16428704) (test/AxiomV1StoragePf.t.sol#67)
+	- proxy = new AxiomProxy(address(implementation),data) (test/AxiomV1StoragePf.t.sol#72)
+	- axiom.setHistoricalRoot(testPrevBlockNumber,keccak256(bytes)(abi.encodePacked(testPrevHash,testRoot,testNumFinal))) (test/AxiomV1StoragePf.t.sol#74)
+	State variables written after the call(s):
+	- axiom = AxiomV1Cheat(address(address(proxy))) (test/AxiomV1StoragePf.t.sol#75)
+	AxiomStoragePfTest.axiom (test/AxiomV1StoragePf.t.sol#18) can be used in cross function reentrancies:
+	- AxiomStoragePfTest.axiom (test/AxiomV1StoragePf.t.sol#18)
+	- AxiomStoragePfTest.deploy() (test/AxiomV1StoragePf.t.sol#65-87)
+	- AxiomStoragePfTest.testInit_zeroAddress() (test/AxiomV1StoragePf.t.sol#89-105)
+	- AxiomStoragePfTest.testInit_zeroGuardianAddress() (test/AxiomV1StoragePf.t.sol#145-164)
+	- AxiomStoragePfTest.testInit_zeroTimelockAddress() (test/AxiomV1StoragePf.t.sol#124-143)
+	- AxiomStoragePfTest.testInit_zeroVerifierAddress() (test/AxiomV1StoragePf.t.sol#107-122)
+Reentrancy in AxiomV1Query.fulfillQueryVsMMR(bytes32,address,uint32,IAxiomV1Query.RecentMMRWitness,bytes) (contracts/AxiomV1Query.sol#159-188):
+	External calls:
+	- proofKeccakQueryResponse = _verifyResultVsMMR(mmrIdx,mmrWitness,proof) (contracts/AxiomV1Query.sol#172)
+		- (success) = mmrVerifierAddress.call(proof) (contracts/AxiomV1Query.sol#420)
+	State variables written after the call(s):
+	- queries[keccakQueryResponse] = newMetadata (contracts/AxiomV1Query.sol#184)
+	AxiomV1Query.queries (contracts/AxiomV1Query.sol#30) can be used in cross function reentrancies:
+	- AxiomV1Query._sendQuery(bytes32,uint256,address) (contracts/AxiomV1Query.sol#285-297)
+	- AxiomV1Query.collectRefund(bytes32) (contracts/AxiomV1Query.sol#190-209)
+	- AxiomV1Query.fulfillQueryVsMMR(bytes32,address,uint32,IAxiomV1Query.RecentMMRWitness,bytes) (contracts/AxiomV1Query.sol#159-188)
+	- AxiomV1Query.queries (contracts/AxiomV1Query.sol#30)
+Reentrancy in AxiomV1QueryTest.testInit_zeroAddress() (test/AxiomV1Query.t.sol#118-141):
+	External calls:
+	- proxy = new AxiomProxy(address(implementation),data) (test/AxiomV1Query.t.sol#123)
+	- axiom.setHistoricalRoot(testPrevBlockNumber,keccak256(bytes)(abi.encodePacked(testPrevHash,testRoot,testNumFinal))) (test/AxiomV1Query.t.sol#125)
+	State variables written after the call(s):
+	- axiom = AxiomV1Cheat(address(address(proxy))) (test/AxiomV1Query.t.sol#126)
+	AxiomV1QueryTest.axiom (test/AxiomV1Query.t.sol#19) can be used in cross function reentrancies:
+	- AxiomV1QueryTest.axiom (test/AxiomV1Query.t.sol#19)
+	- AxiomV1QueryTest.deploy() (test/AxiomV1Query.t.sol#68-91)
+	- AxiomV1QueryTest.deployRecent() (test/AxiomV1Query.t.sol#478-502)
+	- AxiomV1QueryTest.setupVerify() (test/AxiomV1Query.t.sol#875-912)
+	- AxiomV1QueryTest.setupVerifyAfter() (test/AxiomV1Query.t.sol#1029-1067)
+	- AxiomV1QueryTest.setupVerifyOld() (test/AxiomV1Query.t.sol#818-855)
+	- AxiomV1QueryTest.testInit_zeroAddress() (test/AxiomV1Query.t.sol#118-141)
+	- AxiomV1QueryTest.testInit_zeroGuardian() (test/AxiomV1Query.t.sol#168-191)
+	- AxiomV1QueryTest.testInit_zeroTimelock() (test/AxiomV1Query.t.sol#143-166)
+	- AxiomV1QueryTest.testInit_zeroVerifier() (test/AxiomV1Query.t.sol#93-116)
+	- AxiomV1QueryTest.testVerifyResultVsMMR_afterMerkle_fail_recentMMR() (test/AxiomV1Query.t.sol#1107-1130)
+	- AxiomV1QueryTest.testVerifyResultVsMMR_afterMerkle_fail_recentMMR2() (test/AxiomV1Query.t.sol#1132-1155)
+	- AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail_blockHashRoot() (test/AxiomV1Query.t.sol#968-984)
+	- AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail_historicalRoot() (test/AxiomV1Query.t.sol#952-958)
+	- AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail_recentMMR() (test/AxiomV1Query.t.sol#944-950)
+Reentrancy in AxiomStoragePfTest.testInit_zeroAddress() (test/AxiomV1StoragePf.t.sol#89-105):
+	External calls:
+	- proxy = new AxiomProxy(address(implementation),data) (test/AxiomV1StoragePf.t.sol#94)
+	- axiom.setHistoricalRoot(testPrevBlockNumber,keccak256(bytes)(abi.encodePacked(testPrevHash,testRoot,testNumFinal))) (test/AxiomV1StoragePf.t.sol#96)
+	State variables written after the call(s):
+	- axiom = AxiomV1Cheat(address(address(proxy))) (test/AxiomV1StoragePf.t.sol#97)
+	AxiomStoragePfTest.axiom (test/AxiomV1StoragePf.t.sol#18) can be used in cross function reentrancies:
+	- AxiomStoragePfTest.axiom (test/AxiomV1StoragePf.t.sol#18)
+	- AxiomStoragePfTest.deploy() (test/AxiomV1StoragePf.t.sol#65-87)
+	- AxiomStoragePfTest.testInit_zeroAddress() (test/AxiomV1StoragePf.t.sol#89-105)
+	- AxiomStoragePfTest.testInit_zeroGuardianAddress() (test/AxiomV1StoragePf.t.sol#145-164)
+	- AxiomStoragePfTest.testInit_zeroTimelockAddress() (test/AxiomV1StoragePf.t.sol#124-143)
+	- AxiomStoragePfTest.testInit_zeroVerifierAddress() (test/AxiomV1StoragePf.t.sol#107-122)
+Reentrancy in AxiomV1QueryTest.testInit_zeroGuardian() (test/AxiomV1Query.t.sol#168-191):
+	External calls:
+	- proxy = new AxiomProxy(address(implementation),data) (test/AxiomV1Query.t.sol#173)
+	- axiom.setHistoricalRoot(testPrevBlockNumber,keccak256(bytes)(abi.encodePacked(testPrevHash,testRoot,testNumFinal))) (test/AxiomV1Query.t.sol#175)
+	State variables written after the call(s):
+	- axiom = AxiomV1Cheat(address(address(proxy))) (test/AxiomV1Query.t.sol#176)
+	AxiomV1QueryTest.axiom (test/AxiomV1Query.t.sol#19) can be used in cross function reentrancies:
+	- AxiomV1QueryTest.axiom (test/AxiomV1Query.t.sol#19)
+	- AxiomV1QueryTest.deploy() (test/AxiomV1Query.t.sol#68-91)
+	- AxiomV1QueryTest.deployRecent() (test/AxiomV1Query.t.sol#478-502)
+	- AxiomV1QueryTest.setupVerify() (test/AxiomV1Query.t.sol#875-912)
+	- AxiomV1QueryTest.setupVerifyAfter() (test/AxiomV1Query.t.sol#1029-1067)
+	- AxiomV1QueryTest.setupVerifyOld() (test/AxiomV1Query.t.sol#818-855)
+	- AxiomV1QueryTest.testInit_zeroAddress() (test/AxiomV1Query.t.sol#118-141)
+	- AxiomV1QueryTest.testInit_zeroGuardian() (test/AxiomV1Query.t.sol#168-191)
+	- AxiomV1QueryTest.testInit_zeroTimelock() (test/AxiomV1Query.t.sol#143-166)
+	- AxiomV1QueryTest.testInit_zeroVerifier() (test/AxiomV1Query.t.sol#93-116)
+	- AxiomV1QueryTest.testVerifyResultVsMMR_afterMerkle_fail_recentMMR() (test/AxiomV1Query.t.sol#1107-1130)
+	- AxiomV1QueryTest.testVerifyResultVsMMR_afterMerkle_fail_recentMMR2() (test/AxiomV1Query.t.sol#1132-1155)
+	- AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail_blockHashRoot() (test/AxiomV1Query.t.sol#968-984)
+	- AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail_historicalRoot() (test/AxiomV1Query.t.sol#952-958)
+	- AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail_recentMMR() (test/AxiomV1Query.t.sol#944-950)
+Reentrancy in AxiomStoragePfTest.testInit_zeroGuardianAddress() (test/AxiomV1StoragePf.t.sol#145-164):
+	External calls:
+	- proxy = new AxiomProxy(address(implementation),data) (test/AxiomV1StoragePf.t.sol#150)
+	- axiom.setHistoricalRoot(testPrevBlockNumber,keccak256(bytes)(abi.encodePacked(testPrevHash,testRoot,testNumFinal))) (test/AxiomV1StoragePf.t.sol#152)
+	State variables written after the call(s):
+	- axiom = AxiomV1Cheat(address(address(proxy))) (test/AxiomV1StoragePf.t.sol#153)
+	AxiomStoragePfTest.axiom (test/AxiomV1StoragePf.t.sol#18) can be used in cross function reentrancies:
+	- AxiomStoragePfTest.axiom (test/AxiomV1StoragePf.t.sol#18)
+	- AxiomStoragePfTest.deploy() (test/AxiomV1StoragePf.t.sol#65-87)
+	- AxiomStoragePfTest.testInit_zeroAddress() (test/AxiomV1StoragePf.t.sol#89-105)
+	- AxiomStoragePfTest.testInit_zeroGuardianAddress() (test/AxiomV1StoragePf.t.sol#145-164)
+	- AxiomStoragePfTest.testInit_zeroTimelockAddress() (test/AxiomV1StoragePf.t.sol#124-143)
+	- AxiomStoragePfTest.testInit_zeroVerifierAddress() (test/AxiomV1StoragePf.t.sol#107-122)
+Reentrancy in AxiomV1QueryTest.testInit_zeroTimelock() (test/AxiomV1Query.t.sol#143-166):
+	External calls:
+	- proxy = new AxiomProxy(address(implementation),data) (test/AxiomV1Query.t.sol#148)
+	- axiom.setHistoricalRoot(testPrevBlockNumber,keccak256(bytes)(abi.encodePacked(testPrevHash,testRoot,testNumFinal))) (test/AxiomV1Query.t.sol#150)
+	State variables written after the call(s):
+	- axiom = AxiomV1Cheat(address(address(proxy))) (test/AxiomV1Query.t.sol#151)
+	AxiomV1QueryTest.axiom (test/AxiomV1Query.t.sol#19) can be used in cross function reentrancies:
+	- AxiomV1QueryTest.axiom (test/AxiomV1Query.t.sol#19)
+	- AxiomV1QueryTest.deploy() (test/AxiomV1Query.t.sol#68-91)
+	- AxiomV1QueryTest.deployRecent() (test/AxiomV1Query.t.sol#478-502)
+	- AxiomV1QueryTest.setupVerify() (test/AxiomV1Query.t.sol#875-912)
+	- AxiomV1QueryTest.setupVerifyAfter() (test/AxiomV1Query.t.sol#1029-1067)
+	- AxiomV1QueryTest.setupVerifyOld() (test/AxiomV1Query.t.sol#818-855)
+	- AxiomV1QueryTest.testInit_zeroAddress() (test/AxiomV1Query.t.sol#118-141)
+	- AxiomV1QueryTest.testInit_zeroGuardian() (test/AxiomV1Query.t.sol#168-191)
+	- AxiomV1QueryTest.testInit_zeroTimelock() (test/AxiomV1Query.t.sol#143-166)
+	- AxiomV1QueryTest.testInit_zeroVerifier() (test/AxiomV1Query.t.sol#93-116)
+	- AxiomV1QueryTest.testVerifyResultVsMMR_afterMerkle_fail_recentMMR() (test/AxiomV1Query.t.sol#1107-1130)
+	- AxiomV1QueryTest.testVerifyResultVsMMR_afterMerkle_fail_recentMMR2() (test/AxiomV1Query.t.sol#1132-1155)
+	- AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail_blockHashRoot() (test/AxiomV1Query.t.sol#968-984)
+	- AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail_historicalRoot() (test/AxiomV1Query.t.sol#952-958)
+	- AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail_recentMMR() (test/AxiomV1Query.t.sol#944-950)
+Reentrancy in AxiomStoragePfTest.testInit_zeroTimelockAddress() (test/AxiomV1StoragePf.t.sol#124-143):
+	External calls:
+	- proxy = new AxiomProxy(address(implementation),data) (test/AxiomV1StoragePf.t.sol#129)
+	- axiom.setHistoricalRoot(testPrevBlockNumber,keccak256(bytes)(abi.encodePacked(testPrevHash,testRoot,testNumFinal))) (test/AxiomV1StoragePf.t.sol#131)
+	State variables written after the call(s):
+	- axiom = AxiomV1Cheat(address(address(proxy))) (test/AxiomV1StoragePf.t.sol#132)
+	AxiomStoragePfTest.axiom (test/AxiomV1StoragePf.t.sol#18) can be used in cross function reentrancies:
+	- AxiomStoragePfTest.axiom (test/AxiomV1StoragePf.t.sol#18)
+	- AxiomStoragePfTest.deploy() (test/AxiomV1StoragePf.t.sol#65-87)
+	- AxiomStoragePfTest.testInit_zeroAddress() (test/AxiomV1StoragePf.t.sol#89-105)
+	- AxiomStoragePfTest.testInit_zeroGuardianAddress() (test/AxiomV1StoragePf.t.sol#145-164)
+	- AxiomStoragePfTest.testInit_zeroTimelockAddress() (test/AxiomV1StoragePf.t.sol#124-143)
+	- AxiomStoragePfTest.testInit_zeroVerifierAddress() (test/AxiomV1StoragePf.t.sol#107-122)
+Reentrancy in AxiomV1QueryTest.testInit_zeroVerifier() (test/AxiomV1Query.t.sol#93-116):
+	External calls:
+	- proxy = new AxiomProxy(address(implementation),data) (test/AxiomV1Query.t.sol#98)
+	- axiom.setHistoricalRoot(testPrevBlockNumber,keccak256(bytes)(abi.encodePacked(testPrevHash,testRoot,testNumFinal))) (test/AxiomV1Query.t.sol#100)
+	State variables written after the call(s):
+	- axiom = AxiomV1Cheat(address(address(proxy))) (test/AxiomV1Query.t.sol#101)
+	AxiomV1QueryTest.axiom (test/AxiomV1Query.t.sol#19) can be used in cross function reentrancies:
+	- AxiomV1QueryTest.axiom (test/AxiomV1Query.t.sol#19)
+	- AxiomV1QueryTest.deploy() (test/AxiomV1Query.t.sol#68-91)
+	- AxiomV1QueryTest.deployRecent() (test/AxiomV1Query.t.sol#478-502)
+	- AxiomV1QueryTest.setupVerify() (test/AxiomV1Query.t.sol#875-912)
+	- AxiomV1QueryTest.setupVerifyAfter() (test/AxiomV1Query.t.sol#1029-1067)
+	- AxiomV1QueryTest.setupVerifyOld() (test/AxiomV1Query.t.sol#818-855)
+	- AxiomV1QueryTest.testInit_zeroAddress() (test/AxiomV1Query.t.sol#118-141)
+	- AxiomV1QueryTest.testInit_zeroGuardian() (test/AxiomV1Query.t.sol#168-191)
+	- AxiomV1QueryTest.testInit_zeroTimelock() (test/AxiomV1Query.t.sol#143-166)
+	- AxiomV1QueryTest.testInit_zeroVerifier() (test/AxiomV1Query.t.sol#93-116)
+	- AxiomV1QueryTest.testVerifyResultVsMMR_afterMerkle_fail_recentMMR() (test/AxiomV1Query.t.sol#1107-1130)
+	- AxiomV1QueryTest.testVerifyResultVsMMR_afterMerkle_fail_recentMMR2() (test/AxiomV1Query.t.sol#1132-1155)
+	- AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail_blockHashRoot() (test/AxiomV1Query.t.sol#968-984)
+	- AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail_historicalRoot() (test/AxiomV1Query.t.sol#952-958)
+	- AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail_recentMMR() (test/AxiomV1Query.t.sol#944-950)
+Reentrancy in AxiomStoragePfTest.testInit_zeroVerifierAddress() (test/AxiomV1StoragePf.t.sol#107-122):
+	External calls:
+	- proxy = new AxiomProxy(address(implementation),data) (test/AxiomV1StoragePf.t.sol#112)
+	- axiom.setHistoricalRoot(testPrevBlockNumber,keccak256(bytes)(abi.encodePacked(testPrevHash,testRoot,testNumFinal))) (test/AxiomV1StoragePf.t.sol#114)
+	State variables written after the call(s):
+	- axiom = AxiomV1Cheat(address(address(proxy))) (test/AxiomV1StoragePf.t.sol#115)
+	AxiomStoragePfTest.axiom (test/AxiomV1StoragePf.t.sol#18) can be used in cross function reentrancies:
+	- AxiomStoragePfTest.axiom (test/AxiomV1StoragePf.t.sol#18)
+	- AxiomStoragePfTest.deploy() (test/AxiomV1StoragePf.t.sol#65-87)
+	- AxiomStoragePfTest.testInit_zeroAddress() (test/AxiomV1StoragePf.t.sol#89-105)
+	- AxiomStoragePfTest.testInit_zeroGuardianAddress() (test/AxiomV1StoragePf.t.sol#145-164)
+	- AxiomStoragePfTest.testInit_zeroTimelockAddress() (test/AxiomV1StoragePf.t.sol#124-143)
+	- AxiomStoragePfTest.testInit_zeroVerifierAddress() (test/AxiomV1StoragePf.t.sol#107-122)
+Reentrancy in AxiomV1Core.updateHistorical(bytes32,uint32,bytes32[128],bytes32[11][127],bytes) (contracts/AxiomV1Core.sol#137-176):
+	External calls:
+	- roots.merkleRoot() != aggregateRoot (contracts/AxiomV1Core.sol#155)
+	- ! _verifyHistoricalRaw(proofData) (contracts/AxiomV1Core.sol#159)
+		- (success) = historicalVerifierAddress.call(input) (contracts/AxiomV1Core.sol#290)
+	State variables written after the call(s):
+	- historicalRoots[start] = keccak256(bytes)(abi.encodePacked(prevHash,roots[i],BLOCK_BATCH_SIZE)) (contracts/AxiomV1Core.sol#173)
+	AxiomV1Core.historicalRoots (contracts/AxiomV1Core.sol#20) can be used in cross function reentrancies:
+	- AxiomV1Core.appendHistoricalMMR(uint32,bytes32[],bytes32[]) (contracts/AxiomV1Core.sol#178-199)
+	- AxiomV1Core.historicalRoots (contracts/AxiomV1Core.sol#20)
+	- AxiomV1Core.isBlockHashValid(IAxiomV1Verifier.BlockHashWitness) (contracts/AxiomV1Core.sol#230-248)
+	- AxiomV1Core.updateHistorical(bytes32,uint32,bytes32[128],bytes32[11][127],bytes) (contracts/AxiomV1Core.sol#137-176)
+	- AxiomV1Core.updateOld(bytes32,uint32,bytes) (contracts/AxiomV1Core.sol#115-134)
+	- AxiomV1Core.updateRecent(bytes) (contracts/AxiomV1Core.sol#64-113)
+Reentrancy in AxiomV1CoreMock.updateHistorical(bytes32,uint32,bytes32[128],bytes32[11][127],bytes) (contracts/mock/AxiomV1CoreMock.sol#109-144):
+	External calls:
+	- roots.merkleRoot() != aggregateRoot (contracts/mock/AxiomV1CoreMock.sol#127)
+	State variables written after the call(s):
+	- historicalRoots[start] = keccak256(bytes)(abi.encodePacked(prevHash,roots[i],BLOCK_BATCH_SIZE)) (contracts/mock/AxiomV1CoreMock.sol#141)
+	AxiomV1CoreMock.historicalRoots (contracts/mock/AxiomV1CoreMock.sol#17) can be used in cross function reentrancies:
+	- AxiomV1CoreMock.appendHistoricalMMR(uint32,bytes32[],bytes32[]) (contracts/mock/AxiomV1CoreMock.sol#146-167)
+	- AxiomV1CoreMock.historicalRoots (contracts/mock/AxiomV1CoreMock.sol#17)
+	- AxiomV1CoreMock.isBlockHashValid(IAxiomV1Verifier.BlockHashWitness) (contracts/mock/AxiomV1CoreMock.sol#179-197)
+	- AxiomV1CoreMock.updateHistorical(bytes32,uint32,bytes32[128],bytes32[11][127],bytes) (contracts/mock/AxiomV1CoreMock.sol#109-144)
+	- AxiomV1CoreMock.updateOld(bytes32,uint32,bytes) (contracts/mock/AxiomV1CoreMock.sol#91-106)
+	- AxiomV1CoreMock.updateRecent(bytes) (contracts/mock/AxiomV1CoreMock.sol#44-89)
+Reentrancy in AxiomV1Core.updateOld(bytes32,uint32,bytes) (contracts/AxiomV1Core.sol#115-134):
+	External calls:
+	- ! _verifyRaw(proofData) (contracts/AxiomV1Core.sol#128)
+		- (success) = verifierAddress.call(input) (contracts/AxiomV1Core.sol#285)
+	State variables written after the call(s):
+	- historicalRoots[startBlockNumber] = keccak256(bytes)(abi.encodePacked(prevHash,root,BLOCK_BATCH_SIZE)) (contracts/AxiomV1Core.sol#132)
+	AxiomV1Core.historicalRoots (contracts/AxiomV1Core.sol#20) can be used in cross function reentrancies:
+	- AxiomV1Core.appendHistoricalMMR(uint32,bytes32[],bytes32[]) (contracts/AxiomV1Core.sol#178-199)
+	- AxiomV1Core.historicalRoots (contracts/AxiomV1Core.sol#20)
+	- AxiomV1Core.isBlockHashValid(IAxiomV1Verifier.BlockHashWitness) (contracts/AxiomV1Core.sol#230-248)
+	- AxiomV1Core.updateHistorical(bytes32,uint32,bytes32[128],bytes32[11][127],bytes) (contracts/AxiomV1Core.sol#137-176)
+	- AxiomV1Core.updateOld(bytes32,uint32,bytes) (contracts/AxiomV1Core.sol#115-134)
+	- AxiomV1Core.updateRecent(bytes) (contracts/AxiomV1Core.sol#64-113)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-1
+INFO:Detectors:
+StdCheatsSafe.rawToConvertedEIPTx1559s(StdCheatsSafe.RawTx1559[]).i (lib/forge-std/src/StdCheats.sol#250) is a local variable never initialized
+MerkleTreeTest.testMerkleRootValue().leaves (test/MerkleTree.t.sol#26) is a local variable never initialized
+AxiomV1UpdateRecent.testIsBlockHashValid().merkleProof (test/AxiomV1UpdateRecent.t.sol#262) is a local variable never initialized
+AxiomV1QueryMock._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).runningHash_scope_0 (contracts/mock/AxiomV1QueryMock.sol#398) is a local variable never initialized
+AxiomV1UpdateRecent.testIsBlockHashValid_notStored_fail().merkleProof (test/AxiomV1UpdateRecent.t.sol#304) is a local variable never initialized
+StdCheatsSafe.rawToConvertedReceipt(StdCheatsSafe.RawReceipt).receipt (lib/forge-std/src/StdCheats.sol#325) is a local variable never initialized
+MerkleMountainRangeTest.testAppendEmpty().mmr2 (test/MerkleMountainRange.t.sol#20) is a local variable never initialized
+MerkleMountainRangeTest.testAppendEmpty().mmr1 (test/MerkleMountainRange.t.sol#24) is a local variable never initialized
+MerkleMountainRangeTest.testAppendNonempty().mmr2 (test/MerkleMountainRange.t.sol#38) is a local variable never initialized
+StdCheatsSafe.rawToConvertedReceipts(StdCheatsSafe.RawReceipt[]).i (lib/forge-std/src/StdCheats.sol#318) is a local variable never initialized
+StdCheatsSafe.rawToConvertedReceiptLogs(StdCheatsSafe.RawReceiptLog[]).i (lib/forge-std/src/StdCheats.sol#349) is a local variable never initialized
+MerkleMountainRangeTest.testAppendNonempty().mmr1 (test/MerkleMountainRange.t.sol#40) is a local variable never initialized
+AxiomV1UpdateRecent.testIsBlockHashValid_zeroBlockHash_fail().merkleProof (test/AxiomV1UpdateRecent.t.sol#339) is a local variable never initialized
+StdCheatsSafe.readEIP1559ScriptArtifact(string).artifact (lib/forge-std/src/StdCheats.sol#237) is a local variable never initialized
+StdCheatsSafe.rawToConvertedEIPTx1559(StdCheatsSafe.RawTx1559).transaction (lib/forge-std/src/StdCheats.sol#257) is a local variable never initialized
+ERC1967UpgradeUpgradeable._upgradeToAndCallUUPS(address,bytes,bool).slot (lib/openzeppelin-contracts-upgradeable/contracts/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol#94) is a local variable never initialized
+AxiomV1Query._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).runningHash_scope_0 (contracts/AxiomV1Query.sol#376) is a local variable never initialized
+ERC1967Upgrade._upgradeToAndCallUUPS(address,bytes,bool).slot (lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Upgrade.sol#88) is a local variable never initialized
+StdCheatsSafe.rawToConvertedEIP1559Detail(StdCheatsSafe.RawTx1559Detail).txDetail (lib/forge-std/src/StdCheats.sol#273) is a local variable never initialized
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#uninitialized-local-variables
+INFO:Detectors:
+StdChains.getChainWithUpdatedRpcUrl(string,StdChains.Chain) (lib/forge-std/src/StdChains.sol#155-178) ignores return value by vm.rpcUrl(chainAlias) (lib/forge-std/src/StdChains.sol#157-175)
+StdCheatsSafe.isFork() (lib/forge-std/src/StdCheats.sol#438-442) ignores return value by vm.activeFork() (lib/forge-std/src/StdCheats.sol#439-441)
+ERC1967UpgradeUpgradeable._upgradeToAndCallUUPS(address,bytes,bool) (lib/openzeppelin-contracts-upgradeable/contracts/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol#83-101) ignores return value by IERC1822ProxiableUpgradeable(newImplementation).proxiableUUID() (lib/openzeppelin-contracts-upgradeable/contracts/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol#94-98)
+ERC1967Upgrade._upgradeToAndCall(address,bytes,bool) (lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Upgrade.sol#61-70) ignores return value by Address.functionDelegateCall(newImplementation,data) (lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Upgrade.sol#68)
+ERC1967Upgrade._upgradeToAndCallUUPS(address,bytes,bool) (lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Upgrade.sol#77-95) ignores return value by IERC1822Proxiable(newImplementation).proxiableUUID() (lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Upgrade.sol#88-92)
+ERC1967Upgrade._upgradeBeaconToAndCall(address,bytes,bool) (lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Upgrade.sol#160-170) ignores return value by Address.functionDelegateCall(IBeacon(newBeacon).implementation(),data) (lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Upgrade.sol#168)
+AxiomV1Test.testIsRecentBlockHashValid_emptyblockhash_fail() (test/AxiomV1.t.sol#640-644) ignores return value by axiom.isRecentBlockHashValid(16_400_000,blockhash(uint256)(16_400_000)) (test/AxiomV1.t.sol#643)
+AxiomV1QueryTest.deployRecent() (test/AxiomV1Query.t.sol#478-502) ignores return value by vm.createSelectFork(mainnet,16_525_312 + 1000) (test/AxiomV1Query.t.sol#480)
+AxiomStoragePfTest.testIsSlotAttestationValid_frozen() (test/AxiomV1StoragePf.t.sol#251-257) ignores return value by axiomStorage.isSlotAttestationValid(testBlockNumber,testAddress,uint256(0),uint256(129)) (test/AxiomV1StoragePf.t.sol#256)
+AxiomStoragePfTest.testAttestSlotsForkRecent() (test/AxiomV1StoragePf.t.sol#259-325) ignores return value by vm.createSelectFork(mainnet,16_509_500) (test/AxiomV1StoragePf.t.sol#260)
+AxiomStoragePfTest.testAttestSlotsForkProof() (test/AxiomV1StoragePf.t.sol#327-447) ignores return value by vm.createSelectFork(mainnet,16_510_306) (test/AxiomV1StoragePf.t.sol#328)
+AxiomV1UpdateRecent.testIsBlockHashValid_notStored_fail() (test/AxiomV1UpdateRecent.t.sol#278-313) ignores return value by axiom.isBlockHashValid(IAxiomV1Verifier.BlockHashWitness(uint32(start),blockHash,prevHash,uint32(end - start + 1),merkleProof)) (test/AxiomV1UpdateRecent.t.sol#310-312)
+AxiomV1UpdateRecent.testIsBlockHashValid_zeroBlockHash_fail() (test/AxiomV1UpdateRecent.t.sol#315-347) ignores return value by axiom.isBlockHashValid(IAxiomV1Verifier.BlockHashWitness(uint32(start + 1),0x0,prevHash,uint32(end - start + 1),merkleProof)) (test/AxiomV1UpdateRecent.t.sol#344-346)
+MerkleMountainRangeTest.testAppendEmpty() (test/MerkleMountainRange.t.sol#19-35) ignores return value by mmr2.append(leaves) (test/MerkleMountainRange.t.sol#21)
+MerkleMountainRangeTest.testAppendEmpty() (test/MerkleMountainRange.t.sol#19-35) ignores return value by mmr1.appendSingle(leaves[i]) (test/MerkleMountainRange.t.sol#26)
+MerkleMountainRangeTest.testAppendNonempty() (test/MerkleMountainRange.t.sol#37-71) ignores return value by mmr1.appendSingle(leaves[i]) (test/MerkleMountainRange.t.sol#55)
+MerkleMountainRangeTest.testAppendNonempty() (test/MerkleMountainRange.t.sol#37-71) ignores return value by mmr2.append(leaves) (test/MerkleMountainRange.t.sol#59)
+MerkleTreeTest.testEmptyMerkleRoots() (test/MerkleTree.t.sol#11-23) ignores return value by MerkleTree.getEmptyHash(10) (test/MerkleTree.t.sol#21)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unused-return
+INFO:Detectors:
+AxiomV1QueryTest.testFulfillQueryVsMMR_fail_resp().keccakQueryResponse (test/AxiomV1Query.t.sol#582) is written in both
+	(keccakQueryResponse,query) = setupFulfill() (test/AxiomV1Query.t.sol#582)
+	keccakQueryResponse = bytes32(0x12c48c9d0c1cc90c5abd0fcd60baa7b131e36759454dec1e6909660c3221045a) (test/AxiomV1Query.t.sol#583)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#write-after-write
+INFO:Detectors:
+YulDeployer.deployContract(string) (lib/YulDeployer.sol#12-35) uses assembly
+	- INLINE ASM (lib/YulDeployer.sol#26-28)
+DSTest.hasHEVMContext() (lib/forge-std/lib/ds-test/src/test.sol#78-84) uses assembly
+	- INLINE ASM (lib/forge-std/lib/ds-test/src/test.sol#80-82)
+StdChains.getChainWithUpdatedRpcUrl(string,StdChains.Chain) (lib/forge-std/src/StdChains.sol#155-178) uses assembly
+	- INLINE ASM (lib/forge-std/src/StdChains.sol#171-173)
+StdCheatsSafe.assumeNoPrecompiles(address) (lib/forge-std/src/StdCheats.sol#196-203) uses assembly
+	- INLINE ASM (lib/forge-std/src/StdCheats.sol#199-201)
+StdCheatsSafe.deployCode(string,bytes) (lib/forge-std/src/StdCheats.sol#366-374) uses assembly
+	- INLINE ASM (lib/forge-std/src/StdCheats.sol#369-371)
+StdCheatsSafe.deployCode(string) (lib/forge-std/src/StdCheats.sol#376-384) uses assembly
+	- INLINE ASM (lib/forge-std/src/StdCheats.sol#379-381)
+StdCheatsSafe.deployCode(string,bytes,uint256) (lib/forge-std/src/StdCheats.sol#387-395) uses assembly
+	- INLINE ASM (lib/forge-std/src/StdCheats.sol#390-392)
+StdCheatsSafe.deployCode(string,uint256) (lib/forge-std/src/StdCheats.sol#397-405) uses assembly
+	- INLINE ASM (lib/forge-std/src/StdCheats.sol#400-402)
+stdStorageSafe.flatten(bytes32[]) (lib/forge-std/src/StdStorage.sol#181-192) uses assembly
+	- INLINE ASM (lib/forge-std/src/StdStorage.sol#186-188)
+stdStorage.checked_write(StdStorage,bool) (lib/forge-std/src/StdStorage.sol#242-249) uses assembly
+	- INLINE ASM (lib/forge-std/src/StdStorage.sol#245-247)
+stdStorage.flatten(bytes32[]) (lib/forge-std/src/StdStorage.sol#315-326) uses assembly
+	- INLINE ASM (lib/forge-std/src/StdStorage.sol#320-322)
+StdUtils.getTokenBalances(address,address[]) (lib/forge-std/src/StdUtils.sol#141-168) uses assembly
+	- INLINE ASM (lib/forge-std/src/StdUtils.sol#147-149)
+console._sendLogPayload(bytes) (lib/forge-std/src/console.sol#7-15) uses assembly
+	- INLINE ASM (lib/forge-std/src/console.sol#11-14)
+console2._sendLogPayload(bytes) (lib/forge-std/src/console2.sol#12-20) uses assembly
+	- INLINE ASM (lib/forge-std/src/console2.sol#16-19)
+AddressUpgradeable._revert(bytes,string) (lib/openzeppelin-contracts-upgradeable/contracts/utils/AddressUpgradeable.sol#206-218) uses assembly
+	- INLINE ASM (lib/openzeppelin-contracts-upgradeable/contracts/utils/AddressUpgradeable.sol#211-214)
+StorageSlotUpgradeable.getAddressSlot(bytes32) (lib/openzeppelin-contracts-upgradeable/contracts/utils/StorageSlotUpgradeable.sol#52-57) uses assembly
+	- INLINE ASM (lib/openzeppelin-contracts-upgradeable/contracts/utils/StorageSlotUpgradeable.sol#54-56)
+StorageSlotUpgradeable.getBooleanSlot(bytes32) (lib/openzeppelin-contracts-upgradeable/contracts/utils/StorageSlotUpgradeable.sol#62-67) uses assembly
+	- INLINE ASM (lib/openzeppelin-contracts-upgradeable/contracts/utils/StorageSlotUpgradeable.sol#64-66)
+StorageSlotUpgradeable.getBytes32Slot(bytes32) (lib/openzeppelin-contracts-upgradeable/contracts/utils/StorageSlotUpgradeable.sol#72-77) uses assembly
+	- INLINE ASM (lib/openzeppelin-contracts-upgradeable/contracts/utils/StorageSlotUpgradeable.sol#74-76)
+StorageSlotUpgradeable.getUint256Slot(bytes32) (lib/openzeppelin-contracts-upgradeable/contracts/utils/StorageSlotUpgradeable.sol#82-87) uses assembly
+	- INLINE ASM (lib/openzeppelin-contracts-upgradeable/contracts/utils/StorageSlotUpgradeable.sol#84-86)
+StringsUpgradeable.toString(uint256) (lib/openzeppelin-contracts-upgradeable/contracts/utils/StringsUpgradeable.sol#18-38) uses assembly
+	- INLINE ASM (lib/openzeppelin-contracts-upgradeable/contracts/utils/StringsUpgradeable.sol#24-26)
+	- INLINE ASM (lib/openzeppelin-contracts-upgradeable/contracts/utils/StringsUpgradeable.sol#30-32)
+MathUpgradeable.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#55-135) uses assembly
+	- INLINE ASM (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#66-70)
+	- INLINE ASM (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#86-93)
+	- INLINE ASM (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#100-109)
+Proxy._delegate(address) (lib/openzeppelin-contracts/contracts/proxy/Proxy.sol#22-45) uses assembly
+	- INLINE ASM (lib/openzeppelin-contracts/contracts/proxy/Proxy.sol#23-44)
+Address._revert(bytes,string) (lib/openzeppelin-contracts/contracts/utils/Address.sol#231-243) uses assembly
+	- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/Address.sol#236-239)
+StorageSlot.getAddressSlot(bytes32) (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#52-57) uses assembly
+	- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#54-56)
+StorageSlot.getBooleanSlot(bytes32) (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#62-67) uses assembly
+	- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#64-66)
+StorageSlot.getBytes32Slot(bytes32) (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#72-77) uses assembly
+	- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#74-76)
+StorageSlot.getUint256Slot(bytes32) (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#82-87) uses assembly
+	- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#84-86)
+Strings.toString(uint256) (lib/openzeppelin-contracts/contracts/utils/Strings.sol#18-38) uses assembly
+	- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/Strings.sol#24-26)
+	- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/Strings.sol#30-32)
+Math.mulDiv(uint256,uint256,uint256) (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#55-135) uses assembly
+	- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#66-70)
+	- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#86-93)
+	- INLINE ASM (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#100-109)
+AxiomV1Deploy.deployContract(string) (script/local/AxiomV1Deploy.s.sol#9-32) uses assembly
+	- INLINE ASM (script/local/AxiomV1Deploy.s.sol#23-25)
+AxiomV1DeployLocal.deployContract(string) (script/local/AxiomV1DeployLocal.s.sol#10-33) uses assembly
+	- INLINE ASM (script/local/AxiomV1DeployLocal.s.sol#24-26)
+AxiomV1QueryDeployLocal.deployContract(string) (script/local/AxiomV1QueryDeployLocal.s.sol#11-34) uses assembly
+	- INLINE ASM (script/local/AxiomV1QueryDeployLocal.s.sol#25-27)
+AxiomV1StoragePfDeployLocal.deployContract(string) (script/local/AxiomV1StoragePfDeployLocal.s.sol#11-34) uses assembly
+	- INLINE ASM (script/local/AxiomV1StoragePfDeployLocal.s.sol#25-27)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#assembly-usage
+INFO:Detectors:
+AxiomV1Test.testIsRecentBlockHashValid_blockhash_fail() (test/AxiomV1.t.sol#635-638) compares to a boolean constant:
+	-assert(bool)(axiom.isRecentBlockHashValid(16_509_490,blockhash(uint256)(16_509_489)) == false) (test/AxiomV1.t.sol#637)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#boolean-equality
+INFO:Detectors:
+Different versions of Solidity are used:
+	- Version used: ['0.8.19', '<0.9', '>=0.4.22<0.9.0', '>=0.5.0', '>=0.6.0<0.9.0', '>=0.6.2<0.9.0', '>=0.8.0<0.9.0', '^0.8.0', '^0.8.1', '^0.8.2']
+	- 0.8.19 (contracts/AxiomProxy.sol#3)
+	- 0.8.19 (contracts/AxiomTimelock.sol#3)
+	- 0.8.19 (contracts/AxiomV1.sol#2)
+	- 0.8.19 (contracts/AxiomV1Core.sol#2)
+	- 0.8.19 (contracts/AxiomV1Query.sol#2)
+	- 0.8.19 (contracts/AxiomV1StoragePf.sol#2)
+	- 0.8.19 (contracts/interfaces/IAxiomV1.sol#2)
+	- 0.8.19 (contracts/interfaces/IAxiomV1Query.sol#2)
+	- 0.8.19 (contracts/interfaces/IAxiomV1StoragePf.sol#2)
+	- 0.8.19 (contracts/interfaces/core/IAxiomV1Events.sol#2)
+	- 0.8.19 (contracts/interfaces/core/IAxiomV1State.sol#2)
+	- 0.8.19 (contracts/interfaces/core/IAxiomV1Update.sol#2)
+	- 0.8.19 (contracts/interfaces/core/IAxiomV1Verifier.sol#2)
+	- 0.8.19 (contracts/libraries/MerkleMountainRange.sol#2)
+	- 0.8.19 (contracts/libraries/MerkleTree.sol#2)
+	- 0.8.19 (contracts/mock/AxiomV1CoreMock.sol#2)
+	- 0.8.19 (contracts/mock/AxiomV1Mock.sol#2)
+	- 0.8.19 (contracts/mock/AxiomV1QueryMock.sol#2)
+	- 0.8.19 (script/goerli/AxiomV1DeployMock.s.sol#2)
+	- 0.8.19 (script/goerli/AxiomV1QueryDeployMock.s.sol#2)
+	- 0.8.19 (script/local/AxiomV1Deploy.s.sol#2)
+	- 0.8.19 (script/local/AxiomV1DeployLocal.s.sol#2)
+	- 0.8.19 (script/local/AxiomV1QueryDeployLocal.s.sol#2)
+	- 0.8.19 (script/local/AxiomV1QueryDeployMock.s.sol#2)
+	- 0.8.19 (script/local/AxiomV1StoragePfDeployLocal.s.sol#2)
+	- 0.8.19 (script/mainnet/AxiomV1DeployMainnet.s.sol#2)
+	- 0.8.19 (script/mainnet/AxiomV1QueryDeployMainnet.s.sol#2)
+	- 0.8.19 (script/mock/AxiomV1DeployMock.s.sol#2)
+	- 0.8.19 (script/mock/AxiomV1QueryDeployMock.s.sol#2)
+	- 0.8.19 (test/AxiomProxy.t.sol#2)
+	- 0.8.19 (test/AxiomV1.t.sol#2)
+	- 0.8.19 (test/AxiomV1Query.t.sol#2)
+	- 0.8.19 (test/AxiomV1StoragePf.t.sol#2)
+	- 0.8.19 (test/AxiomV1UpdateRecent.t.sol#2)
+	- 0.8.19 (test/MerkleMountainRange.t.sol#2)
+	- 0.8.19 (test/MerkleTree.t.sol#2)
+	- 0.8.19 (contracts/libraries/configuration/AxiomV1Configuration.sol#2)
+	- <0.9 (lib/YulDeployer.sol#3)
+	- >=0.4.22<0.9.0 (lib/forge-std/src/StdStyle.sol#2)
+	- >=0.4.22<0.9.0 (lib/forge-std/src/console.sol#2)
+	- >=0.4.22<0.9.0 (lib/forge-std/src/console2.sol#2)
+	- >=0.5.0 (lib/forge-std/lib/ds-test/src/test.sol#16)
+	- >=0.6.0<0.9.0 (lib/forge-std/src/StdJson.sol#2)
+	- >=0.6.2<0.9.0 (lib/forge-std/src/Base.sol#2)
+	- >=0.6.2<0.9.0 (lib/forge-std/src/Script.sol#2)
+	- >=0.6.2<0.9.0 (lib/forge-std/src/StdAssertions.sol#2)
+	- >=0.6.2<0.9.0 (lib/forge-std/src/StdChains.sol#2)
+	- >=0.6.2<0.9.0 (lib/forge-std/src/StdCheats.sol#2)
+	- >=0.6.2<0.9.0 (lib/forge-std/src/StdError.sol#3)
+	- >=0.6.2<0.9.0 (lib/forge-std/src/StdInvariant.sol#2)
+	- >=0.6.2<0.9.0 (lib/forge-std/src/StdMath.sol#2)
+	- >=0.6.2<0.9.0 (lib/forge-std/src/StdStorage.sol#2)
+	- >=0.6.2<0.9.0 (lib/forge-std/src/StdUtils.sol#2)
+	- >=0.6.2<0.9.0 (lib/forge-std/src/Test.sol#2)
+	- >=0.6.2<0.9.0 (lib/forge-std/src/Vm.sol#2)
+	- >=0.6.2<0.9.0 (lib/forge-std/src/interfaces/IMulticall3.sol#2)
+	- >=0.8.0<0.9.0 (contracts/AxiomV1Access.sol#2)
+	- ABIEncoderV2 (lib/forge-std/src/StdChains.sol#4)
+	- ABIEncoderV2 (lib/forge-std/src/StdCheats.sol#4)
+	- ABIEncoderV2 (lib/forge-std/src/StdInvariant.sol#4)
+	- ABIEncoderV2 (lib/forge-std/src/StdJson.sol#4)
+	- ABIEncoderV2 (lib/forge-std/src/StdUtils.sol#4)
+	- ABIEncoderV2 (lib/forge-std/src/Test.sol#4)
+	- ABIEncoderV2 (lib/forge-std/src/Vm.sol#4)
+	- ABIEncoderV2 (lib/forge-std/src/interfaces/IMulticall3.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/access/AccessControlUpgradeable.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/access/IAccessControlUpgradeable.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/interfaces/IERC1967Upgradeable.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/interfaces/draft-IERC1822Upgradeable.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/proxy/beacon/IBeaconUpgradeable.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/proxy/utils/UUPSUpgradeable.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/utils/ContextUpgradeable.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/utils/StorageSlotUpgradeable.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/utils/StringsUpgradeable.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/utils/introspection/ERC165Upgradeable.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/utils/introspection/IERC165Upgradeable.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts/contracts/access/AccessControl.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts/contracts/access/IAccessControl.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts/contracts/governance/TimelockController.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts/contracts/interfaces/IERC1967.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts/contracts/interfaces/draft-IERC1822.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Proxy.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts/contracts/proxy/Proxy.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts/contracts/proxy/beacon/IBeacon.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts/contracts/token/ERC1155/IERC1155Receiver.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts/contracts/token/ERC721/IERC721Receiver.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts/contracts/utils/Context.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts/contracts/utils/Strings.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol#4)
+	- ^0.8.0 (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#4)
+	- ^0.8.1 (lib/openzeppelin-contracts-upgradeable/contracts/utils/AddressUpgradeable.sol#4)
+	- ^0.8.1 (lib/openzeppelin-contracts/contracts/utils/Address.sol#4)
+	- ^0.8.2 (lib/openzeppelin-contracts-upgradeable/contracts/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol#4)
+	- ^0.8.2 (lib/openzeppelin-contracts-upgradeable/contracts/proxy/utils/Initializable.sol#4)
+	- ^0.8.2 (lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Upgrade.sol#4)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#different-pragma-directives-are-used
+INFO:Detectors:
+AxiomV1Query._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes) (contracts/AxiomV1Query.sol#303-433) has a high cyclomatic complexity (17).
+AxiomV1QueryMock._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes) (contracts/mock/AxiomV1QueryMock.sol#324-462) has a high cyclomatic complexity (16).
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#cyclomatic-complexity
+INFO:Detectors:
+Pragma version0.8.19 (contracts/AxiomProxy.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (contracts/AxiomTimelock.sol#3) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (contracts/AxiomV1.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version>=0.8.0<0.9.0 (contracts/AxiomV1Access.sol#2) is too complex
+Pragma version0.8.19 (contracts/AxiomV1Core.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (contracts/AxiomV1Query.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (contracts/AxiomV1StoragePf.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (contracts/interfaces/IAxiomV1.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (contracts/interfaces/IAxiomV1Query.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (contracts/interfaces/IAxiomV1StoragePf.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (contracts/interfaces/core/IAxiomV1Events.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (contracts/interfaces/core/IAxiomV1State.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (contracts/interfaces/core/IAxiomV1Update.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (contracts/interfaces/core/IAxiomV1Verifier.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (contracts/libraries/MerkleMountainRange.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (contracts/libraries/MerkleTree.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (contracts/mock/AxiomV1CoreMock.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (contracts/mock/AxiomV1Mock.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (contracts/mock/AxiomV1QueryMock.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version<0.9 (lib/YulDeployer.sol#3) is too complex
+Pragma version>=0.5.0 (lib/forge-std/lib/ds-test/src/test.sol#16) allows old versions
+Pragma version>=0.6.2<0.9.0 (lib/forge-std/src/Base.sol#2) is too complex
+Pragma version>=0.6.2<0.9.0 (lib/forge-std/src/Script.sol#2) is too complex
+Pragma version>=0.6.2<0.9.0 (lib/forge-std/src/StdAssertions.sol#2) is too complex
+Pragma version>=0.6.2<0.9.0 (lib/forge-std/src/StdChains.sol#2) is too complex
+Pragma version>=0.6.2<0.9.0 (lib/forge-std/src/StdCheats.sol#2) is too complex
+Pragma version>=0.6.2<0.9.0 (lib/forge-std/src/StdError.sol#3) is too complex
+Pragma version>=0.6.2<0.9.0 (lib/forge-std/src/StdInvariant.sol#2) is too complex
+Pragma version>=0.6.0<0.9.0 (lib/forge-std/src/StdJson.sol#2) is too complex
+Pragma version>=0.6.2<0.9.0 (lib/forge-std/src/StdMath.sol#2) is too complex
+Pragma version>=0.6.2<0.9.0 (lib/forge-std/src/StdStorage.sol#2) is too complex
+Pragma version>=0.4.22<0.9.0 (lib/forge-std/src/StdStyle.sol#2) is too complex
+Pragma version>=0.6.2<0.9.0 (lib/forge-std/src/StdUtils.sol#2) is too complex
+Pragma version>=0.6.2<0.9.0 (lib/forge-std/src/Test.sol#2) is too complex
+Pragma version>=0.6.2<0.9.0 (lib/forge-std/src/Vm.sol#2) is too complex
+Pragma version>=0.4.22<0.9.0 (lib/forge-std/src/console.sol#2) is too complex
+Pragma version>=0.4.22<0.9.0 (lib/forge-std/src/console2.sol#2) is too complex
+Pragma version>=0.6.2<0.9.0 (lib/forge-std/src/interfaces/IMulticall3.sol#2) is too complex
+Pragma version^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/access/AccessControlUpgradeable.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/access/IAccessControlUpgradeable.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/interfaces/IERC1967Upgradeable.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/interfaces/draft-IERC1822Upgradeable.sol#4) allows old versions
+Pragma version^0.8.2 (lib/openzeppelin-contracts-upgradeable/contracts/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/proxy/beacon/IBeaconUpgradeable.sol#4) allows old versions
+Pragma version^0.8.2 (lib/openzeppelin-contracts-upgradeable/contracts/proxy/utils/Initializable.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/proxy/utils/UUPSUpgradeable.sol#4) allows old versions
+Pragma version^0.8.1 (lib/openzeppelin-contracts-upgradeable/contracts/utils/AddressUpgradeable.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/utils/ContextUpgradeable.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/utils/StorageSlotUpgradeable.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/utils/StringsUpgradeable.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/utils/introspection/ERC165Upgradeable.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/utils/introspection/IERC165Upgradeable.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/access/AccessControl.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/access/IAccessControl.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/governance/TimelockController.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/interfaces/IERC1967.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/interfaces/draft-IERC1822.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Proxy.sol#4) allows old versions
+Pragma version^0.8.2 (lib/openzeppelin-contracts/contracts/proxy/ERC1967/ERC1967Upgrade.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/proxy/Proxy.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/proxy/beacon/IBeacon.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/token/ERC1155/IERC1155Receiver.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/token/ERC721/IERC721Receiver.sol#4) allows old versions
+Pragma version^0.8.1 (lib/openzeppelin-contracts/contracts/utils/Address.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/utils/Context.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/utils/StorageSlot.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/utils/Strings.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol#4) allows old versions
+Pragma version^0.8.0 (lib/openzeppelin-contracts/contracts/utils/math/Math.sol#4) allows old versions
+Pragma version0.8.19 (script/goerli/AxiomV1DeployMock.s.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (script/goerli/AxiomV1QueryDeployMock.s.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (script/local/AxiomV1Deploy.s.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (script/local/AxiomV1DeployLocal.s.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (script/local/AxiomV1QueryDeployLocal.s.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (script/local/AxiomV1QueryDeployMock.s.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (script/local/AxiomV1StoragePfDeployLocal.s.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (script/mainnet/AxiomV1DeployMainnet.s.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (script/mainnet/AxiomV1QueryDeployMainnet.s.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (script/mock/AxiomV1DeployMock.s.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (script/mock/AxiomV1QueryDeployMock.s.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (test/AxiomProxy.t.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (test/AxiomV1.t.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (test/AxiomV1Query.t.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (test/AxiomV1StoragePf.t.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (test/AxiomV1UpdateRecent.t.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (test/MerkleMountainRange.t.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (test/MerkleTree.t.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+Pragma version0.8.19 (contracts/libraries/configuration/AxiomV1Configuration.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.8.18.
+solc-0.8.19 is not recommended for deployment
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+INFO:Detectors:
+Low level call in AxiomV1Core._verifyRaw(bytes) (contracts/AxiomV1Core.sol#284-287):
+	- (success) = verifierAddress.call(input) (contracts/AxiomV1Core.sol#285)
+Low level call in AxiomV1Core._verifyHistoricalRaw(bytes) (contracts/AxiomV1Core.sol#289-292):
+	- (success) = historicalVerifierAddress.call(input) (contracts/AxiomV1Core.sol#290)
+Low level call in AxiomV1Query._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes) (contracts/AxiomV1Query.sol#303-433):
+	- (success) = mmrVerifierAddress.call(proof) (contracts/AxiomV1Query.sol#420)
+Low level call in AxiomV1StoragePf.attestSlots(IAxiomV1Verifier.BlockHashWitness,bytes) (contracts/AxiomV1StoragePf.sol#77-124):
+	- (success) = verifierAddress.call(proof) (contracts/AxiomV1StoragePf.sol#111)
+Low level call in DSTest.failed() (lib/forge-std/lib/ds-test/src/test.sol#47-63):
+	- (retdata) = HEVM_ADDRESS.call(abi.encodePacked(bytes4(keccak256(bytes)(load(address,bytes32))),abi.encode(HEVM_ADDRESS,bytes32(failed)))) (lib/forge-std/lib/ds-test/src/test.sol#53-58)
+Low level call in DSTest.fail() (lib/forge-std/lib/ds-test/src/test.sol#65-76):
+	- (status) = HEVM_ADDRESS.call(abi.encodePacked(bytes4(keccak256(bytes)(store(address,bytes32,bytes32))),abi.encode(HEVM_ADDRESS,bytes32(failed),bytes32(uint256(0x01))))) (lib/forge-std/lib/ds-test/src/test.sol#67-72)
+Low level call in StdAssertions.assertEqCall(address,bytes,address,bytes,bool) (lib/forge-std/src/StdAssertions.sol#344-375):
+	- (successA,returnDataA) = address(targetA).call(callDataA) (lib/forge-std/src/StdAssertions.sol#351)
+	- (successB,returnDataB) = address(targetB).call(callDataB) (lib/forge-std/src/StdAssertions.sol#352)
+Low level call in StdCheatsSafe.assumePayable(address) (lib/forge-std/src/StdCheats.sol#479-482):
+	- (success) = address(addr).call{value: 0}() (lib/forge-std/src/StdCheats.sol#480)
+Low level call in StdCheats.deal(address,address,uint256,bool) (lib/forge-std/src/StdCheats.sol#573-592):
+	- (balData) = token.call(abi.encodeWithSelector(0x70a08231,to)) (lib/forge-std/src/StdCheats.sol#575)
+	- (totSupData) = token.call(abi.encodeWithSelector(0x18160ddd)) (lib/forge-std/src/StdCheats.sol#583)
+Low level call in StdCheats.dealERC1155(address,address,uint256,uint256,bool) (lib/forge-std/src/StdCheats.sol#594-617):
+	- (balData) = token.call(abi.encodeWithSelector(0x00fdd58e,to,id)) (lib/forge-std/src/StdCheats.sol#596)
+	- (totSupData) = token.call(abi.encodeWithSelector(0xbd85b039,id)) (lib/forge-std/src/StdCheats.sol#604)
+Low level call in StdCheats.dealERC721(address,address,uint256) (lib/forge-std/src/StdCheats.sol#619-638):
+	- (successMinted,ownerData) = token.staticcall(abi.encodeWithSelector(0x6352211e,id)) (lib/forge-std/src/StdCheats.sol#621)
+	- (fromBalData) = token.call(abi.encodeWithSelector(0x70a08231,abi.decode(ownerData,(address)))) (lib/forge-std/src/StdCheats.sol#625)
+	- (toBalData) = token.call(abi.encodeWithSelector(0x70a08231,to)) (lib/forge-std/src/StdCheats.sol#629)
+Low level call in stdStorageSafe.find(StdStorage) (lib/forge-std/src/StdStorage.sol#32-105):
+	- (rdat) = who.staticcall(cald) (lib/forge-std/src/StdStorage.sol#46)
+	- (success,rdat_scope_0) = who.staticcall(cald) (lib/forge-std/src/StdStorage.sol#76)
+Low level call in stdStorage.checked_write(StdStorage,bytes32) (lib/forge-std/src/StdStorage.sol#251-281):
+	- (rdat) = who.staticcall(cald) (lib/forge-std/src/StdStorage.sol#265)
+Low level call in StdUtils.console2_log(string,uint256) (lib/forge-std/src/StdUtils.sol#180-183):
+	- (status) = address(CONSOLE2_ADDRESS).staticcall(abi.encodeWithSignature(log(string,uint256),p0,p1)) (lib/forge-std/src/StdUtils.sol#181)
+Low level call in StdUtils.console2_log(string,string) (lib/forge-std/src/StdUtils.sol#185-188):
+	- (status) = address(CONSOLE2_ADDRESS).staticcall(abi.encodeWithSignature(log(string,string),p0,p1)) (lib/forge-std/src/StdUtils.sol#186)
+Low level call in ERC1967UpgradeUpgradeable._functionDelegateCall(address,bytes) (lib/openzeppelin-contracts-upgradeable/contracts/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol#184-190):
+	- (success,returndata) = target.delegatecall(data) (lib/openzeppelin-contracts-upgradeable/contracts/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol#188)
+Low level call in AddressUpgradeable.sendValue(address,uint256) (lib/openzeppelin-contracts-upgradeable/contracts/utils/AddressUpgradeable.sol#60-65):
+	- (success) = recipient.call{value: amount}() (lib/openzeppelin-contracts-upgradeable/contracts/utils/AddressUpgradeable.sol#63)
+Low level call in AddressUpgradeable.functionCallWithValue(address,bytes,uint256,string) (lib/openzeppelin-contracts-upgradeable/contracts/utils/AddressUpgradeable.sol#128-137):
+	- (success,returndata) = target.call{value: value}(data) (lib/openzeppelin-contracts-upgradeable/contracts/utils/AddressUpgradeable.sol#135)
+Low level call in AddressUpgradeable.functionStaticCall(address,bytes,string) (lib/openzeppelin-contracts-upgradeable/contracts/utils/AddressUpgradeable.sol#155-162):
+	- (success,returndata) = target.staticcall(data) (lib/openzeppelin-contracts-upgradeable/contracts/utils/AddressUpgradeable.sol#160)
+Low level call in TimelockController._execute(address,uint256,bytes) (lib/openzeppelin-contracts/contracts/governance/TimelockController.sol#348-355):
+	- (success) = target.call{value: value}(data) (lib/openzeppelin-contracts/contracts/governance/TimelockController.sol#353)
+Low level call in Address.sendValue(address,uint256) (lib/openzeppelin-contracts/contracts/utils/Address.sol#60-65):
+	- (success) = recipient.call{value: amount}() (lib/openzeppelin-contracts/contracts/utils/Address.sol#63)
+Low level call in Address.functionCallWithValue(address,bytes,uint256,string) (lib/openzeppelin-contracts/contracts/utils/Address.sol#128-137):
+	- (success,returndata) = target.call{value: value}(data) (lib/openzeppelin-contracts/contracts/utils/Address.sol#135)
+Low level call in Address.functionStaticCall(address,bytes,string) (lib/openzeppelin-contracts/contracts/utils/Address.sol#155-162):
+	- (success,returndata) = target.staticcall(data) (lib/openzeppelin-contracts/contracts/utils/Address.sol#160)
+Low level call in Address.functionDelegateCall(address,bytes,string) (lib/openzeppelin-contracts/contracts/utils/Address.sol#180-187):
+	- (success,returndata) = target.delegatecall(data) (lib/openzeppelin-contracts/contracts/utils/Address.sol#185)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+INFO:Detectors:
+Parameter AxiomV1.initialize(address,address,address,address)._verifierAddress (contracts/AxiomV1.sol#23) is not in mixedCase
+Parameter AxiomV1.initialize(address,address,address,address)._historicalVerifierAddress (contracts/AxiomV1.sol#24) is not in mixedCase
+Function AxiomV1Access.__AxiomV1Access_init() (contracts/AxiomV1Access.sol#46-48) is not in mixedCase
+Function AxiomV1Access.__AxiomV1Access_init_unchained() (contracts/AxiomV1Access.sol#50-52) is not in mixedCase
+Variable AxiomV1Access.__gap (contracts/AxiomV1Access.sol#76) is not in mixedCase
+Function AxiomV1Core.__AxiomV1Core_init(address,address,address,address) (contracts/AxiomV1Core.sol#33-41) is not in mixedCase
+Parameter AxiomV1Core.__AxiomV1Core_init(address,address,address,address)._verifierAddress (contracts/AxiomV1Core.sol#34) is not in mixedCase
+Parameter AxiomV1Core.__AxiomV1Core_init(address,address,address,address)._historicalVerifierAddress (contracts/AxiomV1Core.sol#35) is not in mixedCase
+Function AxiomV1Core.__AxiomV1Core_init_unchained(address,address,address,address) (contracts/AxiomV1Core.sol#44-62) is not in mixedCase
+Parameter AxiomV1Core.__AxiomV1Core_init_unchained(address,address,address,address)._verifierAddress (contracts/AxiomV1Core.sol#45) is not in mixedCase
+Parameter AxiomV1Core.__AxiomV1Core_init_unchained(address,address,address,address)._historicalVerifierAddress (contracts/AxiomV1Core.sol#46) is not in mixedCase
+Parameter AxiomV1Core.upgradeSnarkVerifier(address)._verifierAddress (contracts/AxiomV1Core.sol#205) is not in mixedCase
+Parameter AxiomV1Core.upgradeHistoricalSnarkVerifier(address)._historicalVerifierAddress (contracts/AxiomV1Core.sol#215) is not in mixedCase
+Variable AxiomV1Core.__gap (contracts/AxiomV1Core.sol#299) is not in mixedCase
+Parameter AxiomV1Query.initialize(address,address,uint256,uint256,uint32,address,address)._axiomAddress (contracts/AxiomV1Query.sol#56) is not in mixedCase
+Parameter AxiomV1Query.initialize(address,address,uint256,uint256,uint32,address,address)._mmrVerifierAddress (contracts/AxiomV1Query.sol#56) is not in mixedCase
+Parameter AxiomV1Query.initialize(address,address,uint256,uint256,uint32,address,address)._minQueryPrice (contracts/AxiomV1Query.sol#56) is not in mixedCase
+Parameter AxiomV1Query.initialize(address,address,uint256,uint256,uint32,address,address)._maxQueryPrice (contracts/AxiomV1Query.sol#56) is not in mixedCase
+Parameter AxiomV1Query.initialize(address,address,uint256,uint256,uint32,address,address)._queryDeadlineInterval (contracts/AxiomV1Query.sol#56) is not in mixedCase
+Parameter AxiomV1Query.updateAxiomAddress(address)._axiomAddress (contracts/AxiomV1Query.sol#89) is not in mixedCase
+Parameter AxiomV1Query.updateMMRVerifierAddress(address)._mmrVerifierAddress (contracts/AxiomV1Query.sol#96) is not in mixedCase
+Parameter AxiomV1Query.updateMinQueryPrice(uint256)._minQueryPrice (contracts/AxiomV1Query.sol#103) is not in mixedCase
+Parameter AxiomV1Query.updateMaxQueryPrice(uint256)._maxQueryPrice (contracts/AxiomV1Query.sol#110) is not in mixedCase
+Parameter AxiomV1Query.updateQueryDeadlineInterval(uint32)._queryDeadlineInterval (contracts/AxiomV1Query.sol#117) is not in mixedCase
+Variable AxiomV1Query.__gap (contracts/AxiomV1Query.sol#535) is not in mixedCase
+Parameter AxiomV1StoragePf.initialize(address,address,address,address)._axiomAddress (contracts/AxiomV1StoragePf.sol#34) is not in mixedCase
+Parameter AxiomV1StoragePf.initialize(address,address,address,address)._verifierAddress (contracts/AxiomV1StoragePf.sol#34) is not in mixedCase
+Parameter AxiomV1StoragePf.updateAxiomAddress(address)._axiomAddress (contracts/AxiomV1StoragePf.sol#62) is not in mixedCase
+Parameter AxiomV1StoragePf.updateSnarkVerifierAddress(address)._verifierAddress (contracts/AxiomV1StoragePf.sol#71) is not in mixedCase
+Function AxiomV1CoreMock.__AxiomV1Core_init(address,address) (contracts/mock/AxiomV1CoreMock.sol#30-33) is not in mixedCase
+Function AxiomV1CoreMock.__AxiomV1Core_init_unchained(address,address) (contracts/mock/AxiomV1CoreMock.sol#36-42) is not in mixedCase
+Variable AxiomV1CoreMock.__gap (contracts/mock/AxiomV1CoreMock.sol#238) is not in mixedCase
+Parameter AxiomV1QueryMock.initialize(address,uint256,uint256,uint32,address,address)._axiomAddress (contracts/mock/AxiomV1QueryMock.sol#56) is not in mixedCase
+Parameter AxiomV1QueryMock.initialize(address,uint256,uint256,uint32,address,address)._minQueryPrice (contracts/mock/AxiomV1QueryMock.sol#57) is not in mixedCase
+Parameter AxiomV1QueryMock.initialize(address,uint256,uint256,uint32,address,address)._maxQueryPrice (contracts/mock/AxiomV1QueryMock.sol#58) is not in mixedCase
+Parameter AxiomV1QueryMock.initialize(address,uint256,uint256,uint32,address,address)._queryDeadlineInterval (contracts/mock/AxiomV1QueryMock.sol#59) is not in mixedCase
+Parameter AxiomV1QueryMock.updateAxiomAddress(address)._axiomAddress (contracts/mock/AxiomV1QueryMock.sol#89) is not in mixedCase
+Parameter AxiomV1QueryMock.updateMinQueryPrice(uint256)._minQueryPrice (contracts/mock/AxiomV1QueryMock.sol#96) is not in mixedCase
+Parameter AxiomV1QueryMock.updateMaxQueryPrice(uint256)._maxQueryPrice (contracts/mock/AxiomV1QueryMock.sol#103) is not in mixedCase
+Parameter AxiomV1QueryMock.updateQueryDeadlineInterval(uint32)._queryDeadlineInterval (contracts/mock/AxiomV1QueryMock.sol#110) is not in mixedCase
+Variable AxiomV1QueryMock.__gap (contracts/mock/AxiomV1QueryMock.sol#583) is not in mixedCase
+Event DSTestlog(string) (lib/forge-std/lib/ds-test/src/test.sol#19) is not in CapWords
+Event DSTestlogs(bytes) (lib/forge-std/lib/ds-test/src/test.sol#20) is not in CapWords
+Event DSTestlog_address(address) (lib/forge-std/lib/ds-test/src/test.sol#22) is not in CapWords
+Event DSTestlog_bytes32(bytes32) (lib/forge-std/lib/ds-test/src/test.sol#23) is not in CapWords
+Event DSTestlog_int(int256) (lib/forge-std/lib/ds-test/src/test.sol#24) is not in CapWords
+Event DSTestlog_uint(uint256) (lib/forge-std/lib/ds-test/src/test.sol#25) is not in CapWords
+Event DSTestlog_bytes(bytes) (lib/forge-std/lib/ds-test/src/test.sol#26) is not in CapWords
+Event DSTestlog_string(string) (lib/forge-std/lib/ds-test/src/test.sol#27) is not in CapWords
+Event DSTestlog_named_address(string,address) (lib/forge-std/lib/ds-test/src/test.sol#29) is not in CapWords
+Event DSTestlog_named_bytes32(string,bytes32) (lib/forge-std/lib/ds-test/src/test.sol#30) is not in CapWords
+Event DSTestlog_named_decimal_int(string,int256,uint256) (lib/forge-std/lib/ds-test/src/test.sol#31) is not in CapWords
+Event DSTestlog_named_decimal_uint(string,uint256,uint256) (lib/forge-std/lib/ds-test/src/test.sol#32) is not in CapWords
+Event DSTestlog_named_int(string,int256) (lib/forge-std/lib/ds-test/src/test.sol#33) is not in CapWords
+Event DSTestlog_named_uint(string,uint256) (lib/forge-std/lib/ds-test/src/test.sol#34) is not in CapWords
+Event DSTestlog_named_bytes(string,bytes) (lib/forge-std/lib/ds-test/src/test.sol#35) is not in CapWords
+Event DSTestlog_named_string(string,string) (lib/forge-std/lib/ds-test/src/test.sol#36) is not in CapWords
+Variable DSTest.IS_TEST (lib/forge-std/lib/ds-test/src/test.sol#38) is not in mixedCase
+Modifier DSTest.logs_gas() (lib/forge-std/lib/ds-test/src/test.sol#86-91) is not in mixedCase
+Constant CommonBase.vm (lib/forge-std/src/Base.sol#22) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant ScriptBase.vmSafe (lib/forge-std/src/Base.sol#32) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable Script.IS_SCRIPT (lib/forge-std/src/Script.sol#25) is not in mixedCase
+Event StdAssertionslog_array(uint256[]) (lib/forge-std/src/StdAssertions.sol#8) is not in CapWords
+Event StdAssertionslog_array(int256[]) (lib/forge-std/src/StdAssertions.sol#9) is not in CapWords
+Event StdAssertionslog_array(address[]) (lib/forge-std/src/StdAssertions.sol#10) is not in CapWords
+Event StdAssertionslog_named_array(string,uint256[]) (lib/forge-std/src/StdAssertions.sol#11) is not in CapWords
+Event StdAssertionslog_named_array(string,int256[]) (lib/forge-std/src/StdAssertions.sol#12) is not in CapWords
+Event StdAssertionslog_named_array(string,address[]) (lib/forge-std/src/StdAssertions.sol#13) is not in CapWords
+Constant StdChains.vm (lib/forge-std/src/StdChains.sol#39) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant StdCheatsSafe.vm (lib/forge-std/src/StdCheats.sol#10) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant StdCheats.vm (lib/forge-std/src/StdCheats.sol#490) is not in UPPER_CASE_WITH_UNDERSCORES
+Contract stdError (lib/forge-std/src/StdError.sol#5-15) is not in CapWords
+Contract stdJson (lib/forge-std/src/StdJson.sol#29-179) is not in CapWords
+Constant stdJson.vm (lib/forge-std/src/StdJson.sol#30) is not in UPPER_CASE_WITH_UNDERSCORES
+Contract stdMath (lib/forge-std/src/StdMath.sol#4-43) is not in CapWords
+Contract stdStorageSafe (lib/forge-std/src/StdStorage.sol#16-193) is not in CapWords
+Event stdStorageSafeWARNING_UninitedSlot(address,uint256) (lib/forge-std/src/StdStorage.sol#18) is not in CapWords
+Parameter stdStorageSafe.target(StdStorage,address)._target (lib/forge-std/src/StdStorage.sol#107) is not in mixedCase
+Parameter stdStorageSafe.sig(StdStorage,bytes4)._sig (lib/forge-std/src/StdStorage.sol#112) is not in mixedCase
+Parameter stdStorageSafe.sig(StdStorage,string)._sig (lib/forge-std/src/StdStorage.sol#117) is not in mixedCase
+Function stdStorageSafe.with_key(StdStorage,address) (lib/forge-std/src/StdStorage.sol#122-125) is not in mixedCase
+Function stdStorageSafe.with_key(StdStorage,uint256) (lib/forge-std/src/StdStorage.sol#127-130) is not in mixedCase
+Function stdStorageSafe.with_key(StdStorage,bytes32) (lib/forge-std/src/StdStorage.sol#132-135) is not in mixedCase
+Parameter stdStorageSafe.depth(StdStorage,uint256)._depth (lib/forge-std/src/StdStorage.sol#137) is not in mixedCase
+Function stdStorageSafe.read_bytes32(StdStorage) (lib/forge-std/src/StdStorage.sol#148-150) is not in mixedCase
+Function stdStorageSafe.read_bool(StdStorage) (lib/forge-std/src/StdStorage.sol#152-157) is not in mixedCase
+Function stdStorageSafe.read_address(StdStorage) (lib/forge-std/src/StdStorage.sol#159-161) is not in mixedCase
+Function stdStorageSafe.read_uint(StdStorage) (lib/forge-std/src/StdStorage.sol#163-165) is not in mixedCase
+Function stdStorageSafe.read_int(StdStorage) (lib/forge-std/src/StdStorage.sol#167-169) is not in mixedCase
+Constant stdStorageSafe.vm (lib/forge-std/src/StdStorage.sol#20) is not in UPPER_CASE_WITH_UNDERSCORES
+Contract stdStorage (lib/forge-std/src/StdStorage.sol#195-327) is not in CapWords
+Parameter stdStorage.target(StdStorage,address)._target (lib/forge-std/src/StdStorage.sol#206) is not in mixedCase
+Parameter stdStorage.sig(StdStorage,bytes4)._sig (lib/forge-std/src/StdStorage.sol#210) is not in mixedCase
+Parameter stdStorage.sig(StdStorage,string)._sig (lib/forge-std/src/StdStorage.sol#214) is not in mixedCase
+Function stdStorage.with_key(StdStorage,address) (lib/forge-std/src/StdStorage.sol#218-220) is not in mixedCase
+Function stdStorage.with_key(StdStorage,uint256) (lib/forge-std/src/StdStorage.sol#222-224) is not in mixedCase
+Function stdStorage.with_key(StdStorage,bytes32) (lib/forge-std/src/StdStorage.sol#226-228) is not in mixedCase
+Parameter stdStorage.depth(StdStorage,uint256)._depth (lib/forge-std/src/StdStorage.sol#230) is not in mixedCase
+Function stdStorage.checked_write(StdStorage,address) (lib/forge-std/src/StdStorage.sol#234-236) is not in mixedCase
+Function stdStorage.checked_write(StdStorage,uint256) (lib/forge-std/src/StdStorage.sol#238-240) is not in mixedCase
+Function stdStorage.checked_write(StdStorage,bool) (lib/forge-std/src/StdStorage.sol#242-249) is not in mixedCase
+Function stdStorage.checked_write(StdStorage,bytes32) (lib/forge-std/src/StdStorage.sol#251-281) is not in mixedCase
+Function stdStorage.read_bytes32(StdStorage) (lib/forge-std/src/StdStorage.sol#283-285) is not in mixedCase
+Function stdStorage.read_bool(StdStorage) (lib/forge-std/src/StdStorage.sol#287-289) is not in mixedCase
+Function stdStorage.read_address(StdStorage) (lib/forge-std/src/StdStorage.sol#291-293) is not in mixedCase
+Function stdStorage.read_uint(StdStorage) (lib/forge-std/src/StdStorage.sol#295-297) is not in mixedCase
+Function stdStorage.read_int(StdStorage) (lib/forge-std/src/StdStorage.sol#299-301) is not in mixedCase
+Constant stdStorage.vm (lib/forge-std/src/StdStorage.sol#196) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant StdStyle.vm (lib/forge-std/src/StdStyle.sol#7) is not in UPPER_CASE_WITH_UNDERSCORES
+Function StdUtils.console2_log(string,uint256) (lib/forge-std/src/StdUtils.sol#180-183) is not in mixedCase
+Function StdUtils.console2_log(string,string) (lib/forge-std/src/StdUtils.sol#185-188) is not in mixedCase
+Constant StdUtils.multicall (lib/forge-std/src/StdUtils.sol#15) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant StdUtils.vm (lib/forge-std/src/StdUtils.sol#16) is not in UPPER_CASE_WITH_UNDERSCORES
+Contract console (lib/forge-std/src/console.sol#4-1534) is not in CapWords
+Contract console2 (lib/forge-std/src/console2.sol#9-1547) is not in CapWords
+Function AccessControlUpgradeable.__AccessControl_init() (lib/openzeppelin-contracts-upgradeable/contracts/access/AccessControlUpgradeable.sol#51-52) is not in mixedCase
+Function AccessControlUpgradeable.__AccessControl_init_unchained() (lib/openzeppelin-contracts-upgradeable/contracts/access/AccessControlUpgradeable.sol#54-55) is not in mixedCase
+Variable AccessControlUpgradeable.__gap (lib/openzeppelin-contracts-upgradeable/contracts/access/AccessControlUpgradeable.sol#259) is not in mixedCase
+Function ERC1967UpgradeUpgradeable.__ERC1967Upgrade_init() (lib/openzeppelin-contracts-upgradeable/contracts/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol#22-23) is not in mixedCase
+Function ERC1967UpgradeUpgradeable.__ERC1967Upgrade_init_unchained() (lib/openzeppelin-contracts-upgradeable/contracts/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol#25-26) is not in mixedCase
+Variable ERC1967UpgradeUpgradeable.__gap (lib/openzeppelin-contracts-upgradeable/contracts/proxy/ERC1967/ERC1967UpgradeUpgradeable.sol#197) is not in mixedCase
+Function UUPSUpgradeable.__UUPSUpgradeable_init() (lib/openzeppelin-contracts-upgradeable/contracts/proxy/utils/UUPSUpgradeable.sol#23-24) is not in mixedCase
+Function UUPSUpgradeable.__UUPSUpgradeable_init_unchained() (lib/openzeppelin-contracts-upgradeable/contracts/proxy/utils/UUPSUpgradeable.sol#26-27) is not in mixedCase
+Variable UUPSUpgradeable.__self (lib/openzeppelin-contracts-upgradeable/contracts/proxy/utils/UUPSUpgradeable.sol#29) is not in mixedCase
+Variable UUPSUpgradeable.__gap (lib/openzeppelin-contracts-upgradeable/contracts/proxy/utils/UUPSUpgradeable.sol#107) is not in mixedCase
+Function ContextUpgradeable.__Context_init() (lib/openzeppelin-contracts-upgradeable/contracts/utils/ContextUpgradeable.sol#18-19) is not in mixedCase
+Function ContextUpgradeable.__Context_init_unchained() (lib/openzeppelin-contracts-upgradeable/contracts/utils/ContextUpgradeable.sol#21-22) is not in mixedCase
+Variable ContextUpgradeable.__gap (lib/openzeppelin-contracts-upgradeable/contracts/utils/ContextUpgradeable.sol#36) is not in mixedCase
+Function ERC165Upgradeable.__ERC165_init() (lib/openzeppelin-contracts-upgradeable/contracts/utils/introspection/ERC165Upgradeable.sol#24-25) is not in mixedCase
+Function ERC165Upgradeable.__ERC165_init_unchained() (lib/openzeppelin-contracts-upgradeable/contracts/utils/introspection/ERC165Upgradeable.sol#27-28) is not in mixedCase
+Variable ERC165Upgradeable.__gap (lib/openzeppelin-contracts-upgradeable/contracts/utils/introspection/ERC165Upgradeable.sol#41) is not in mixedCase
+Contract Proxy_Test (test/AxiomProxy.t.sol#13-218) is not in CapWords
+Function Proxy_Test.test_implementationKey_succeeds() (test/AxiomProxy.t.sol#48-51) is not in mixedCase
+Function Proxy_Test.test_upgrade_admin_fails() (test/AxiomProxy.t.sol#54-57) is not in mixedCase
+Function Proxy_Test.test_upgrade_multisig_fails() (test/AxiomProxy.t.sol#60-64) is not in mixedCase
+Function Proxy_Test.test_upgrade_timelock_succeeds() (test/AxiomProxy.t.sol#66-75) is not in mixedCase
+Function Proxy_Test.test_schedule_timelockNotProposer_fails() (test/AxiomProxy.t.sol#78-85) is not in mixedCase
+Function Proxy_Test.test_execute_timelockNotExecutor_fails() (test/AxiomProxy.t.sol#87-98) is not in mixedCase
+Function Proxy_Test.test_execute_timelockWithoutSchedule_fails() (test/AxiomProxy.t.sol#100-107) is not in mixedCase
+Function Proxy_Test.test_schedule_timelockDelayTooShort_fails() (test/AxiomProxy.t.sol#110-117) is not in mixedCase
+Function Proxy_Test.test_upgrade_timelockExecuteTooSoon_fails() (test/AxiomProxy.t.sol#120-131) is not in mixedCase
+Function Proxy_Test.test_upgradeInitialize_timelock_fails() (test/AxiomProxy.t.sol#133-149) is not in mixedCase
+Function Proxy_Test.test_upgradeSnarkVerifier_multisig_fails() (test/AxiomProxy.t.sol#152-159) is not in mixedCase
+Function Proxy_Test.test_upgradeSnarkVerifier_timelock_succeeds() (test/AxiomProxy.t.sol#161-203) is not in mixedCase
+Function Proxy_Test.test_upgradeHistoricalVerifier_timelock_succeeds() (test/AxiomProxy.t.sol#205-217) is not in mixedCase
+Variable Proxy_Test._implementationTest (test/AxiomProxy.t.sol#14) is not in mixedCase
+Function AxiomV1Test.testInit_zeroVerifier_fail() (test/AxiomV1.t.sol#62-73) is not in mixedCase
+Function AxiomV1Test.testInit_zeroHistoricalVerifier_fail() (test/AxiomV1.t.sol#75-82) is not in mixedCase
+Function AxiomV1Test.testInit_zeroTimelock_fail() (test/AxiomV1.t.sol#84-95) is not in mixedCase
+Function AxiomV1Test.testInit_zeroGuardian_fail() (test/AxiomV1.t.sol#97-108) is not in mixedCase
+Function AxiomV1Test.testUpdateOld_blockhash_fail() (test/AxiomV1.t.sol#130-148) is not in mixedCase
+Function AxiomV1Test.testUpdateOld_proof_fail() (test/AxiomV1.t.sol#150-173) is not in mixedCase
+Function AxiomV1Test.testUpdateOld_startBlockNumber_fail() (test/AxiomV1.t.sol#175-197) is not in mixedCase
+Function AxiomV1Test.testUpdateOld_numFinal_fail() (test/AxiomV1.t.sol#199-222) is not in mixedCase
+Function AxiomV1Test.testUpdateOld_notProver_fail() (test/AxiomV1.t.sol#224-242) is not in mixedCase
+Function AxiomV1Test.testUpdateOld_freezeUnfreeze() (test/AxiomV1.t.sol#257-281) is not in mixedCase
+Function AxiomV1Test.testUpdateHistorical_proof_fail() (test/AxiomV1.t.sol#306-330) is not in mixedCase
+Function AxiomV1Test.testUpdateHistorical_startBlockNumber_fail() (test/AxiomV1.t.sol#332-357) is not in mixedCase
+Function AxiomV1Test.testUpdateHistorical_numFinal_fail() (test/AxiomV1.t.sol#359-384) is not in mixedCase
+Function AxiomV1Test.testUpdateHistorical_blockhash_fail() (test/AxiomV1.t.sol#386-406) is not in mixedCase
+Function AxiomV1Test.testUpdateHistorical_noendhash_fail() (test/AxiomV1.t.sol#408-418) is not in mixedCase
+Function AxiomV1Test.testUpdateHistorical_merkleroot_fail() (test/AxiomV1.t.sol#420-441) is not in mixedCase
+Function AxiomV1Test.testAppendHistoricalMMR_startBlockNumber_fail() (test/AxiomV1.t.sol#463-482) is not in mixedCase
+Function AxiomV1Test.testAppendHistoricalMMR_length0_fail() (test/AxiomV1.t.sol#484-499) is not in mixedCase
+Function AxiomV1Test.testAppendHistoricalMMR_update_fail() (test/AxiomV1.t.sol#501-519) is not in mixedCase
+Function AxiomV1Test.testAppendHistoricalMMR_rootLength_fail() (test/AxiomV1.t.sol#521-540) is not in mixedCase
+Function AxiomV1Test.testMmrVerifyBlockHash_buffer_fail() (test/AxiomV1.t.sol#555-568) is not in mixedCase
+Function AxiomV1Test.testMmrVerifyBlockHash_blockNumber_fail() (test/AxiomV1.t.sol#570-582) is not in mixedCase
+Function AxiomV1Test.testMmrVerifyBlockHash_blockNumber_fail2() (test/AxiomV1.t.sol#584-596) is not in mixedCase
+Function AxiomV1Test.testMmrVerifyBlockHash_merkleProofLength_fail() (test/AxiomV1.t.sol#598-615) is not in mixedCase
+Function AxiomV1Test.testIsRecentBlockHashValid_blockhash_fail() (test/AxiomV1.t.sol#635-638) is not in mixedCase
+Function AxiomV1Test.testIsRecentBlockHashValid_emptyblockhash_fail() (test/AxiomV1.t.sol#640-644) is not in mixedCase
+Function AxiomV1QueryTest.testInit_zeroVerifier() (test/AxiomV1Query.t.sol#93-116) is not in mixedCase
+Function AxiomV1QueryTest.testInit_zeroAddress() (test/AxiomV1Query.t.sol#118-141) is not in mixedCase
+Function AxiomV1QueryTest.testInit_zeroTimelock() (test/AxiomV1Query.t.sol#143-166) is not in mixedCase
+Function AxiomV1QueryTest.testInit_zeroGuardian() (test/AxiomV1Query.t.sol#168-191) is not in mixedCase
+Function AxiomV1QueryTest.testSendOffchainQuery_price_fail() (test/AxiomV1Query.t.sol#193-203) is not in mixedCase
+Function AxiomV1QueryTest.testSendOffchainQuery_price2_fail() (test/AxiomV1Query.t.sol#205-215) is not in mixedCase
+Function AxiomV1QueryTest.testSendOffchainQuery_price3_fail() (test/AxiomV1Query.t.sol#217-227) is not in mixedCase
+Function AxiomV1QueryTest.testSendOffchainQuery_active_fail() (test/AxiomV1Query.t.sol#273-281) is not in mixedCase
+Function AxiomV1QueryTest.testSendOnchainQuery_price_fail() (test/AxiomV1Query.t.sol#308-317) is not in mixedCase
+Function AxiomV1QueryTest.testSendOnchainQuery_price2_fail() (test/AxiomV1Query.t.sol#319-328) is not in mixedCase
+Function AxiomV1QueryTest.testSendOnchainQuery_price3_fail() (test/AxiomV1Query.t.sol#330-339) is not in mixedCase
+Function AxiomV1QueryTest.testCollectRefund_early_fail() (test/AxiomV1Query.t.sol#358-363) is not in mixedCase
+Function AxiomV1QueryTest.testCollectRefund_double_fail() (test/AxiomV1Query.t.sol#365-369) is not in mixedCase
+Function AxiomV1QueryTest.testCollectRefund_after_fulfill_fail() (test/AxiomV1Query.t.sol#371-382) is not in mixedCase
+Function AxiomV1QueryTest.testUpdateMinQueryPrice_fail() (test/AxiomV1Query.t.sol#394-399) is not in mixedCase
+Function AxiomV1QueryTest.testUpdateMaxQueryPrice_fail() (test/AxiomV1Query.t.sol#413-418) is not in mixedCase
+Function AxiomV1QueryTest.testUpdateQueryDeadlineInterval_fail() (test/AxiomV1Query.t.sol#430-435) is not in mixedCase
+Function AxiomV1QueryTest.testUpdateAxiomAddress_fail() (test/AxiomV1Query.t.sol#448-453) is not in mixedCase
+Function AxiomV1QueryTest.testUpdateMMRVerifierAddress_fail() (test/AxiomV1Query.t.sol#466-471) is not in mixedCase
+Function AxiomV1QueryTest.testFulfillQueryVsMMR_fail_twice() (test/AxiomV1Query.t.sol#530-544) is not in mixedCase
+Function AxiomV1QueryTest.testFulfillQueryVsMMR_fail_state_inactive() (test/AxiomV1Query.t.sol#546-552) is not in mixedCase
+Function AxiomV1QueryTest.testFulfillQueryVsMMR_fail_state_refunded() (test/AxiomV1Query.t.sol#554-566) is not in mixedCase
+Function AxiomV1QueryTest.testFulfillQueryVsMMR_fail_proof() (test/AxiomV1Query.t.sol#568-578) is not in mixedCase
+Function AxiomV1QueryTest.testFulfillQueryVsMMR_fail_resp() (test/AxiomV1Query.t.sol#580-591) is not in mixedCase
+Function AxiomV1QueryTest.testIsKeccakResultValid_fail() (test/AxiomV1Query.t.sol#604-612) is not in mixedCase
+Function AxiomV1QueryTest.testIsPoseidonResultValid_fail() (test/AxiomV1Query.t.sol#625-633) is not in mixedCase
+Function AxiomV1QueryTest.testAreResponsesValid_null() (test/AxiomV1Query.t.sol#635-646) is not in mixedCase
+Function AxiomV1QueryTest.testAreResponsesValid_fail() (test/AxiomV1Query.t.sol#648-659) is not in mixedCase
+Function AxiomV1QueryTest.testAreResponsesValid_old_success() (test/AxiomV1Query.t.sol#735-753) is not in mixedCase
+Function AxiomV1QueryTest.testAreResponsesValid_old_fail_block() (test/AxiomV1Query.t.sol#755-774) is not in mixedCase
+Function AxiomV1QueryTest.testAreResponsesValid_old_fail_account() (test/AxiomV1Query.t.sol#776-795) is not in mixedCase
+Function AxiomV1QueryTest.testAreResponsesValid_old_fail_storage() (test/AxiomV1Query.t.sol#797-816) is not in mixedCase
+Function AxiomV1QueryTest.testVerifyResultVsMMR_old() (test/AxiomV1Query.t.sol#857-873) is not in mixedCase
+Function AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle() (test/AxiomV1Query.t.sol#919-935) is not in mixedCase
+Function AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail_role() (test/AxiomV1Query.t.sol#937-942) is not in mixedCase
+Function AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail_recentMMR() (test/AxiomV1Query.t.sol#944-950) is not in mixedCase
+Function AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail_historicalRoot() (test/AxiomV1Query.t.sol#952-958) is not in mixedCase
+Function AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail_historicalRoot2() (test/AxiomV1Query.t.sol#960-966) is not in mixedCase
+Function AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail_blockHashRoot() (test/AxiomV1Query.t.sol#968-984) is not in mixedCase
+Function AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail_mmrWitness() (test/AxiomV1Query.t.sol#986-992) is not in mixedCase
+Function AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail_proof() (test/AxiomV1Query.t.sol#994-999) is not in mixedCase
+Function AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail2_proof() (test/AxiomV1Query.t.sol#1001-1006) is not in mixedCase
+Function AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail3_proof() (test/AxiomV1Query.t.sol#1008-1013) is not in mixedCase
+Function AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail_mmrIdx() (test/AxiomV1Query.t.sol#1015-1020) is not in mixedCase
+Function AxiomV1QueryTest.testVerifyResultVsMMR_inMerkle_fail_mmrIdx2() (test/AxiomV1Query.t.sol#1022-1027) is not in mixedCase
+Function AxiomV1QueryTest.testVerifyResultVsMMR_afterMerkle() (test/AxiomV1Query.t.sol#1069-1073) is not in mixedCase
+Function AxiomV1QueryTest.testVerifyResultVsMMR_afterMerkle_fail_notRecent() (test/AxiomV1Query.t.sol#1075-1081) is not in mixedCase
+Function AxiomV1QueryTest.testVerifyResultVsMMR_afterMerkle_fail_notRecent2() (test/AxiomV1Query.t.sol#1083-1089) is not in mixedCase
+Function AxiomV1QueryTest.testVerifyResultVsMMR_afterMerkle_fail_mmrComplementOrPeaks() (test/AxiomV1Query.t.sol#1091-1097) is not in mixedCase
+Function AxiomV1QueryTest.testVerifyResultVsMMR_afterMerkle_fail_mmrComplementOrPeaks2() (test/AxiomV1Query.t.sol#1099-1105) is not in mixedCase
+Function AxiomV1QueryTest.testVerifyResultVsMMR_afterMerkle_fail_recentMMR() (test/AxiomV1Query.t.sol#1107-1130) is not in mixedCase
+Function AxiomV1QueryTest.testVerifyResultVsMMR_afterMerkle_fail_recentMMR2() (test/AxiomV1Query.t.sol#1132-1155) is not in mixedCase
+Function AxiomStoragePfTest.testInit_zeroAddress() (test/AxiomV1StoragePf.t.sol#89-105) is not in mixedCase
+Function AxiomStoragePfTest.testInit_zeroVerifierAddress() (test/AxiomV1StoragePf.t.sol#107-122) is not in mixedCase
+Function AxiomStoragePfTest.testInit_zeroTimelockAddress() (test/AxiomV1StoragePf.t.sol#124-143) is not in mixedCase
+Function AxiomStoragePfTest.testInit_zeroGuardianAddress() (test/AxiomV1StoragePf.t.sol#145-164) is not in mixedCase
+Function AxiomStoragePfTest.testAttestSlots_blockHash_witness_fail() (test/AxiomV1StoragePf.t.sol#187-192) is not in mixedCase
+Function AxiomStoragePfTest.testAttestSlots_blockNumber_witness_fail() (test/AxiomV1StoragePf.t.sol#194-199) is not in mixedCase
+Function AxiomStoragePfTest.testAttestSlots_proof_fail() (test/AxiomV1StoragePf.t.sol#201-206) is not in mixedCase
+Function AxiomStoragePfTest.testAttestSlots_blockHash_fail() (test/AxiomV1StoragePf.t.sol#208-213) is not in mixedCase
+Function AxiomStoragePfTest.testAttestSlots_blockNumber_fail() (test/AxiomV1StoragePf.t.sol#215-220) is not in mixedCase
+Function AxiomStoragePfTest.testAttestSlots_recentInvalid() (test/AxiomV1StoragePf.t.sol#222-227) is not in mixedCase
+Function AxiomStoragePfTest.testAttestSlots_oldInvalid() (test/AxiomV1StoragePf.t.sol#229-234) is not in mixedCase
+Function AxiomStoragePfTest.testAttestSlots_frozen() (test/AxiomV1StoragePf.t.sol#236-243) is not in mixedCase
+Function AxiomStoragePfTest.testIsSlotAttestationValid_frozen() (test/AxiomV1StoragePf.t.sol#251-257) is not in mixedCase
+Function AxiomStoragePfTest.testUpdateAxiomAddress_fail() (test/AxiomV1StoragePf.t.sol#465-470) is not in mixedCase
+Function AxiomStoragePfTest.testUpdateSnarkVerifierAddress_fail() (test/AxiomV1StoragePf.t.sol#483-488) is not in mixedCase
+Function AxiomV1UpdateRecent.testUpdateRecent1024_mmrUpdate() (test/AxiomV1UpdateRecent.t.sol#65-83) is not in mixedCase
+Function AxiomV1UpdateRecent.testUpdateRecent1024_proof_fail() (test/AxiomV1UpdateRecent.t.sol#97-113) is not in mixedCase
+Function AxiomV1UpdateRecent.testUpdateRecent1024_proof_malformed_uint256() (test/AxiomV1UpdateRecent.t.sol#115-130) is not in mixedCase
+Function AxiomV1UpdateRecent.testUpdateRecent1024_numFinal_fail() (test/AxiomV1UpdateRecent.t.sol#132-147) is not in mixedCase
+Function AxiomV1UpdateRecent.testUpdateRecent1024_startBlockNumber_fail() (test/AxiomV1UpdateRecent.t.sol#149-163) is not in mixedCase
+Function AxiomV1UpdateRecent.testUpdateRecent1024_notRecentEndBlock_fail() (test/AxiomV1UpdateRecent.t.sol#165-174) is not in mixedCase
+Function AxiomV1UpdateRecent.testUpdateRecent1024_notRecentEndBlock2_fail() (test/AxiomV1UpdateRecent.t.sol#176-185) is not in mixedCase
+Function AxiomV1UpdateRecent.testUpdateRecent1024_endhash_fail() (test/AxiomV1UpdateRecent.t.sol#187-201) is not in mixedCase
+Function AxiomV1UpdateRecent.testUpdateRecent128_notProver_fail() (test/AxiomV1UpdateRecent.t.sol#203-215) is not in mixedCase
+Function AxiomV1UpdateRecent.testUpdateRecent128_freezeUnfreeze() (test/AxiomV1UpdateRecent.t.sol#217-236) is not in mixedCase
+Function AxiomV1UpdateRecent.testIsBlockHashValid_notStored_fail() (test/AxiomV1UpdateRecent.t.sol#278-313) is not in mixedCase
+Function AxiomV1UpdateRecent.testIsBlockHashValid_zeroBlockHash_fail() (test/AxiomV1UpdateRecent.t.sol#315-347) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+INFO:Detectors:
+Redundant expression "status (lib/forge-std/lib/ds-test/src/test.sol#73)" inDSTest (lib/forge-std/lib/ds-test/src/test.sol#18-592)
+Redundant expression "status (lib/forge-std/src/StdUtils.sol#182)" inStdUtils (lib/forge-std/src/StdUtils.sol#10-189)
+Redundant expression "status (lib/forge-std/src/StdUtils.sol#187)" inStdUtils (lib/forge-std/src/StdUtils.sol#10-189)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#redundant-statements
+INFO:Detectors:
+Variable AxiomV1Query.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_0 (contracts/AxiomV1Query.sol#251) is too similar to AxiomV1Query._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).idx_scope_1 (contracts/AxiomV1Query.sol#383)
+Variable AxiomV1Query.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_0 (contracts/AxiomV1Query.sol#251) is too similar to AxiomV1Query._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).idx_scope_2 (contracts/AxiomV1Query.sol#391)
+Variable AxiomV1Query.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_0 (contracts/AxiomV1Query.sol#251) is too similar to AxiomV1Query.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_2 (contracts/AxiomV1Query.sol#267)
+Variable AxiomV1Query._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).idx_scope_1 (contracts/AxiomV1Query.sol#383) is too similar to AxiomV1Query.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_2 (contracts/AxiomV1Query.sol#267)
+Variable AxiomV1Query._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).idx_scope_1 (contracts/AxiomV1Query.sol#383) is too similar to AxiomV1Query._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).idx_scope_2 (contracts/AxiomV1Query.sol#391)
+Variable AxiomV1Query.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).leaf_scope_1 (contracts/AxiomV1Query.sol#252-261) is too similar to AxiomV1Query.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).leaf_scope_3 (contracts/AxiomV1Query.sol#268-273)
+Variable AxiomV1QueryMock.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_0 (contracts/mock/AxiomV1QueryMock.sol#258) is too similar to AxiomV1QueryMock._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).idx_scope_1 (contracts/mock/AxiomV1QueryMock.sol#406)
+Variable AxiomV1QueryMock.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_0 (contracts/mock/AxiomV1QueryMock.sol#258) is too similar to AxiomV1QueryMock._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).idx_scope_2 (contracts/mock/AxiomV1QueryMock.sol#414)
+Variable AxiomV1QueryMock.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_0 (contracts/mock/AxiomV1QueryMock.sol#258) is too similar to AxiomV1QueryMock.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_2 (contracts/mock/AxiomV1QueryMock.sol#282)
+Variable AxiomV1QueryMock._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).idx_scope_1 (contracts/mock/AxiomV1QueryMock.sol#406) is too similar to AxiomV1QueryMock._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).idx_scope_2 (contracts/mock/AxiomV1QueryMock.sol#414)
+Variable AxiomV1QueryMock._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes).idx_scope_1 (contracts/mock/AxiomV1QueryMock.sol#406) is too similar to AxiomV1QueryMock.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).idx_scope_2 (contracts/mock/AxiomV1QueryMock.sol#282)
+Variable AxiomV1QueryMock.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).leaf_scope_1 (contracts/mock/AxiomV1QueryMock.sol#259-272) is too similar to AxiomV1QueryMock.areResponsesValid(bytes32,bytes32,bytes32,IAxiomV1Query.BlockResponse[],IAxiomV1Query.AccountResponse[],IAxiomV1Query.StorageResponse[]).leaf_scope_3 (contracts/mock/AxiomV1QueryMock.sol#283-290)
+Variable StdAssertions.assertEqCall(address,bytes,address,bytes,bool).returnDataA (lib/forge-std/src/StdAssertions.sol#351) is too similar to StdAssertions.assertEqCall(address,bytes,address,bytes,bool).returnDataB (lib/forge-std/src/StdAssertions.sol#352)
+Variable StdInvariant._targetedArtifactSelectors (lib/forge-std/src/StdInvariant.sol#20) is too similar to StdInvariant.targetArtifactSelectors().targetedArtifactSelectors_ (lib/forge-std/src/StdInvariant.sol#77)
+Variable StdInvariant._targetedArtifacts (lib/forge-std/src/StdInvariant.sol#18) is too similar to StdInvariant.targetArtifacts().targetedArtifacts_ (lib/forge-std/src/StdInvariant.sol#73)
+Variable StdInvariant._targetedSelectors (lib/forge-std/src/StdInvariant.sol#21) is too similar to StdInvariant.targetSelectors().targetedSelectors_ (lib/forge-std/src/StdInvariant.sol#85)
+Variable StdInvariant._excludedArtifacts (lib/forge-std/src/StdInvariant.sol#17) is too similar to StdInvariant.excludeArtifacts().excludedArtifacts_ (lib/forge-std/src/StdInvariant.sol#61)
+Variable StdInvariant._excludedContracts (lib/forge-std/src/StdInvariant.sol#12) is too similar to StdInvariant.excludeContracts().excludedContracts_ (lib/forge-std/src/StdInvariant.sol#65)
+Variable StdInvariant._excludedSenders (lib/forge-std/src/StdInvariant.sol#13) is too similar to StdInvariant.excludeSenders().excludedSenders_ (lib/forge-std/src/StdInvariant.sol#69)
+Variable StdInvariant._targetedContracts (lib/forge-std/src/StdInvariant.sol#14) is too similar to StdInvariant.targetContracts().targetedContracts_ (lib/forge-std/src/StdInvariant.sol#81)
+Variable StdInvariant._targetedSenders (lib/forge-std/src/StdInvariant.sol#15) is too similar to StdInvariant.targetSenders().targetedSenders_ (lib/forge-std/src/StdInvariant.sol#89)
+Variable Vm.expectEmit(bool,bool,bool,bool).checkTopic1 (lib/forge-std/src/Vm.sol#343) is too similar to Vm.expectEmit(bool,bool,bool,bool).checkTopic2 (lib/forge-std/src/Vm.sol#343)
+Variable Vm.expectEmit(bool,bool,bool,bool,address).checkTopic1 (lib/forge-std/src/Vm.sol#344) is too similar to Vm.expectEmit(bool,bool,bool,bool,address).checkTopic2 (lib/forge-std/src/Vm.sol#344)
+Variable Vm.expectEmit(bool,bool,bool,bool).checkTopic1 (lib/forge-std/src/Vm.sol#343) is too similar to Vm.expectEmit(bool,bool,bool,bool,address).checkTopic2 (lib/forge-std/src/Vm.sol#344)
+Variable Vm.expectEmit(bool,bool,bool,bool).checkTopic1 (lib/forge-std/src/Vm.sol#343) is too similar to Vm.expectEmit(bool,bool,bool,bool).checkTopic3 (lib/forge-std/src/Vm.sol#343)
+Variable Vm.expectEmit(bool,bool,bool,bool,address).checkTopic1 (lib/forge-std/src/Vm.sol#344) is too similar to Vm.expectEmit(bool,bool,bool,bool,address).checkTopic3 (lib/forge-std/src/Vm.sol#344)
+Variable Vm.expectEmit(bool,bool,bool,bool).checkTopic1 (lib/forge-std/src/Vm.sol#343) is too similar to Vm.expectEmit(bool,bool,bool,bool,address).checkTopic3 (lib/forge-std/src/Vm.sol#344)
+Variable Vm.expectEmit(bool,bool,bool,bool,address).checkTopic1 (lib/forge-std/src/Vm.sol#344) is too similar to Vm.expectEmit(bool,bool,bool,bool).checkTopic2 (lib/forge-std/src/Vm.sol#343)
+Variable Vm.expectEmit(bool,bool,bool,bool,address).checkTopic2 (lib/forge-std/src/Vm.sol#344) is too similar to Vm.expectEmit(bool,bool,bool,bool,address).checkTopic3 (lib/forge-std/src/Vm.sol#344)
+Variable Vm.expectEmit(bool,bool,bool,bool).checkTopic2 (lib/forge-std/src/Vm.sol#343) is too similar to Vm.expectEmit(bool,bool,bool,bool).checkTopic3 (lib/forge-std/src/Vm.sol#343)
+Variable Vm.expectEmit(bool,bool,bool,bool).checkTopic2 (lib/forge-std/src/Vm.sol#343) is too similar to Vm.expectEmit(bool,bool,bool,bool,address).checkTopic3 (lib/forge-std/src/Vm.sol#344)
+Variable Vm.expectEmit(bool,bool,bool,bool,address).checkTopic1 (lib/forge-std/src/Vm.sol#344) is too similar to Vm.expectEmit(bool,bool,bool,bool).checkTopic3 (lib/forge-std/src/Vm.sol#343)
+Variable Vm.expectEmit(bool,bool,bool,bool,address).checkTopic2 (lib/forge-std/src/Vm.sol#344) is too similar to Vm.expectEmit(bool,bool,bool,bool).checkTopic3 (lib/forge-std/src/Vm.sol#343)
+Variable AxiomV1UpdateRecent.mainnetForkId1 (test/AxiomV1UpdateRecent.t.sol#18) is too similar to AxiomV1UpdateRecent.mainnetForkId2 (test/AxiomV1UpdateRecent.t.sol#19)
+Variable AxiomV1UpdateRecent.mainnetForkId1 (test/AxiomV1UpdateRecent.t.sol#18) is too similar to AxiomV1UpdateRecent.mainnetForkId3 (test/AxiomV1UpdateRecent.t.sol#20)
+Variable AxiomV1UpdateRecent.mainnetForkId1 (test/AxiomV1UpdateRecent.t.sol#18) is too similar to AxiomV1UpdateRecent.mainnetForkId4 (test/AxiomV1UpdateRecent.t.sol#21)
+Variable AxiomV1UpdateRecent.mainnetForkId2 (test/AxiomV1UpdateRecent.t.sol#19) is too similar to AxiomV1UpdateRecent.mainnetForkId3 (test/AxiomV1UpdateRecent.t.sol#20)
+Variable AxiomV1UpdateRecent.mainnetForkId2 (test/AxiomV1UpdateRecent.t.sol#19) is too similar to AxiomV1UpdateRecent.mainnetForkId4 (test/AxiomV1UpdateRecent.t.sol#21)
+Variable AxiomV1UpdateRecent.mainnetForkId3 (test/AxiomV1UpdateRecent.t.sol#20) is too similar to AxiomV1UpdateRecent.mainnetForkId4 (test/AxiomV1UpdateRecent.t.sol#21)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#variable-names-too-similar
+INFO:Detectors:
+AxiomV1Query._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes) (contracts/AxiomV1Query.sol#303-433) uses literals with too many digits:
+	- zeroHashes = (bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0xad3228b676f7d3cd4284a5443f17f1962b36e491b30a40b2405849e597ba5fb5),bytes32(0xb4c11951957c6f8f642c4af61cd6b24640fec6dc7fc607ee8206a99e92410d30),bytes32(0x21ddb9a356815c3fac1026b6dec5df3124afbadb485c9ba5a3e3398a04b7ba85),bytes32(0xe58769b32a1beaf1ea27375a44095a0d1fb664ce2dd358e7fcbfb78c26a19344),bytes32(0x0eb01ebfc9ed27500cd4dfc979272d1f0913cc9f66540d7e8005811109e1cf2d),bytes32(0x887c22bd8750d34016ac3c66b5ff102dacdd73f6b014e710b51e8022af9a1968),bytes32(0xffd70157e48063fc33c97a050f7f640233bf646cc98d9524c6b92bcf3ab56f83),bytes32(0x9867cc5f7f196b93bae1e27e6320742445d290f2263827498b54fec539f756af),bytes32(0xcefad4e508c098b9a7e1d8feb19955fb02ba9675585078710969d3440f5054e0)) (contracts/AxiomV1Query.sol#363-374)
+MerkleTree.getEmptyHash(uint256) (contracts/libraries/MerkleTree.sol#30-55) uses literals with too many digits:
+	- bytes32(0x0000000000000000000000000000000000000000000000000000000000000000) (contracts/libraries/MerkleTree.sol#33)
+AxiomV1QueryMock._verifyResultVsMMR(uint32,IAxiomV1Query.RecentMMRWitness,bytes) (contracts/mock/AxiomV1QueryMock.sol#324-462) uses literals with too many digits:
+	- zeroHashes = (bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0xad3228b676f7d3cd4284a5443f17f1962b36e491b30a40b2405849e597ba5fb5),bytes32(0xb4c11951957c6f8f642c4af61cd6b24640fec6dc7fc607ee8206a99e92410d30),bytes32(0x21ddb9a356815c3fac1026b6dec5df3124afbadb485c9ba5a3e3398a04b7ba85),bytes32(0xe58769b32a1beaf1ea27375a44095a0d1fb664ce2dd358e7fcbfb78c26a19344),bytes32(0x0eb01ebfc9ed27500cd4dfc979272d1f0913cc9f66540d7e8005811109e1cf2d),bytes32(0x887c22bd8750d34016ac3c66b5ff102dacdd73f6b014e710b51e8022af9a1968),bytes32(0xffd70157e48063fc33c97a050f7f640233bf646cc98d9524c6b92bcf3ab56f83),bytes32(0x9867cc5f7f196b93bae1e27e6320742445d290f2263827498b54fec539f756af),bytes32(0xcefad4e508c098b9a7e1d8feb19955fb02ba9675585078710969d3440f5054e0)) (contracts/mock/AxiomV1QueryMock.sol#385-396)
+AxiomV1Test.testUpdateHistorical() (test/AxiomV1.t.sol#283-304) uses literals with too many digits:
+	- proofData = vm.parseBytes(vm.readFile(test/data/mainnet_17_7_000000_01ffff.v1.calldata)) (test/AxiomV1.t.sol#300)
+AxiomV1Test.testUpdateHistorical_proof_fail() (test/AxiomV1.t.sol#306-330) uses literals with too many digits:
+	- correctProofStr = vm.readFile(test/data/mainnet_17_7_000000_01ffff.v1.calldata) (test/AxiomV1.t.sol#322)
+AxiomV1Test.testUpdateHistorical_startBlockNumber_fail() (test/AxiomV1.t.sol#332-357) uses literals with too many digits:
+	- correctProofStr = vm.readFile(test/data/mainnet_17_7_000000_01ffff.v1.calldata) (test/AxiomV1.t.sol#348)
+AxiomV1Test.testUpdateHistorical_numFinal_fail() (test/AxiomV1.t.sol#359-384) uses literals with too many digits:
+	- correctProofStr = vm.readFile(test/data/mainnet_17_7_000000_01ffff.v1.calldata) (test/AxiomV1.t.sol#375)
+AxiomV1Test.testUpdateHistorical_blockhash_fail() (test/AxiomV1.t.sol#386-406) uses literals with too many digits:
+	- proofData = vm.parseBytes(vm.readFile(test/data/mainnet_17_7_000000_01ffff.v1.calldata)) (test/AxiomV1.t.sol#402)
+AxiomV1Test.testUpdateHistorical_noendhash_fail() (test/AxiomV1.t.sol#408-418) uses literals with too many digits:
+	- proofData = vm.parseBytes(vm.readFile(test/data/mainnet_17_7_000000_01ffff.v1.calldata)) (test/AxiomV1.t.sol#414)
+AxiomV1Test.testUpdateHistorical_merkleroot_fail() (test/AxiomV1.t.sol#420-441) uses literals with too many digits:
+	- proofData = vm.parseBytes(vm.readFile(test/data/mainnet_17_7_000000_01ffff.v1.calldata)) (test/AxiomV1.t.sol#437)
+AxiomV1Test.testMmrVerifyBlockHash_buffer_fail() (test/AxiomV1.t.sol#555-568) uses literals with too many digits:
+	- mmr[0] = bytes32(0x0000000000000000000000000000000000000000000000000000000000000001) (test/AxiomV1.t.sol#565)
+AxiomV1Test.testEmptyHashes() (test/AxiomV1.t.sol#622-628) uses literals with too many digits:
+	- empty = bytes32(0x0000000000000000000000000000000000000000000000000000000000000000) (test/AxiomV1.t.sol#623)
+AxiomV1QueryTest.getResponses() (test/AxiomV1Query.t.sol#661-733) uses literals with too many digits:
+	- accountResponses[0] = IAxiomV1Query.AccountResponse(0x00e4a8de,address(0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03),0x0000000000000001,0x000000000000000000000000,bytes32(0x9c3a96f4bfc05ccaa0e9afede34db54dc538a472cb02745945f69946e7b83b77),bytes32(0xd4e5a9dff22acb675a291c79616f91b1526ce1a84dff4bd9695f3f39ae779f11),2,(bytes32(0x5a9d0f95ad207f61ec6a3d8b2fc68afc3cb13eaaae91f01a481f7c3d069472ad),bytes32(0x665a53a7a4158ef85effefadafb70cc2b0f5a2730ba249e394ade1a50a9ff860),bytes32(0xf6371c25077974c2103eba464e3d156daf5dd07b5fadc61e4d46a540bbd2a8fc),bytes32(0x55ca2a37baea541065c114678849eff535d47e4b6bd1dfdf7b5228f8154ba297),bytes32(0x8cb6ca32d6e8f7502de010f7006abb3adc30de603b8ce78338f17087cc5337f4),bytes32(0xdc937903ea8463bc3b5d5d955996741b3755738f8db5778f72d2d5935b6d0d1f))) (test/AxiomV1Query.t.sol#685-701)
+AxiomV1QueryTest.getResponses() (test/AxiomV1Query.t.sol#661-733) uses literals with too many digits:
+	- storageResponses[0] = IAxiomV1Query.StorageResponse(0x00e4a8de,address(0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03),0xc3a24b0501bd2c13a7e57f2db4369ec4c223447539fc0724a9d55ac4a06ebd4d,0x000000000000000000000000ae7f458667f1b30746354abc3157907d9f6fd15e,5,(bytes32(0x3bcd8b2d335cb29067add168998f15c0e6d95ddb9d5e201d401e209c2e44105a),bytes32(0x31997bbbd8a758724d7da2b0cd5124528fe898b5a864d57e04632ccc578917d0),bytes32(0x353a3ce929af5ece3c7f40f7eec7aee600e3e9d996bba3cd1036bc179caab6ed),bytes32(0x856dd40d86680c29172434871dc7c4658202155123984eba56106f25c3e760dd),bytes32(0xa5be3438169bce453d6fea0cea536e017415bb356413bebd02eefa6ad90be79a),bytes32(0xaf834e301342cca73396a73b664426a48e4c3220e6af2b824b5813666c853738))) (test/AxiomV1Query.t.sol#703-717)
+AxiomV1QueryTest.getResponses() (test/AxiomV1Query.t.sol#661-733) uses literals with too many digits:
+	- storageResponses[1] = IAxiomV1Query.StorageResponse(0x00e4a8de,address(0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03),0x9f4e12e393433b9749089d7660b578840ae05c9423ce1aefceb0c80c340a21c6,0x00000000000000000000000028d804bf2212e220bc2b7b6252993db8286df07f,37,(bytes32(0xfd88b0196f3238660ba0d6b511c3372c69c552043fe60445e8e51a8bbe894a0b),bytes32(0x5303f8e3edb6f5de7d19eceff09ea1987b43a1e4be803509fe15e1ca45a13aa9),bytes32(0xad5c6fc4bc7de66d9319cbadf98bb98a2423777a54a9b3dfaf4f2da4e8377010),bytes32(0x5d166b5043b1b2af0dabc6a947c56df90844f4de95bd96b8d8cf76106ee77154),bytes32(0x132dd3f2c5947e0f8c6a567dfc9baf4743332ba7fd93111892b3a578484efa06),bytes32(0x8d9273852e6da2438f32e3b34ee4cd917a595419b856a6984a57968c58c6384a))) (test/AxiomV1Query.t.sol#718-732)
+AxiomV1QueryTest.setupVerifyOld() (test/AxiomV1Query.t.sol#818-855) uses literals with too many digits:
+	- recentMMRPeaks = (bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000)) (test/AxiomV1Query.t.sol#823-834)
+AxiomV1QueryTest.setupVerifyOld() (test/AxiomV1Query.t.sol#818-855) uses literals with too many digits:
+	- mmrComplementOrPeaks = (bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x21ddb9a356815c3fac1026b6dec5df3124afbadb485c9ba5a3e3398a04b7ba85),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0xffd70157e48063fc33c97a050f7f640233bf646cc98d9524c6b92bcf3ab56f83),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000)) (test/AxiomV1Query.t.sol#835-846)
+AxiomV1QueryTest.setupVerify() (test/AxiomV1Query.t.sol#875-912) uses literals with too many digits:
+	- recentMMRPeaks = (bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x8b3a3edbb630e10137c73c1ed5c97430780ac8eec9d7377d23616b2917266134),bytes32(0xc10835fac9fa70d643de38a49c39d34c15430c14524e655dc254c970cc14613e),bytes32(0x04bf2aed8bebf56f9a7c1d9f09981f5c79a0b36f5cb40b27bd67c40963a06e85),bytes32(0x49f13b9f2d98b9da20760dd5c1d426fa88e7dee5d81830622f5b32a9b476e4a6),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x99f4b8a0bfec3d4981afe8d5e1ca52a180e12ce968ca1174e0dd43b841f3fb6d),bytes32(0x148f3ef4a995b5cf79d74393f3e3aefc6331ca44ccfd715977d6f92cadc7d86d)) (test/AxiomV1Query.t.sol#880-891)
+AxiomV1QueryTest.setupVerify() (test/AxiomV1Query.t.sol#875-912) uses literals with too many digits:
+	- mmrComplementOrPeaks = (bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x21ddb9a356815c3fac1026b6dec5df3124afbadb485c9ba5a3e3398a04b7ba85),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0xffd70157e48063fc33c97a050f7f640233bf646cc98d9524c6b92bcf3ab56f83),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000)) (test/AxiomV1Query.t.sol#892-903)
+AxiomV1QueryTest.setupVerifyAfter() (test/AxiomV1Query.t.sol#1029-1067) uses literals with too many digits:
+	- recentMMRPeaks = (bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x8b3a3edbb630e10137c73c1ed5c97430780ac8eec9d7377d23616b2917266134),bytes32(0xc10835fac9fa70d643de38a49c39d34c15430c14524e655dc254c970cc14613e),bytes32(0x04bf2aed8bebf56f9a7c1d9f09981f5c79a0b36f5cb40b27bd67c40963a06e85),bytes32(0x49f13b9f2d98b9da20760dd5c1d426fa88e7dee5d81830622f5b32a9b476e4a6),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x99f4b8a0bfec3d4981afe8d5e1ca52a180e12ce968ca1174e0dd43b841f3fb6d),bytes32(0x148f3ef4a995b5cf79d74393f3e3aefc6331ca44ccfd715977d6f92cadc7d86d)) (test/AxiomV1Query.t.sol#1035-1046)
+AxiomV1QueryTest.setupVerifyAfter() (test/AxiomV1Query.t.sol#1029-1067) uses literals with too many digits:
+	- mmrComplementOrPeaks = (bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x1652d5fba64e377c08b07af274c2aea9fb401251362f0f1f2ec9c7545f09bdef),bytes32(0xb5f49e0214eddefad32d06cbfd948d389396259672a1ba7d64e09bd28a569dfa),bytes32(0xc2757981fcaa38193568a0a01b8efa5453d24664f43d55287a2a908999c2230e),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x04bf2aed8bebf56f9a7c1d9f09981f5c79a0b36f5cb40b27bd67c40963a06e85),bytes32(0x49f13b9f2d98b9da20760dd5c1d426fa88e7dee5d81830622f5b32a9b476e4a6),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x99f4b8a0bfec3d4981afe8d5e1ca52a180e12ce968ca1174e0dd43b841f3fb6d),bytes32(0x148f3ef4a995b5cf79d74393f3e3aefc6331ca44ccfd715977d6f92cadc7d86d)) (test/AxiomV1Query.t.sol#1047-1058)
+AxiomV1QueryTest.testVerifyResultVsMMR_afterMerkle_fail_recentMMR() (test/AxiomV1Query.t.sol#1107-1130) uses literals with too many digits:
+	- mmrWitness.mmrComplementOrPeaks = (bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0xd6a86147728bce5a6ea7c2ae22e1cc6a707004fb5673359b11803680287054e7),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x20f09125160825a7cba452e65aa55075daab16987efa4f37493f1bcb2e8671b9),bytes32(0xb6277c130610ee3f7889222df96638f737cf95211ee419f35341bf9286c2b6ef)) (test/AxiomV1Query.t.sol#1109-1120)
+AxiomV1QueryTest.testVerifyResultVsMMR_afterMerkle_fail_recentMMR2() (test/AxiomV1Query.t.sol#1132-1155) uses literals with too many digits:
+	- mmrWitness.mmrComplementOrPeaks = (bytes32(0xd233f5988996b4050826e708679e5f72b88d33942a5dbde3fa5c052852958b99),bytes32(0xcc2f5ad7186c1ba0042162ea0068e45ad2e47b66176a86e845c0a133e46fa953),bytes32(0x9ba2c722652c63cd688724169b4ab519302f63ff0f105ccd94d0e95b84a4d373),bytes32(0xb8c83a8f5ab3f19ef8d696cdb7d54adaf2a64b66fc184e24dfab00bb671c3f7f),bytes32(0x4aaffe85b9fc9698cda21b02d4740cb74dca814a3ca0343f459336a632b05f46),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x8732e5911479582067e24f564643c5602174232ae7881b74548c0401a7fadff7),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x20f09125160825a7cba452e65aa55075daab16987efa4f37493f1bcb2e8671b9),bytes32(0xb6277c130610ee3f7889222df96638f737cf95211ee419f35341bf9286c2b6ef)) (test/AxiomV1Query.t.sol#1134-1145)
+AxiomStoragePfTest.setUp() (test/AxiomV1StoragePf.t.sol#30-63) uses literals with too many digits:
+	- blockMerkleProof = (bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),bytes32(0x0000000000000000000000000000000000000000000000000000000000000000)) (test/AxiomV1StoragePf.t.sol#44-55)
+AxiomStoragePfTest.testAttestSlots_blockHash_witness_fail() (test/AxiomV1StoragePf.t.sol#187-192) uses literals with too many digits:
+	- blockData.claimedBlockHash = bytes32(0x0000000000000000000000000000000000000000000000000000000000000001) (test/AxiomV1StoragePf.t.sol#189)
+AxiomStoragePfTest.testAttestSlots_oldInvalid() (test/AxiomV1StoragePf.t.sol#229-234) uses literals with too many digits:
+	- blockData.merkleProof[0] = bytes32(0x0000000000000000000000000000000000000000000000000000000000000001) (test/AxiomV1StoragePf.t.sol#231)
+MerkleTreeTest.testEmptyMerkleRoots() (test/MerkleTree.t.sol#11-23) uses literals with too many digits:
+	- currHash = bytes32(0x0000000000000000000000000000000000000000000000000000000000000000) (test/MerkleTree.t.sol#13)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#too-many-digits
+INFO:Detectors:
+AxiomV1Query.__gap (contracts/AxiomV1Query.sol#535) is never used in AxiomV1Query (contracts/AxiomV1Query.sol#18-536)
+AxiomV1QueryMock.__gap (contracts/mock/AxiomV1QueryMock.sol#583) is never used in AxiomV1QueryMock (contracts/mock/AxiomV1QueryMock.sol#18-584)
+CommonBase.CONSOLE (lib/forge-std/src/Base.sol#11) is never used in YulDeployer (lib/YulDeployer.sol#7-36)
+CommonBase.DEFAULT_SENDER (lib/forge-std/src/Base.sol#13) is never used in YulDeployer (lib/YulDeployer.sol#7-36)
+CommonBase.DEFAULT_TEST_CONTRACT (lib/forge-std/src/Base.sol#15) is never used in YulDeployer (lib/YulDeployer.sol#7-36)
+CommonBase.MULTICALL3_ADDRESS (lib/forge-std/src/Base.sol#17) is never used in YulDeployer (lib/YulDeployer.sol#7-36)
+CommonBase.UINT256_MAX (lib/forge-std/src/Base.sol#19-20) is never used in YulDeployer (lib/YulDeployer.sol#7-36)
+CommonBase.stdstore (lib/forge-std/src/Base.sol#23) is never used in YulDeployer (lib/YulDeployer.sol#7-36)
+CommonBase.CONSOLE (lib/forge-std/src/Base.sol#11) is never used in AxiomV1DeployMock (script/goerli/AxiomV1DeployMock.s.sol#8-20)
+CommonBase.DEFAULT_SENDER (lib/forge-std/src/Base.sol#13) is never used in AxiomV1DeployMock (script/goerli/AxiomV1DeployMock.s.sol#8-20)
+CommonBase.DEFAULT_TEST_CONTRACT (lib/forge-std/src/Base.sol#15) is never used in AxiomV1DeployMock (script/goerli/AxiomV1DeployMock.s.sol#8-20)
+CommonBase.MULTICALL3_ADDRESS (lib/forge-std/src/Base.sol#17) is never used in AxiomV1DeployMock (script/goerli/AxiomV1DeployMock.s.sol#8-20)
+CommonBase.UINT256_MAX (lib/forge-std/src/Base.sol#19-20) is never used in AxiomV1DeployMock (script/goerli/AxiomV1DeployMock.s.sol#8-20)
+CommonBase.stdstore (lib/forge-std/src/Base.sol#23) is never used in AxiomV1DeployMock (script/goerli/AxiomV1DeployMock.s.sol#8-20)
+ScriptBase.CREATE2_FACTORY (lib/forge-std/src/Base.sol#30) is never used in AxiomV1DeployMock (script/goerli/AxiomV1DeployMock.s.sol#8-20)
+ScriptBase.vmSafe (lib/forge-std/src/Base.sol#32) is never used in AxiomV1DeployMock (script/goerli/AxiomV1DeployMock.s.sol#8-20)
+CommonBase.CONSOLE (lib/forge-std/src/Base.sol#11) is never used in AxiomV1QueryDeployMock (script/goerli/AxiomV1QueryDeployMock.s.sol#11-34)
+CommonBase.DEFAULT_SENDER (lib/forge-std/src/Base.sol#13) is never used in AxiomV1QueryDeployMock (script/goerli/AxiomV1QueryDeployMock.s.sol#11-34)
+CommonBase.DEFAULT_TEST_CONTRACT (lib/forge-std/src/Base.sol#15) is never used in AxiomV1QueryDeployMock (script/goerli/AxiomV1QueryDeployMock.s.sol#11-34)
+CommonBase.MULTICALL3_ADDRESS (lib/forge-std/src/Base.sol#17) is never used in AxiomV1QueryDeployMock (script/goerli/AxiomV1QueryDeployMock.s.sol#11-34)
+CommonBase.UINT256_MAX (lib/forge-std/src/Base.sol#19-20) is never used in AxiomV1QueryDeployMock (script/goerli/AxiomV1QueryDeployMock.s.sol#11-34)
+CommonBase.stdstore (lib/forge-std/src/Base.sol#23) is never used in AxiomV1QueryDeployMock (script/goerli/AxiomV1QueryDeployMock.s.sol#11-34)
+ScriptBase.CREATE2_FACTORY (lib/forge-std/src/Base.sol#30) is never used in AxiomV1QueryDeployMock (script/goerli/AxiomV1QueryDeployMock.s.sol#11-34)
+ScriptBase.vmSafe (lib/forge-std/src/Base.sol#32) is never used in AxiomV1QueryDeployMock (script/goerli/AxiomV1QueryDeployMock.s.sol#11-34)
+CommonBase.CONSOLE (lib/forge-std/src/Base.sol#11) is never used in AxiomV1Deploy (script/local/AxiomV1Deploy.s.sol#8-59)
+CommonBase.DEFAULT_SENDER (lib/forge-std/src/Base.sol#13) is never used in AxiomV1Deploy (script/local/AxiomV1Deploy.s.sol#8-59)
+CommonBase.DEFAULT_TEST_CONTRACT (lib/forge-std/src/Base.sol#15) is never used in AxiomV1Deploy (script/local/AxiomV1Deploy.s.sol#8-59)
+CommonBase.MULTICALL3_ADDRESS (lib/forge-std/src/Base.sol#17) is never used in AxiomV1Deploy (script/local/AxiomV1Deploy.s.sol#8-59)
+CommonBase.UINT256_MAX (lib/forge-std/src/Base.sol#19-20) is never used in AxiomV1Deploy (script/local/AxiomV1Deploy.s.sol#8-59)
+CommonBase.stdstore (lib/forge-std/src/Base.sol#23) is never used in AxiomV1Deploy (script/local/AxiomV1Deploy.s.sol#8-59)
+ScriptBase.CREATE2_FACTORY (lib/forge-std/src/Base.sol#30) is never used in AxiomV1Deploy (script/local/AxiomV1Deploy.s.sol#8-59)
+ScriptBase.vmSafe (lib/forge-std/src/Base.sol#32) is never used in AxiomV1Deploy (script/local/AxiomV1Deploy.s.sol#8-59)
+CommonBase.CONSOLE (lib/forge-std/src/Base.sol#11) is never used in AxiomV1DeployLocal (script/local/AxiomV1DeployLocal.s.sol#9-58)
+CommonBase.DEFAULT_SENDER (lib/forge-std/src/Base.sol#13) is never used in AxiomV1DeployLocal (script/local/AxiomV1DeployLocal.s.sol#9-58)
+CommonBase.DEFAULT_TEST_CONTRACT (lib/forge-std/src/Base.sol#15) is never used in AxiomV1DeployLocal (script/local/AxiomV1DeployLocal.s.sol#9-58)
+CommonBase.MULTICALL3_ADDRESS (lib/forge-std/src/Base.sol#17) is never used in AxiomV1DeployLocal (script/local/AxiomV1DeployLocal.s.sol#9-58)
+CommonBase.UINT256_MAX (lib/forge-std/src/Base.sol#19-20) is never used in AxiomV1DeployLocal (script/local/AxiomV1DeployLocal.s.sol#9-58)
+CommonBase.stdstore (lib/forge-std/src/Base.sol#23) is never used in AxiomV1DeployLocal (script/local/AxiomV1DeployLocal.s.sol#9-58)
+ScriptBase.CREATE2_FACTORY (lib/forge-std/src/Base.sol#30) is never used in AxiomV1DeployLocal (script/local/AxiomV1DeployLocal.s.sol#9-58)
+ScriptBase.vmSafe (lib/forge-std/src/Base.sol#32) is never used in AxiomV1DeployLocal (script/local/AxiomV1DeployLocal.s.sol#9-58)
+CommonBase.CONSOLE (lib/forge-std/src/Base.sol#11) is never used in AxiomV1QueryDeployLocal (script/local/AxiomV1QueryDeployLocal.s.sol#10-72)
+CommonBase.DEFAULT_SENDER (lib/forge-std/src/Base.sol#13) is never used in AxiomV1QueryDeployLocal (script/local/AxiomV1QueryDeployLocal.s.sol#10-72)
+CommonBase.DEFAULT_TEST_CONTRACT (lib/forge-std/src/Base.sol#15) is never used in AxiomV1QueryDeployLocal (script/local/AxiomV1QueryDeployLocal.s.sol#10-72)
+CommonBase.MULTICALL3_ADDRESS (lib/forge-std/src/Base.sol#17) is never used in AxiomV1QueryDeployLocal (script/local/AxiomV1QueryDeployLocal.s.sol#10-72)
+CommonBase.UINT256_MAX (lib/forge-std/src/Base.sol#19-20) is never used in AxiomV1QueryDeployLocal (script/local/AxiomV1QueryDeployLocal.s.sol#10-72)
+CommonBase.stdstore (lib/forge-std/src/Base.sol#23) is never used in AxiomV1QueryDeployLocal (script/local/AxiomV1QueryDeployLocal.s.sol#10-72)
+ScriptBase.CREATE2_FACTORY (lib/forge-std/src/Base.sol#30) is never used in AxiomV1QueryDeployLocal (script/local/AxiomV1QueryDeployLocal.s.sol#10-72)
+ScriptBase.vmSafe (lib/forge-std/src/Base.sol#32) is never used in AxiomV1QueryDeployLocal (script/local/AxiomV1QueryDeployLocal.s.sol#10-72)
+CommonBase.CONSOLE (lib/forge-std/src/Base.sol#11) is never used in AxiomV1StoragePfDeployLocal (script/local/AxiomV1StoragePfDeployLocal.s.sol#10-69)
+CommonBase.DEFAULT_SENDER (lib/forge-std/src/Base.sol#13) is never used in AxiomV1StoragePfDeployLocal (script/local/AxiomV1StoragePfDeployLocal.s.sol#10-69)
+CommonBase.DEFAULT_TEST_CONTRACT (lib/forge-std/src/Base.sol#15) is never used in AxiomV1StoragePfDeployLocal (script/local/AxiomV1StoragePfDeployLocal.s.sol#10-69)
+CommonBase.MULTICALL3_ADDRESS (lib/forge-std/src/Base.sol#17) is never used in AxiomV1StoragePfDeployLocal (script/local/AxiomV1StoragePfDeployLocal.s.sol#10-69)
+CommonBase.UINT256_MAX (lib/forge-std/src/Base.sol#19-20) is never used in AxiomV1StoragePfDeployLocal (script/local/AxiomV1StoragePfDeployLocal.s.sol#10-69)
+CommonBase.stdstore (lib/forge-std/src/Base.sol#23) is never used in AxiomV1StoragePfDeployLocal (script/local/AxiomV1StoragePfDeployLocal.s.sol#10-69)
+ScriptBase.CREATE2_FACTORY (lib/forge-std/src/Base.sol#30) is never used in AxiomV1StoragePfDeployLocal (script/local/AxiomV1StoragePfDeployLocal.s.sol#10-69)
+ScriptBase.vmSafe (lib/forge-std/src/Base.sol#32) is never used in AxiomV1StoragePfDeployLocal (script/local/AxiomV1StoragePfDeployLocal.s.sol#10-69)
+CommonBase.CONSOLE (lib/forge-std/src/Base.sol#11) is never used in AxiomV1DeployMainnet (script/mainnet/AxiomV1DeployMainnet.s.sol#7-29)
+CommonBase.DEFAULT_SENDER (lib/forge-std/src/Base.sol#13) is never used in AxiomV1DeployMainnet (script/mainnet/AxiomV1DeployMainnet.s.sol#7-29)
+CommonBase.DEFAULT_TEST_CONTRACT (lib/forge-std/src/Base.sol#15) is never used in AxiomV1DeployMainnet (script/mainnet/AxiomV1DeployMainnet.s.sol#7-29)
+CommonBase.MULTICALL3_ADDRESS (lib/forge-std/src/Base.sol#17) is never used in AxiomV1DeployMainnet (script/mainnet/AxiomV1DeployMainnet.s.sol#7-29)
+CommonBase.UINT256_MAX (lib/forge-std/src/Base.sol#19-20) is never used in AxiomV1DeployMainnet (script/mainnet/AxiomV1DeployMainnet.s.sol#7-29)
+CommonBase.stdstore (lib/forge-std/src/Base.sol#23) is never used in AxiomV1DeployMainnet (script/mainnet/AxiomV1DeployMainnet.s.sol#7-29)
+ScriptBase.CREATE2_FACTORY (lib/forge-std/src/Base.sol#30) is never used in AxiomV1DeployMainnet (script/mainnet/AxiomV1DeployMainnet.s.sol#7-29)
+ScriptBase.vmSafe (lib/forge-std/src/Base.sol#32) is never used in AxiomV1DeployMainnet (script/mainnet/AxiomV1DeployMainnet.s.sol#7-29)
+CommonBase.CONSOLE (lib/forge-std/src/Base.sol#11) is never used in AxiomV1QueryDeployMainnet (script/mainnet/AxiomV1QueryDeployMainnet.s.sol#10-36)
+CommonBase.DEFAULT_SENDER (lib/forge-std/src/Base.sol#13) is never used in AxiomV1QueryDeployMainnet (script/mainnet/AxiomV1QueryDeployMainnet.s.sol#10-36)
+CommonBase.DEFAULT_TEST_CONTRACT (lib/forge-std/src/Base.sol#15) is never used in AxiomV1QueryDeployMainnet (script/mainnet/AxiomV1QueryDeployMainnet.s.sol#10-36)
+CommonBase.MULTICALL3_ADDRESS (lib/forge-std/src/Base.sol#17) is never used in AxiomV1QueryDeployMainnet (script/mainnet/AxiomV1QueryDeployMainnet.s.sol#10-36)
+CommonBase.UINT256_MAX (lib/forge-std/src/Base.sol#19-20) is never used in AxiomV1QueryDeployMainnet (script/mainnet/AxiomV1QueryDeployMainnet.s.sol#10-36)
+CommonBase.stdstore (lib/forge-std/src/Base.sol#23) is never used in AxiomV1QueryDeployMainnet (script/mainnet/AxiomV1QueryDeployMainnet.s.sol#10-36)
+ScriptBase.CREATE2_FACTORY (lib/forge-std/src/Base.sol#30) is never used in AxiomV1QueryDeployMainnet (script/mainnet/AxiomV1QueryDeployMainnet.s.sol#10-36)
+ScriptBase.vmSafe (lib/forge-std/src/Base.sol#32) is never used in AxiomV1QueryDeployMainnet (script/mainnet/AxiomV1QueryDeployMainnet.s.sol#10-36)
+CommonBase.CONSOLE (lib/forge-std/src/Base.sol#11) is never used in Proxy_Test (test/AxiomProxy.t.sol#13-218)
+CommonBase.DEFAULT_SENDER (lib/forge-std/src/Base.sol#13) is never used in Proxy_Test (test/AxiomProxy.t.sol#13-218)
+CommonBase.DEFAULT_TEST_CONTRACT (lib/forge-std/src/Base.sol#15) is never used in Proxy_Test (test/AxiomProxy.t.sol#13-218)
+CommonBase.MULTICALL3_ADDRESS (lib/forge-std/src/Base.sol#17) is never used in Proxy_Test (test/AxiomProxy.t.sol#13-218)
+CommonBase.UINT256_MAX (lib/forge-std/src/Base.sol#19-20) is never used in Proxy_Test (test/AxiomProxy.t.sol#13-218)
+CommonBase.stdstore (lib/forge-std/src/Base.sol#23) is never used in Proxy_Test (test/AxiomProxy.t.sol#13-218)
+Proxy_Test.OWNER_KEY (test/AxiomProxy.t.sol#46) is never used in Proxy_Test (test/AxiomProxy.t.sol#13-218)
+CommonBase.CONSOLE (lib/forge-std/src/Base.sol#11) is never used in AxiomV1Test (test/AxiomV1.t.sol#30-649)
+CommonBase.DEFAULT_SENDER (lib/forge-std/src/Base.sol#13) is never used in AxiomV1Test (test/AxiomV1.t.sol#30-649)
+CommonBase.DEFAULT_TEST_CONTRACT (lib/forge-std/src/Base.sol#15) is never used in AxiomV1Test (test/AxiomV1.t.sol#30-649)
+CommonBase.MULTICALL3_ADDRESS (lib/forge-std/src/Base.sol#17) is never used in AxiomV1Test (test/AxiomV1.t.sol#30-649)
+CommonBase.UINT256_MAX (lib/forge-std/src/Base.sol#19-20) is never used in AxiomV1Test (test/AxiomV1.t.sol#30-649)
+CommonBase.stdstore (lib/forge-std/src/Base.sol#23) is never used in AxiomV1Test (test/AxiomV1.t.sol#30-649)
+CommonBase.CONSOLE (lib/forge-std/src/Base.sol#11) is never used in AxiomV1QueryTest (test/AxiomV1Query.t.sol#18-1156)
+CommonBase.DEFAULT_SENDER (lib/forge-std/src/Base.sol#13) is never used in AxiomV1QueryTest (test/AxiomV1Query.t.sol#18-1156)
+CommonBase.DEFAULT_TEST_CONTRACT (lib/forge-std/src/Base.sol#15) is never used in AxiomV1QueryTest (test/AxiomV1Query.t.sol#18-1156)
+CommonBase.MULTICALL3_ADDRESS (lib/forge-std/src/Base.sol#17) is never used in AxiomV1QueryTest (test/AxiomV1Query.t.sol#18-1156)
+CommonBase.UINT256_MAX (lib/forge-std/src/Base.sol#19-20) is never used in AxiomV1QueryTest (test/AxiomV1Query.t.sol#18-1156)
+CommonBase.stdstore (lib/forge-std/src/Base.sol#23) is never used in AxiomV1QueryTest (test/AxiomV1Query.t.sol#18-1156)
+CommonBase.CONSOLE (lib/forge-std/src/Base.sol#11) is never used in AxiomStoragePfTest (test/AxiomV1StoragePf.t.sol#17-489)
+CommonBase.DEFAULT_SENDER (lib/forge-std/src/Base.sol#13) is never used in AxiomStoragePfTest (test/AxiomV1StoragePf.t.sol#17-489)
+CommonBase.DEFAULT_TEST_CONTRACT (lib/forge-std/src/Base.sol#15) is never used in AxiomStoragePfTest (test/AxiomV1StoragePf.t.sol#17-489)
+CommonBase.MULTICALL3_ADDRESS (lib/forge-std/src/Base.sol#17) is never used in AxiomStoragePfTest (test/AxiomV1StoragePf.t.sol#17-489)
+CommonBase.UINT256_MAX (lib/forge-std/src/Base.sol#19-20) is never used in AxiomStoragePfTest (test/AxiomV1StoragePf.t.sol#17-489)
+CommonBase.stdstore (lib/forge-std/src/Base.sol#23) is never used in AxiomStoragePfTest (test/AxiomV1StoragePf.t.sol#17-489)
+CommonBase.CONSOLE (lib/forge-std/src/Base.sol#11) is never used in AxiomV1UpdateRecent (test/AxiomV1UpdateRecent.t.sol#13-348)
+CommonBase.DEFAULT_SENDER (lib/forge-std/src/Base.sol#13) is never used in AxiomV1UpdateRecent (test/AxiomV1UpdateRecent.t.sol#13-348)
+CommonBase.DEFAULT_TEST_CONTRACT (lib/forge-std/src/Base.sol#15) is never used in AxiomV1UpdateRecent (test/AxiomV1UpdateRecent.t.sol#13-348)
+CommonBase.MULTICALL3_ADDRESS (lib/forge-std/src/Base.sol#17) is never used in AxiomV1UpdateRecent (test/AxiomV1UpdateRecent.t.sol#13-348)
+CommonBase.UINT256_MAX (lib/forge-std/src/Base.sol#19-20) is never used in AxiomV1UpdateRecent (test/AxiomV1UpdateRecent.t.sol#13-348)
+CommonBase.stdstore (lib/forge-std/src/Base.sol#23) is never used in AxiomV1UpdateRecent (test/AxiomV1UpdateRecent.t.sol#13-348)
+CommonBase.CONSOLE (lib/forge-std/src/Base.sol#11) is never used in MerkleMountainRangeTest (test/MerkleMountainRange.t.sol#7-72)
+CommonBase.DEFAULT_SENDER (lib/forge-std/src/Base.sol#13) is never used in MerkleMountainRangeTest (test/MerkleMountainRange.t.sol#7-72)
+CommonBase.DEFAULT_TEST_CONTRACT (lib/forge-std/src/Base.sol#15) is never used in MerkleMountainRangeTest (test/MerkleMountainRange.t.sol#7-72)
+CommonBase.MULTICALL3_ADDRESS (lib/forge-std/src/Base.sol#17) is never used in MerkleMountainRangeTest (test/MerkleMountainRange.t.sol#7-72)
+CommonBase.UINT256_MAX (lib/forge-std/src/Base.sol#19-20) is never used in MerkleMountainRangeTest (test/MerkleMountainRange.t.sol#7-72)
+CommonBase.stdstore (lib/forge-std/src/Base.sol#23) is never used in MerkleMountainRangeTest (test/MerkleMountainRange.t.sol#7-72)
+CommonBase.CONSOLE (lib/forge-std/src/Base.sol#11) is never used in MerkleTreeTest (test/MerkleTree.t.sol#8-34)
+CommonBase.DEFAULT_SENDER (lib/forge-std/src/Base.sol#13) is never used in MerkleTreeTest (test/MerkleTree.t.sol#8-34)
+CommonBase.DEFAULT_TEST_CONTRACT (lib/forge-std/src/Base.sol#15) is never used in MerkleTreeTest (test/MerkleTree.t.sol#8-34)
+CommonBase.MULTICALL3_ADDRESS (lib/forge-std/src/Base.sol#17) is never used in MerkleTreeTest (test/MerkleTree.t.sol#8-34)
+CommonBase.UINT256_MAX (lib/forge-std/src/Base.sol#19-20) is never used in MerkleTreeTest (test/MerkleTree.t.sol#8-34)
+CommonBase.stdstore (lib/forge-std/src/Base.sol#23) is never used in MerkleTreeTest (test/MerkleTree.t.sol#8-34)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unused-state-variable
+INFO:Detectors:
+DSTest.IS_TEST (lib/forge-std/lib/ds-test/src/test.sol#38) should be constant 
+Script.IS_SCRIPT (lib/forge-std/src/Script.sol#25) should be constant 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-constant
+INFO:Detectors:
+AxiomStoragePfTest.implementationSt (test/AxiomV1StoragePf.t.sol#19) should be immutable 
+AxiomV1QueryTest.implementationQu (test/AxiomV1Query.t.sol#20) should be immutable 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-immutable
+INFO:Slither:. analyzed (95 contracts with 71 detectors), 666 result(s) found

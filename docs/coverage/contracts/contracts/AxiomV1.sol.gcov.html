@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - lcov.info - contracts/contracts/AxiomV1.sol</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">contracts/contracts</a> - AxiomV1.sol<span style="font-size: 80%;"> (source / <a href="AxiomV1.sol.func-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">lcov.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">6</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2023-07-05 20:29:04</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">3</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntryHi">-</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">0</td>
+          </tr>
+                  <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">             Branch data     Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>                 :             : // SPDX-License-Identifier: MIT</span>
+<span id="L2"><span class="lineNum">       2</span>                 :             : pragma solidity 0.8.19;</span>
+<span id="L3"><span class="lineNum">       3</span>                 :             : </span>
+<span id="L4"><span class="lineNum">       4</span>                 :             : import {AccessControlUpgradeable} from &quot;@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol&quot;;</span>
+<span id="L5"><span class="lineNum">       5</span>                 :             : import {UUPSUpgradeable} from &quot;@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol&quot;;</span>
+<span id="L6"><span class="lineNum">       6</span>                 :             : </span>
+<span id="L7"><span class="lineNum">       7</span>                 :             : import {AxiomV1Core} from &quot;./AxiomV1Core.sol&quot;;</span>
+<span id="L8"><span class="lineNum">       8</span>                 :             : import {AxiomV1Access} from &quot;./AxiomV1Access.sol&quot;;</span>
+<span id="L9"><span class="lineNum">       9</span>                 :             : import {IAxiomV1} from &quot;./interfaces/IAxiomV1.sol&quot;;</span>
+<span id="L10"><span class="lineNum">      10</span>                 :             : </span>
+<span id="L11"><span class="lineNum">      11</span>                 :             : /// @title  Axiom V1</span>
+<span id="L12"><span class="lineNum">      12</span>                 :             : /// @author Axiom</span>
+<span id="L13"><span class="lineNum">      13</span>                 :             : /// @notice Core Axiom smart contract that verifies the validity of historical block hashes using SNARKs.</span>
+<span id="L14"><span class="lineNum">      14</span>                 :             : contract AxiomV1 is AxiomV1Core, UUPSUpgradeable {</span>
+<span id="L15"><span class="lineNum">      15</span>                 :             :     /// @custom:oz-upgrades-unsafe-allow constructor</span>
+<span id="L16"><span class="lineNum">      16</span>                 :             :     /// @notice Prevents the implementation contract from being initialized outside of the upgradeable proxy.</span>
+<span id="L17"><span class="lineNum">      17</span>                 :             :     constructor() {</span>
+<span id="L18"><span class="lineNum">      18</span>                 :             :         _disableInitializers();</span>
+<span id="L19"><span class="lineNum">      19</span>                 :             :     }</span>
+<span id="L20"><span class="lineNum">      20</span>                 :             : </span>
+<span id="L21"><span class="lineNum">      21</span>                 :             :     /// @notice Initializes the contract and the parent contracts once.</span>
+<span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC tlaBgGNC">          90 :     function initialize(</span></span>
+<span id="L23"><span class="lineNum">      23</span>                 :             :         address _verifierAddress,</span>
+<span id="L24"><span class="lineNum">      24</span>                 :             :         address _historicalVerifierAddress,</span>
+<span id="L25"><span class="lineNum">      25</span>                 :             :         address timelock,</span>
+<span id="L26"><span class="lineNum">      26</span>                 :             :         address guardian</span>
+<span id="L27"><span class="lineNum">      27</span>                 :             :     ) public initializer {</span>
+<span id="L28"><span class="lineNum">      28</span>                 :<span class="tlaGNC">          89 :         require(timelock != address(0)); // AxiomV1: timelock cannot be the zero address</span></span>
+<span id="L29"><span class="lineNum">      29</span>                 :<span class="tlaGNC">          88 :         __UUPSUpgradeable_init();</span></span>
+<span id="L30"><span class="lineNum">      30</span>                 :             :         // prover is initialized to the contract deployer</span>
+<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC">          88 :         __AxiomV1Core_init(_verifierAddress, _historicalVerifierAddress, guardian, msg.sender);</span></span>
+<span id="L32"><span class="lineNum">      32</span>                 :             : </span>
+<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">          85 :         _grantRole(DEFAULT_ADMIN_ROLE, timelock);</span></span>
+<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">          85 :         _grantRole(TIMELOCK_ROLE, timelock);</span></span>
+<span id="L35"><span class="lineNum">      35</span>                 :             :     }</span>
+<span id="L36"><span class="lineNum">      36</span>                 :             : </span>
+<span id="L37"><span class="lineNum">      37</span>                 :<span class="tlaGNC">           4 :     function _authorizeUpgrade(address) internal override onlyRole(TIMELOCK_ROLE) {}</span></span>
+<span id="L38"><span class="lineNum">      38</span>                 :             : </span>
+<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">           1 :     function supportsInterface(bytes4 interfaceId)</span></span>
+<span id="L40"><span class="lineNum">      40</span>                 :             :         public</span>
+<span id="L41"><span class="lineNum">      41</span>                 :             :         view</span>
+<span id="L42"><span class="lineNum">      42</span>                 :             :         virtual</span>
+<span id="L43"><span class="lineNum">      43</span>                 :             :         override(AccessControlUpgradeable)</span>
+<span id="L44"><span class="lineNum">      44</span>                 :             :         returns (bool)</span>
+<span id="L45"><span class="lineNum">      45</span>                 :             :     {</span>
+<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">           1 :         return interfaceId == type(IAxiomV1).interfaceId || super.supportsInterface(interfaceId);</span></span>
+<span id="L47"><span class="lineNum">      47</span>                 :             :     }</span>
+<span id="L48"><span class="lineNum">      48</span>                 :             : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

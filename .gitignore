@@ -23,3 +23,7 @@ CONTRACT_ADDRESS
 *.pk
 *.pkey
 *.srs
+
+# Ignore Mac DS_Store files
+.DS_Store
+**/.DS_Store
