@@ -211,7 +211,8 @@ This generates the following files (links below)
 
 1. [axiom-v1-contracts.png](./docs/axiom-v1-contracts.png)
 : Useful for undertanding the axiom-v1-contracts their functions and relationships
-2. [axiom-v1-contracts-coverage-report](https://htmlpreview.github.io/?./docs/coverage/index.html): Useful for reviewing test coverage for Axiom contracts.
-   - *Note: to see the report locally open `./docs/coverage/index.html` in your web browser.*
+2. [axiom-v1-contracts.log](./docs/axiom-v1-contracts.log): Useful for seeing any potential attack vectors for axiom-v1-contracts
+3. [axiom-v1-contracts-coverage-report](https://htmlpreview.github.io/?https://raw.githubusercontent.com/axiom/axiom-v1-contracts/main/docs/coverage/contracts/contracts/index.html): Useful for reviewing test coverage for Axiom contracts.
+   - *Note*: if you have forked axiom-v1-contracts you will need to replace the github user and branch above e.g. to [https://htmlpreview.github.io/?https://raw.githubusercontent.com/johnwhitton/axiom-v1-contracts/code-analysis/docs/coverage/contracts/contracts/index.html]([https://htmlpreview.github.io/?https://raw.githubusercontent.com/johnwhitton/axiom-v1-contracts/code-analysis/docs/coverage/contracts/contracts/index.html])
+   - *Note: to see the report locally use  `./docs/coverage/index.html` in your web browser.*
    - *Note: coverage report needs [lcov](https://github.com/linux-test-project/lcov) installed e.g. for mac use [Homebrew Formulae lcov](https://formulae.brew.sh/formula/lcov)*
-3. [axiom-v1-contracts.log](./docs/axiom-v1-contracts.log)
