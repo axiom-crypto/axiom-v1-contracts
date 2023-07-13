@@ -126,24 +126,7 @@ contract AxiomExperimentalTxMock is IAxiomExperimentalTx, AxiomV1Access, UUPSUpg
         _verifyResultVsMMR(mmrIdx, mmrWitness, proof, queryType);
     }
 
-    function sendTxQuery(bytes32 keccakResponse, address payable refundee, bytes calldata query) external payable {
-        requireNotFrozen();
-        // Check for minimum payment
-        if (msg.value < minQueryPrice) {
-            revert PriceNotPaid();
-        }
-        // Check for maximum payment
-        if (msg.value > maxQueryPrice) {
-            revert PriceTooHigh();
-        }
-        _sendQuery(AxiomQueryType.Transaction, keccakResponse, msg.value, refundee);
-        bytes32 queryHash = keccak256(query);
-        emit TxQueryInitiatedOnchain(
-            keccakResponse, msg.value, uint32(block.number) + queryDeadlineInterval, refundee, queryHash
-        );
-    }
-
-    function sendReceiptQuery(bytes32 keccakResponse, address payable refundee, bytes calldata query)
+    function sendTxReceiptsQuery(bytes32 keccakResponse, address payable refundee, bytes calldata query)
         external
         payable
     {
@@ -156,7 +139,27 @@ contract AxiomExperimentalTxMock is IAxiomExperimentalTx, AxiomV1Access, UUPSUpg
         if (msg.value > maxQueryPrice) {
             revert PriceTooHigh();
         }
-        _sendQuery(AxiomQueryType.Receipt, keccakResponse, msg.value, refundee);
+        _sendQuery(AxiomQueryType.TxReceipts, keccakResponse, msg.value, refundee);
+        bytes32 queryHash = keccak256(query);
+        emit TxQueryInitiatedOnchain(
+            keccakResponse, msg.value, uint32(block.number) + queryDeadlineInterval, refundee, queryHash
+        );
+    }
+
+    function sendOnlyReceiptsQuery(bytes32 keccakResponse, address payable refundee, bytes calldata query)
+        external
+        payable
+    {
+        requireNotFrozen();
+        // Check for minimum payment
+        if (msg.value < minQueryPrice) {
+            revert PriceNotPaid();
+        }
+        // Check for maximum payment
+        if (msg.value > maxQueryPrice) {
+            revert PriceTooHigh();
+        }
+        _sendQuery(AxiomQueryType.OnlyReceipts, keccakResponse, msg.value, refundee);
         bytes32 queryHash = keccak256(query);
         emit TxQueryInitiatedOnchain(
             keccakResponse, msg.value, uint32(block.number) + queryDeadlineInterval, refundee, queryHash
@@ -232,12 +235,14 @@ contract AxiomExperimentalTxMock is IAxiomExperimentalTx, AxiomV1Access, UUPSUpg
     }
     */
 
-    function areTxResponsesValid(bytes32 keccakResponse, TxResponse[] calldata txResponses)
-        external
-        view
-        returns (bool)
-    {
-        if (!verifiedKeccakResults[AxiomQueryType.Transaction][keccakResponse]) {
+    function areTxResponsesValid(
+        bytes32 keccakTxResponse,
+        bytes32 keccakReceiptResponse,
+        TxResponse[] calldata txResponses,
+        ReceiptResponse[] calldata receiptResponses
+    ) external view returns (bool) {
+        bytes32 keccakResponse = keccak256(abi.encodePacked(keccakTxResponse, keccakReceiptResponse));
+        if (!verifiedKeccakResults[AxiomQueryType.TxReceipts][keccakResponse]) {
             return false;
         }
 
@@ -251,19 +256,37 @@ contract AxiomExperimentalTxMock is IAxiomExperimentalTx, AxiomV1Access, UUPSUpg
                     txResponses[idx].value
                 )
             );
-            if (!isMerklePathValid(keccakResponse, leaf, txResponses[idx].proof, txResponses[idx].leafIdx)) {
+            if (!isMerklePathValid(keccakTxResponse, leaf, txResponses[idx].proof, txResponses[idx].leafIdx)) {
+                return false;
+            }
+        }
+        for (uint32 idx = 0; idx < receiptResponses.length; idx++) {
+            bytes32 leaf = keccak256(
+                abi.encodePacked(
+                    receiptResponses[idx].blockNumber,
+                    receiptResponses[idx].txIdx,
+                    receiptResponses[idx].fieldIdx,
+                    receiptResponses[idx].logIdx,
+                    receiptResponses[idx].value
+                )
+            );
+            if (
+                !isMerklePathValid(
+                    keccakReceiptResponse, leaf, receiptResponses[idx].proof, receiptResponses[idx].leafIdx
+                )
+            ) {
                 return false;
             }
         }
         return true;
     }
 
-    function areReceiptResponsesValid(bytes32 keccakResponse, ReceiptResponse[] calldata receiptResponses)
+    function areReceiptResponsesValid(bytes32 keccakReceiptResponse, ReceiptResponse[] calldata receiptResponses)
         external
         view
         returns (bool)
     {
-        if (!verifiedKeccakResults[AxiomQueryType.Receipt][keccakResponse]) {
+        if (!verifiedKeccakResults[AxiomQueryType.OnlyReceipts][keccakReceiptResponse]) {
             return false;
         }
 
@@ -277,7 +300,11 @@ contract AxiomExperimentalTxMock is IAxiomExperimentalTx, AxiomV1Access, UUPSUpg
                     receiptResponses[idx].value
                 )
             );
-            if (!isMerklePathValid(keccakResponse, leaf, receiptResponses[idx].proof, receiptResponses[idx].leafIdx)) {
+            if (
+                !isMerklePathValid(
+                    keccakReceiptResponse, leaf, receiptResponses[idx].proof, receiptResponses[idx].leafIdx
+                )
+            ) {
                 return false;
             }
         }
@@ -319,7 +346,12 @@ contract AxiomExperimentalTxMock is IAxiomExperimentalTx, AxiomV1Access, UUPSUpg
         requireNotFrozen();
         require(mmrIdx < MMR_RING_BUFFER_SIZE);
 
-        AxiomTxQueryResponse memory response = getTxQueryData(proof);
+        AxiomTxQueryResponse memory response;
+        if (queryType == AxiomQueryType.TxReceipts) {
+            response = getTxQueryData(proof);
+        } else {
+            response = getReceiptQueryData(proof);
+        }
 
         // Check that the historical MMR matches a cached value in `mmrRingBuffer`
         if (IAxiomV1State(axiomAddress).mmrRingBuffer(mmrIdx) != response.historicalMMRKeccak) {
@@ -340,7 +372,9 @@ contract AxiomExperimentalTxMock is IAxiomExperimentalTx, AxiomV1Access, UUPSUpg
             );
         }
 
-        require(response.recentMMRKeccak == keccak256(abi.encodePacked(mmrWitness.recentMMRPeaks)));
+        {
+            require(response.recentMMRKeccak == keccak256(abi.encodePacked(mmrWitness.recentMMRPeaks)));
+        }
         uint32 mmrLen = 0;
         for (uint32 idx = 0; idx < 10; idx++) {
             if (mmrWitness.recentMMRPeaks[idx] != bytes32(0)) {
@@ -372,24 +406,26 @@ contract AxiomExperimentalTxMock is IAxiomExperimentalTx, AxiomV1Access, UUPSUpg
                 revert BlockHashWitnessNotRecent();
             }
 
-            // zeroHashes[idx] is the Merkle root of a tree of depth idx with 0's as leaves
-            bytes32[10] memory zeroHashes = [
-                bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),
-                bytes32(0xad3228b676f7d3cd4284a5443f17f1962b36e491b30a40b2405849e597ba5fb5),
-                bytes32(0xb4c11951957c6f8f642c4af61cd6b24640fec6dc7fc607ee8206a99e92410d30),
-                bytes32(0x21ddb9a356815c3fac1026b6dec5df3124afbadb485c9ba5a3e3398a04b7ba85),
-                bytes32(0xe58769b32a1beaf1ea27375a44095a0d1fb664ce2dd358e7fcbfb78c26a19344),
-                bytes32(0x0eb01ebfc9ed27500cd4dfc979272d1f0913cc9f66540d7e8005811109e1cf2d),
-                bytes32(0x887c22bd8750d34016ac3c66b5ff102dacdd73f6b014e710b51e8022af9a1968),
-                bytes32(0xffd70157e48063fc33c97a050f7f640233bf646cc98d9524c6b92bcf3ab56f83),
-                bytes32(0x9867cc5f7f196b93bae1e27e6320742445d290f2263827498b54fec539f756af),
-                bytes32(0xcefad4e508c098b9a7e1d8feb19955fb02ba9675585078710969d3440f5054e0)
-            ];
-            // read the committed MMR without zero-padding
-            (bytes32 runningHash, uint32 runningSize) =
-                getMMRComplementRoot(mmrWitness.mmrComplementOrPeaks, zeroHashes);
-            require(mmrWitness.numFinal == runningSize);
-            require(mmrWitness.root == runningHash);
+            {
+                // zeroHashes[idx] is the Merkle root of a tree of depth idx with 0's as leaves
+                bytes32[10] memory zeroHashes = [
+                    bytes32(0x0000000000000000000000000000000000000000000000000000000000000000),
+                    bytes32(0xad3228b676f7d3cd4284a5443f17f1962b36e491b30a40b2405849e597ba5fb5),
+                    bytes32(0xb4c11951957c6f8f642c4af61cd6b24640fec6dc7fc607ee8206a99e92410d30),
+                    bytes32(0x21ddb9a356815c3fac1026b6dec5df3124afbadb485c9ba5a3e3398a04b7ba85),
+                    bytes32(0xe58769b32a1beaf1ea27375a44095a0d1fb664ce2dd358e7fcbfb78c26a19344),
+                    bytes32(0x0eb01ebfc9ed27500cd4dfc979272d1f0913cc9f66540d7e8005811109e1cf2d),
+                    bytes32(0x887c22bd8750d34016ac3c66b5ff102dacdd73f6b014e710b51e8022af9a1968),
+                    bytes32(0xffd70157e48063fc33c97a050f7f640233bf646cc98d9524c6b92bcf3ab56f83),
+                    bytes32(0x9867cc5f7f196b93bae1e27e6320742445d290f2263827498b54fec539f756af),
+                    bytes32(0xcefad4e508c098b9a7e1d8feb19955fb02ba9675585078710969d3440f5054e0)
+                ];
+                // read the committed MMR without zero-padding
+                (bytes32 runningHash, uint32 runningSize) =
+                    getMMRComplementRoot(mmrWitness.mmrComplementOrPeaks, zeroHashes);
+                require(mmrWitness.numFinal == runningSize);
+                require(mmrWitness.root == runningHash);
+            }
 
             // check appending to the committed MMR with recent blocks will yield the claimed MMR
             {
@@ -437,13 +473,19 @@ contract AxiomExperimentalTxMock is IAxiomExperimentalTx, AxiomV1Access, UUPSUpg
             revert MMRProofVerificationFailed();
         }
         */
+        bytes32 keccakResponse;
+        if (queryType == AxiomQueryType.OnlyReceipts) {
+            keccakResponse = response.keccakReceiptResponse;
+        } else {
+            keccakResponse = keccak256(abi.encodePacked(response.keccakTxResponse, response.keccakReceiptResponse));
+        }
 
         // update the cache
-        verifiedKeccakResults[queryType][response.keccakResponse] = true;
+        verifiedKeccakResults[queryType][keccakResponse] = true;
         // verifiedPoseidonResults[queryType][response.poseidonResponse] = true;
-        emit KeccakResultEvent(queryType, response.keccakResponse);
+        emit KeccakResultEvent(queryType, keccakResponse);
         // emit PoseidonResultEvent(queryType, response.poseidonResponse);
-        return response.keccakResponse;
+        return keccakResponse;
     }
 
     /// @dev    Given a non-empty MMR `mmr`, compute its `size` and the Merkle root of its completion to 1024 leaves using `mmrComplement`
@@ -505,13 +547,15 @@ contract AxiomExperimentalTxMock is IAxiomExperimentalTx, AxiomV1Access, UUPSUpg
     /// @param proof The ZK proof.
     // The public instances are laid out in the proof calldata as follows:
     //   ** First 4 * 3 * 32 = 384 bytes are reserved for proof verification data used with the pairing precompile
-    //   ** The next blocks of 13 groups of 32 bytes each are:
-    //   ** `poseidonResponse`            as a field element
-    //   ** `keccakResponse`              as 2 field elements, in hi-lo form
+    //   ** The next blocks of 10 groups of 32 bytes each are:
+    //   ** `poseidonTxResponse`            as a field element
+    //   ** `keccakTxResponse`              as 2 field elements, in hi-lo form
+    //   ** `poseidonReceiptResponse`       as a field element
+    //   ** `keccakReceiptResponse`         as 2 field elements, in hi-lo form
     //   ** `historicalMMRKeccak` which is `keccak256(abi.encodePacked(mmr[10:]))` as 2 field elements in hi-lo form.
     //   ** `recentMMRKeccak`     which is `keccak256(abi.encodePacked(mmr[:10]))` as 2 field elements in hi-lo form.
     // Here:
-    //   ** `{keccak, poseidon}Response` are defined as in `AxiomTxQueryResponse`.
+    //   ** `{keccak, poseidon}{Tx,Receipt}Response` are defined as in `AxiomTxQueryResponse`.
     //   ** hi-lo form means a uint256 `(a << 128) + b` is represented as two uint256's `a` and `b`, each of which is
     //      guaranteed to contain a uint128.
     //   ** `mmr` is a variable length array of bytes32 containing the Merkle Mountain Range that `proof` is proving into.
@@ -519,8 +563,48 @@ contract AxiomExperimentalTxMock is IAxiomExperimentalTx, AxiomV1Access, UUPSUpg
     //   ** `mmr` is guaranteed to have length at least `10` and at most `32`.
     function getTxQueryData(bytes calldata proof) internal pure returns (AxiomTxQueryResponse memory) {
         return AxiomTxQueryResponse({
-            poseidonResponse: bytes32(proof[384:384 + 32]),
-            keccakResponse: bytes32(
+            poseidonTxResponse: bytes32(proof[384:384 + 32]),
+            keccakTxResponse: bytes32(
+                uint256(bytes32(proof[384 + 32:384 + 2 * 32])) << 128 | uint256(bytes32(proof[384 + 2 * 32:384 + 3 * 32]))
+                ),
+            poseidonReceiptResponse: bytes32(proof[384 + 3 * 32:384 + 4 * 32]),
+            keccakReceiptResponse: bytes32(
+                uint256(bytes32(proof[384 + 4 * 32:384 + 5 * 32])) << 128
+                    | uint256(bytes32(proof[384 + 5 * 32:384 + 6 * 32]))
+                ),
+            historicalMMRKeccak: bytes32(
+                uint256(bytes32(proof[384 + 6 * 32:384 + 7 * 32])) << 128
+                    | uint256(bytes32(proof[384 + 7 * 32:384 + 8 * 32]))
+                ),
+            recentMMRKeccak: bytes32(
+                uint256(bytes32(proof[384 + 8 * 32:384 + 9 * 32])) << 128
+                    | uint256(bytes32(proof[384 + 9 * 32:384 + 10 * 32]))
+                )
+        });
+    }
+
+    /// @dev   Extract public instances from proof.
+    /// @param proof The ZK proof.
+    // The public instances are laid out in the proof calldata as follows:
+    //   ** First 4 * 3 * 32 = 384 bytes are reserved for proof verification data used with the pairing precompile
+    //   ** The next blocks of 7 groups of 32 bytes each are:
+    //   ** `poseidonReceiptResponse`       as a field element
+    //   ** `keccakReceiptResponse`         as 2 field elements, in hi-lo form
+    //   ** `historicalMMRKeccak` which is `keccak256(abi.encodePacked(mmr[10:]))` as 2 field elements in hi-lo form.
+    //   ** `recentMMRKeccak`     which is `keccak256(abi.encodePacked(mmr[:10]))` as 2 field elements in hi-lo form.
+    // Here:
+    //   ** `{keccak, poseidon}ReceiptResponse` are defined as in `AxiomReceiptQueryResponse`.
+    //   ** hi-lo form means a uint256 `(a << 128) + b` is represented as two uint256's `a` and `b`, each of which is
+    //      guaranteed to contain a uint128.
+    //   ** `mmr` is a variable length array of bytes32 containing the Merkle Mountain Range that `proof` is proving into.
+    //      `mmr[idx]` is either `bytes32(0)` or the Merkle root of `1 << idx` block hashes.
+    //   ** `mmr` is guaranteed to have length at least `10` and at most `32`.
+    function getReceiptQueryData(bytes calldata proof) internal pure returns (AxiomTxQueryResponse memory) {
+        return AxiomTxQueryResponse({
+            poseidonTxResponse: bytes32(0),
+            keccakTxResponse: bytes32(0),
+            poseidonReceiptResponse: bytes32(proof[384:384 + 32]),
+            keccakReceiptResponse: bytes32(
                 uint256(bytes32(proof[384 + 32:384 + 2 * 32])) << 128 | uint256(bytes32(proof[384 + 2 * 32:384 + 3 * 32]))
                 ),
             historicalMMRKeccak: bytes32(

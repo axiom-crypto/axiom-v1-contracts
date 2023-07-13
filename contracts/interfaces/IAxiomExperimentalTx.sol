@@ -32,29 +32,27 @@ interface IAxiomExperimentalTx {
 
     /// @notice Different types of queries
     /// @param State Query for block header, account state, or account storage
-    /// @param Transaction Query for transaction fields
-    /// @param Receipt Query for transaction receipt fields
+    /// @param TxReceipts Query for transaction fields and tx receipt fields
+    /// @param OnlyReceipts Query for only tx receipt fields
     enum AxiomQueryType
     // State,
     {
-        Transaction,
-        Receipt
+        TxReceipts,
+        OnlyReceipts
     }
 
     /// @notice Response values read from ZK proof for query.
-    /// @param  poseidonResponse Poseidon Merkle root
-    /// @param  keccakResponse Keccak Merkle root
+    /// @param  poseidonTxResponse Poseidon Merkle root of poseidon transaction responses
+    /// @param  keccakTxResponse Keccak Merkle root of keccak transaction responses
+    /// @param  poseidonReceiptResponse Poseidon Merkle root of poseidon receipt responses
+    /// @param  keccakReceiptResponse Keccak Merkle root of keccak receipt responses
     /// @param  historicalMMRKeccak `keccak256(abi.encodePacked(mmr[10:]))`
     /// @param  recentMMRKeccak `keccak256(abi.encodePacked(mmr[:10]))`
-    //  Detailed documentation on format here: https://hackmd.io/@axiom/S17K2drf2
-    //  ** `poseidonBlockResponseRow = poseidon(blockHash . blockNumber . poseidon_tree_root(block_header))`
-    //  ** `poseidonAccountResponseRow = poseidon(stateRoot . addr . poseidon_tree_root(account_state)))`
-    //  ** `mmr` is a variable length array of bytes32 containing the Merkle Mountain Range the ZK proof is proving into.
-    //     `mmr[idx]` is either `bytes32(0)` or the Merkle root of `1 << idx` block hashes.
-    //  ** `mmr` is guaranteed to have length at least `10` and at most `32`.
     struct AxiomTxQueryResponse {
-        bytes32 poseidonResponse;
-        bytes32 keccakResponse;
+        bytes32 poseidonTxResponse;
+        bytes32 keccakTxResponse;
+        bytes32 poseidonReceiptResponse;
+        bytes32 keccakReceiptResponse;
         bytes32 historicalMMRKeccak;
         bytes32 recentMMRKeccak;
     }
@@ -104,9 +102,9 @@ interface IAxiomExperimentalTx {
 
     /// @notice Read the set of verified query responses in Keccak form.
     /// @param  queryType The type of query.
-    /// @param  hash `verifiedKeccakResults(keccak256(keccakBlockResponse . keccakAccountResponse . keccakStorageResponse)) == true`
-    ///         if and only if each of `keccakBlockResponse`, `keccakAccountResponse`, and `keccakStorageResponse` have been verified
-    ///         on-chain by a ZK proof.
+    /// @param  hash `verifiedKeccakResults(keccakResponse) == true`
+    ///         if and only if `keccakResponse` been verified on-chain by a ZK proof.
+    /// @dev    `keccakResponse = keccak256(keccakTxResponse . keccakReceiptResponse)` if queryType == TxReceipts and `keccakResponse = keccakReceiptResponse` if queryType == OnlyReceipts.
     function verifiedKeccakResults(AxiomQueryType queryType, bytes32 hash) external view returns (bool);
 
     /*
@@ -217,17 +215,19 @@ interface IAxiomExperimentalTx {
         AxiomQueryType queryType
     ) external;
 
-    /// @notice Request proof for transaction query with on-chain query data availability.
+    /// @notice Request proof for query consisting of transactions *and* receipts, with on-chain query data availability.
     /// @param  keccakResponse The Keccak-encoded query response.
     /// @param  refundee The address refunds should be sent to.
     /// @param  query The serialized query.
-    function sendTxQuery(bytes32 keccakResponse, address payable refundee, bytes calldata query) external payable;
+    function sendTxReceiptsQuery(bytes32 keccakResponse, address payable refundee, bytes calldata query)
+        external
+        payable;
 
-    /// @notice Request proof for receipt query with on-chain query data availability.
+    /// @notice Request proof for query consisting of olny receipts, with on-chain query data availability.
     /// @param  keccakResponse The Keccak-encoded query response.
     /// @param  refundee The address refunds should be sent to.
     /// @param  query The serialized query.
-    function sendReceiptQuery(bytes32 keccakResponse, address payable refundee, bytes calldata query)
+    function sendOnlyReceiptsQuery(bytes32 keccakResponse, address payable refundee, bytes calldata query)
         external
         payable;
 
@@ -279,18 +279,22 @@ interface IAxiomExperimentalTx {
     ) external view returns (bool);
     */
 
-    /// @notice Verify transaction data against responses which have already been proven.
-    /// @param  keccakResponse As documented in `AxiomTxQueryResponse`.
+    /// @notice Verify transaction and receipt data against responses which have already been proven.
+    /// @param  keccakTxResponse As documented in `AxiomTxQueryResponse`.
+    /// @param  keccakReceiptResponse As documented in `AxiomTxQueryResponse`.
     /// @param  txResponses The list of transaction results.
-    function areTxResponsesValid(bytes32 keccakResponse, TxResponse[] calldata txResponses)
-        external
-        view
-        returns (bool);
+    /// @param  receiptResponses The list of transaction results.
+    function areTxResponsesValid(
+        bytes32 keccakTxResponse,
+        bytes32 keccakReceiptResponse,
+        TxResponse[] calldata txResponses,
+        ReceiptResponse[] calldata receiptResponses
+    ) external view returns (bool);
 
     /// @notice Verify transaction receipt data against responses which have already been proven.
-    /// @param  keccakResponse As documented in `AxiomTxQueryResponse`.
+    /// @param  keccakReceiptResponse As documented in `AxiomTxQueryResponse`.
     /// @param  receiptResponses The list of receipt results.
-    function areReceiptResponsesValid(bytes32 keccakResponse, ReceiptResponse[] calldata receiptResponses)
+    function areReceiptResponsesValid(bytes32 keccakReceiptResponse, ReceiptResponse[] calldata receiptResponses)
         external
         view
         returns (bool);
