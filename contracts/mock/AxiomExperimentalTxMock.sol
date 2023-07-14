@@ -235,7 +235,7 @@ contract AxiomExperimentalTxMock is IAxiomExperimentalTx, AxiomV1Access, UUPSUpg
     }
     */
 
-    function areTxResponsesValid(
+    function areTxReceiptsValid(
         bytes32 keccakTxResponse,
         bytes32 keccakReceiptResponse,
         TxResponse[] calldata txResponses,
@@ -281,7 +281,7 @@ contract AxiomExperimentalTxMock is IAxiomExperimentalTx, AxiomV1Access, UUPSUpg
         return true;
     }
 
-    function areReceiptResponsesValid(bytes32 keccakReceiptResponse, ReceiptResponse[] calldata receiptResponses)
+    function areOnlyReceiptsValid(bytes32 keccakReceiptResponse, ReceiptResponse[] calldata receiptResponses)
         external
         view
         returns (bool)

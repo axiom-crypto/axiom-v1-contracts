@@ -284,7 +284,7 @@ interface IAxiomExperimentalTx {
     /// @param  keccakReceiptResponse As documented in `AxiomTxQueryResponse`.
     /// @param  txResponses The list of transaction results.
     /// @param  receiptResponses The list of transaction results.
-    function areTxResponsesValid(
+    function areTxReceiptsValid(
         bytes32 keccakTxResponse,
         bytes32 keccakReceiptResponse,
         TxResponse[] calldata txResponses,
@@ -294,7 +294,7 @@ interface IAxiomExperimentalTx {
     /// @notice Verify transaction receipt data against responses which have already been proven.
     /// @param  keccakReceiptResponse As documented in `AxiomTxQueryResponse`.
     /// @param  receiptResponses The list of receipt results.
-    function areReceiptResponsesValid(bytes32 keccakReceiptResponse, ReceiptResponse[] calldata receiptResponses)
+    function areOnlyReceiptsValid(bytes32 keccakReceiptResponse, ReceiptResponse[] calldata receiptResponses)
         external
         view
         returns (bool);
