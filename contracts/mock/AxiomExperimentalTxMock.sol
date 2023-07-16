@@ -161,7 +161,7 @@ contract AxiomExperimentalTxMock is IAxiomExperimentalTx, AxiomV1Access, UUPSUpg
         }
         _sendQuery(AxiomQueryType.OnlyReceipts, keccakResponse, msg.value, refundee);
         bytes32 queryHash = keccak256(query);
-        emit TxQueryInitiatedOnchain(
+        emit ReceiptQueryInitiatedOnchain(
             keccakResponse, msg.value, uint32(block.number) + queryDeadlineInterval, refundee, queryHash
         );
     }
