@@ -3,10 +3,6 @@ pragma solidity 0.8.19;
 
 import "./core/IAxiomV1Verifier.sol";
 
-// The depth of the Merkle root of queries in:
-//   `keccakResponse`
-uint32 constant QUERY_MERKLE_DEPTH = 3;
-
 interface IAxiomExperimentalTx {
     /// @notice States of an on-chain query
     /// @param  Inactive The query has not been made or was refunded.
@@ -85,7 +81,7 @@ interface IAxiomExperimentalTx {
         bytes value;
         // for Merkle proof usage
         uint32 leafIdx;
-        bytes32[QUERY_MERKLE_DEPTH] proof;
+        bytes32[] proof;
     }
 
     struct ReceiptResponse {
@@ -97,7 +93,7 @@ interface IAxiomExperimentalTx {
         bytes value;
         // for Merkle proof usage
         uint32 leafIdx;
-        bytes32[QUERY_MERKLE_DEPTH] proof;
+        bytes32[] proof;
     }
 
     /// @notice Read the set of verified query responses in Keccak form.

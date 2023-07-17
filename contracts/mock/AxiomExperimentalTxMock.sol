@@ -9,7 +9,7 @@ import {Address} from "@openzeppelin/contracts/utils/Address.sol";
 import {AxiomV1Access} from "../AxiomV1Access.sol";
 import {IAxiomV1State} from "../interfaces/core/IAxiomV1State.sol";
 import {IAxiomV1Verifier} from "../interfaces/core/IAxiomV1Verifier.sol";
-import {IAxiomExperimentalTx, QUERY_MERKLE_DEPTH} from "../interfaces/IAxiomExperimentalTx.sol";
+import {IAxiomExperimentalTx} from "../interfaces/IAxiomExperimentalTx.sol";
 import {MerkleTree} from "../libraries/MerkleTree.sol";
 import "../libraries/configuration/AxiomV1Configuration.sol";
 
@@ -527,7 +527,7 @@ contract AxiomExperimentalTxMock is IAxiomExperimentalTx, AxiomV1Access, UUPSUpg
     /// @param leaf The claimed leaf in the tree.
     /// @param proof The Merkle proof, where index 0 corresponds to a leaf in the tree.
     /// @param leafIdx The claimed index of the leaf in the tree, where index 0 corresponds to the leftmost leaf.
-    function isMerklePathValid(bytes32 root, bytes32 leaf, bytes32[QUERY_MERKLE_DEPTH] memory proof, uint32 leafIdx)
+    function isMerklePathValid(bytes32 root, bytes32 leaf, bytes32[] memory proof, uint32 leafIdx)
         internal
         pure
         returns (bool)
