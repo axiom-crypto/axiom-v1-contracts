@@ -75,8 +75,8 @@ interface IAxiomExperimentalTx {
     struct TxResponse {
         // for app usage
         uint32 blockNumber;
-        uint8 txType;
         uint32 txIdx;
+        uint8 txType;
         uint8 fieldIdx;
         bytes value;
         // for Merkle proof usage

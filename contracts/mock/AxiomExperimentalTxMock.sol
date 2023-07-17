@@ -250,8 +250,8 @@ contract AxiomExperimentalTxMock is IAxiomExperimentalTx, AxiomV1Access, UUPSUpg
             bytes32 leaf = keccak256(
                 abi.encodePacked(
                     txResponses[idx].blockNumber,
-                    txResponses[idx].txType,
                     txResponses[idx].txIdx,
+                    txResponses[idx].txType,
                     txResponses[idx].fieldIdx,
                     txResponses[idx].value
                 )
